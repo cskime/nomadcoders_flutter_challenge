@@ -1,7 +1,50 @@
 import 'package:flutter/material.dart';
 
+typedef Time = ({int hour, int minute});
+
+class EventModel {
+  final Color backgroundColor;
+  final Time startTime;
+  final Time endTime;
+  final String title;
+  final List<String> participants;
+
+  EventModel({
+    required this.backgroundColor,
+    required this.startTime,
+    required this.endTime,
+    required this.title,
+    required this.participants,
+  });
+}
+
 class Day9HomeScreen extends StatelessWidget {
-  const Day9HomeScreen({super.key});
+  final eventModels = [
+    EventModel(
+      backgroundColor: const Color(0xFFFEF754),
+      startTime: (hour: 11, minute: 30),
+      endTime: (hour: 12, minute: 20),
+      title: 'design meeting'.toUpperCase(),
+      participants: ['alex', 'helena', 'nana'].toUppercase(),
+    ),
+    EventModel(
+      backgroundColor: const Color(0xFF9C6BCE),
+      startTime: (hour: 12, minute: 35),
+      endTime: (hour: 14, minute: 10),
+      title: 'daily project'.toUpperCase(),
+      participants:
+          ['me', 'richard', 'ciry', 'joey', 'ross', 'chandler'].toUppercase(),
+    ),
+    EventModel(
+      backgroundColor: const Color(0xFFBBEE4B),
+      startTime: (hour: 15, minute: 00),
+      endTime: (hour: 16, minute: 30),
+      title: 'weekly planning'.toUpperCase(),
+      participants: ['den', 'nana', 'mark'].toUppercase(),
+    ),
+  ];
+
+  Day9HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,47 +53,22 @@ class Day9HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const _AppBar(imagePath: 'assets/images/avatar.png'),
               const SizedBox(height: 32),
               const _DateScrollView(),
               const SizedBox(height: 32),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    _Card(
-                      backgroundColor: const Color(0xFFFEF754),
-                      startTime: (hour: 11, minute: 30),
-                      endTime: (hour: 12, minute: 20),
-                      title: 'design meeting'.toUpperCase(),
-                      participants: ['alex', 'helena', 'nana'].toUppercase(),
-                    ),
-                    const SizedBox(height: 8),
-                    _Card(
-                      backgroundColor: const Color(0xFF9C6BCE),
-                      startTime: (hour: 12, minute: 35),
-                      endTime: (hour: 14, minute: 10),
-                      title: 'daily project'.toUpperCase(),
-                      participants: [
-                        'me',
-                        'richard',
-                        'ciry',
-                        'joey',
-                        'ross',
-                        'chandler'
-                      ].toUppercase(),
-                    ),
-                    const SizedBox(height: 8),
-                    _Card(
-                      backgroundColor: const Color(0xFFBBEE4B),
-                      startTime: (hour: 15, minute: 00),
-                      endTime: (hour: 16, minute: 30),
-                      title: 'weekly planning'.toUpperCase(),
-                      participants: ['den', 'nana', 'mark'].toUppercase(),
-                    ),
-                  ],
-                ),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return _Card(event: eventModels[index]);
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 8);
+                },
+                itemCount: eventModels.length,
               )
             ],
           ),
@@ -66,29 +84,17 @@ extension on List<String> {
   }
 }
 
-typedef Time = ({int hour, int minute});
-
 class _Card extends StatelessWidget {
-  final Color backgroundColor;
-  final Time startTime;
-  final Time endTime;
-  final String title;
-  final List<String> participants;
+  final EventModel event;
 
-  const _Card({
-    required this.backgroundColor,
-    required this.startTime,
-    required this.endTime,
-    required this.title,
-    required this.participants,
-  });
+  const _Card({required this.event});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 16),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: event.backgroundColor,
         borderRadius: BorderRadius.circular(40),
       ),
       child: Row(
@@ -99,7 +105,7 @@ class _Card extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  title,
+                  event.title,
                   style: const TextStyle(
                     fontSize: 64,
                     height: 1,
@@ -117,8 +123,8 @@ class _Card extends StatelessWidget {
   }
 
   Widget get _participantsView {
-    final count = participants.length;
-    List<String> displaying = participants.take(3).toList();
+    final count = event.participants.length;
+    List<String> displaying = event.participants.take(3).toList();
     if (count > 3) {
       displaying.add('+${count - 3}');
     }
@@ -149,7 +155,7 @@ class _Card extends StatelessWidget {
   Widget get _dateRangeView {
     return Column(
       children: [
-        _dateView(startTime.hour, startTime.minute),
+        _dateView(event.startTime.hour, event.startTime.minute),
         const SizedBox(height: 4),
         const SizedBox(
           width: 1,
@@ -159,7 +165,7 @@ class _Card extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        _dateView(endTime.hour, endTime.minute),
+        _dateView(event.endTime.hour, event.endTime.minute),
       ],
     );
   }
