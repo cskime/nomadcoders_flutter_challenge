@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:nomadcoders_flutter_challenge/day12/models/movie.dart';
 import 'package:nomadcoders_flutter_challenge/day12/models/movie_detail.dart';
 import 'package:nomadcoders_flutter_challenge/day12/services/movie_service.dart';
