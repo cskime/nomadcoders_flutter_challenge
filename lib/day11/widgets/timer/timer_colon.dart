@@ -5,25 +5,27 @@ class TimerColon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 32,
-      child: Column(
-        children: [
-          _timerDot,
-          const SizedBox(height: 16),
-          _timerDot,
-        ],
-      ),
+    return const Column(
+      children: [
+        _TimerDot(),
+        SizedBox(height: 16),
+        _TimerDot(),
+      ],
     );
   }
+}
 
-  Widget get _timerDot {
+class _TimerDot extends StatelessWidget {
+  const _TimerDot();
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      width: 8,
-      height: 8,
+      width: 10,
+      height: 10,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(5),
+        shape: BoxShape.circle,
       ),
       clipBehavior: Clip.hardEdge,
     );

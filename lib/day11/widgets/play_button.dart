@@ -20,8 +20,8 @@ class PlayButton extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(size / 2),
+          color: Colors.black.withOpacity(0.2),
+          shape: BoxShape.circle,
         ),
         child: Center(
           child: Icon(

@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
 
 class MinuteButton extends StatelessWidget {
-  final int minute;
-  final bool isSelected;
-  final ValueChanged<int> onPressed;
-
   const MinuteButton({
     super.key,
+    required this.width,
+    required this.height,
     required this.minute,
     required this.isSelected,
     required this.onPressed,
   });
 
+  final double width;
+  final double height;
+  final int minute;
+  final bool isSelected;
+  final void Function(int minute) onPressed;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onPressed(minute);
-      },
+      onTap: () => onPressed(minute),
       child: Container(
-        width: 60,
-        height: 40,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
-          color: isSelected ? Colors.white : PRIMARY_COLOR,
-          border: Border.all(
-            color: Colors.white,
-          ),
+          color: isSelected ? Colors.white : Theme.of(context).primaryColor,
+          border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(4),
         ),
         clipBehavior: Clip.hardEdge,
@@ -34,9 +33,10 @@ class MinuteButton extends StatelessWidget {
           child: Text(
             minute.toString(),
             style: TextStyle(
-                color: isSelected ? PRIMARY_COLOR : Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w700),
+              color: isSelected ? Theme.of(context).primaryColor : Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),
