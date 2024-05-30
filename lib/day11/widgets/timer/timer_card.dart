@@ -26,8 +26,9 @@ class TimerCard extends StatelessWidget {
                     text,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      fontSize: 150,
+                      fontSize: 200,
                       fontWeight: FontWeight.w700,
+                      fontFeatures: const [FontFeature.tabularFigures()],
                     ),
                   ),
                 ),
