@@ -70,61 +70,59 @@ class _Day11HomeScreenState extends State<Day11HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  'pomotimer'.toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Text(
+                'pomotimer'.toUpperCase(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 2,
+                ),
+              ),
+            ),
+            const SizedBox(height: 100),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: TimerView(duration: current),
+            ),
+            const SizedBox(height: 56),
+            MinutesOptionView(
+              height: 40,
+              onMinuteSelected: (minute) => setState(() {
+                current = Duration(minutes: minute);
+              }),
+            ),
+            Expanded(
+              child: Center(
+                child: PlayButton(
+                  isPlaying: timer != null,
+                  size: 80,
+                  onPressed: _onPlayButtonPressed,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 48),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CountLabel(
+                    count: '$currentRound/$round',
+                    title: 'ROUND',
                   ),
-                ),
-              ),
-              const SizedBox(height: 100),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: TimerView(duration: current),
-              ),
-              const SizedBox(height: 56),
-              MinutesOptionView(
-                height: 40,
-                onMinuteSelected: (minute) => setState(() {
-                  current = Duration(minutes: minute);
-                }),
-              ),
-              Expanded(
-                child: Center(
-                  child: PlayButton(
-                    isPlaying: timer != null,
-                    size: 80,
-                    onPressed: _onPlayButtonPressed,
+                  CountLabel(
+                    count: '$currentGoal/$goal',
+                    title: 'GOAL',
                   ),
-                ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 48),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CountLabel(
-                      count: '$currentRound/$round',
-                      title: 'ROUND',
-                    ),
-                    CountLabel(
-                      count: '$currentGoal/$goal',
-                      title: 'GOAL',
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
