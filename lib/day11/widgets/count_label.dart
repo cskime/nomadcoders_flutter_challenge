@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CountLabel extends StatelessWidget {
-  final String count;
-  final String title;
-
   const CountLabel({
     super.key,
     required this.count,
     required this.title,
   });
+
+  final String count;
+  final String title;
 
   @override
   Widget build(BuildContext context) {

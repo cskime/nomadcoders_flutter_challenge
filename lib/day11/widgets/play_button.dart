@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PlayButton extends StatelessWidget {
-  final bool isPlaying;
-  final GestureTapCallback onPressed;
-  final double size;
-
   const PlayButton({
     super.key,
     required this.isPlaying,
     required this.onPressed,
     required this.size,
   });
+
+  final bool isPlaying;
+  final GestureTapCallback onPressed;
+  final double size;
 
   @override
   Widget build(BuildContext context) {

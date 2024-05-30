@@ -8,10 +8,10 @@ class MinutesListView extends StatefulWidget {
     required this.onMinuteSelected,
   });
 
-  static const double buttonAspectRatio = 1.5;
-  final double height;
-  double get buttonWidth => height * buttonAspectRatio;
+  static const double _buttonAspectRatio = 1.5;
+  double get _buttonWidth => height * _buttonAspectRatio;
 
+  final double height;
   final void Function(int minute) onMinuteSelected;
 
   @override
@@ -19,11 +19,10 @@ class MinutesListView extends StatefulWidget {
 }
 
 class _MinutesListViewState extends State<MinutesListView> {
-  static const double buttonSpacing = 16;
-
-  static const unit = 5;
-  final minutes = List.generate(12, (index) => (index + 1) * unit);
-  int _current = unit;
+  static const double _buttonSpacing = 16;
+  static const _unit = 5;
+  final _minutes = List.generate(12, (index) => (index + 1) * _unit);
+  int _current = _unit;
 
   final _scrollController = ScrollController();
 
@@ -33,9 +32,9 @@ class _MinutesListViewState extends State<MinutesListView> {
     });
     widget.onMinuteSelected(minute);
 
-    final index = minutes.indexOf(minute);
+    final index = _minutes.indexOf(minute);
     _scrollController.animateTo(
-      (buttonSpacing + widget.buttonWidth) * index,
+      (_buttonSpacing + widget._buttonWidth) * index,
       duration: const Duration(milliseconds: 250),
       curve: Curves.easeInOut,
     );
@@ -47,13 +46,14 @@ class _MinutesListViewState extends State<MinutesListView> {
       controller: _scrollController,
       scrollDirection: Axis.horizontal,
       padding: EdgeInsets.symmetric(
-        horizontal: (MediaQuery.sizeOf(context).width - widget.buttonWidth) / 2,
+        horizontal:
+            (MediaQuery.sizeOf(context).width - widget._buttonWidth) / 2,
       ),
-      itemCount: minutes.length,
+      itemCount: _minutes.length,
       itemBuilder: (context, index) {
-        int minute = minutes[index];
+        int minute = _minutes[index];
         return MinuteButton(
-          width: widget.buttonWidth,
+          width: widget._buttonWidth,
           height: widget.height,
           minute: minute,
           isSelected: minute == _current,
@@ -61,7 +61,7 @@ class _MinutesListViewState extends State<MinutesListView> {
         );
       },
       separatorBuilder: (context, index) {
-        return const SizedBox(width: buttonSpacing);
+        return const SizedBox(width: _buttonSpacing);
       },
     );
   }

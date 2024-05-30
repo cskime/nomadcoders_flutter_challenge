@@ -48,10 +48,10 @@ class _CardBackground extends StatelessWidget {
 
   final int depth;
   final Widget? child;
-  static const double unit = 6;
+  static const double _unit = 6;
 
-  double get _top => unit * (2 - depth);
-  double get _horizontal => unit * depth;
+  double get _top => _unit * (2 - depth);
+  double get _horizontal => _unit * depth;
   double get _opacity => depth == 0 ? 1 : 0.6;
 
   @override
