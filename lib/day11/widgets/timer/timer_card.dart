@@ -20,17 +20,21 @@ class TimerCard extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 200,
-                      fontWeight: FontWeight.w700,
-                      fontFeatures: const [FontFeature.tabularFigures()],
-                    ),
-                  ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: constraints.maxWidth,
+                          fontWeight: FontWeight.w700,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
