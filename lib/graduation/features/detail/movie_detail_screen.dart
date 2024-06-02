@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/common/rating_view.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/detail/widgets/movie_detail_app_bar.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/movie_detail.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/state/movies_scope.dart';
@@ -57,6 +58,18 @@ class MovieDetailScreen extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Wrap(
+                                  spacing: 8,
+                                  children: movie.companyLogoPaths
+                                      .map<Widget>(
+                                        (path) => Image.network(
+                                          ImageUri.string(path),
+                                          height: 32,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                                const SizedBox(height: 12),
                                 Text(
                                   movie.title,
                                   style: const TextStyle(
@@ -64,6 +77,8 @@ class MovieDetailScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                const SizedBox(height: 4),
+                                RatingView(rating: movie.rating),
                                 const SizedBox(height: 24),
                                 Text(
                                   '${_runtime(movie)} | ${_genres(movie)}',
@@ -114,23 +129,28 @@ class MovieDetailScreen extends StatelessWidget {
 }
 
 class _BuyTicketButton extends StatelessWidget {
-  const _BuyTicketButton();
+  const _BuyTicketButton({this.onPressed});
+
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width * 0.6,
-      height: 48,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Center(
-        child: Text(
-          'Buy ticket',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: MediaQuery.sizeOf(context).width * 0.6,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Center(
+          child: Text(
+            'Buy ticket',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

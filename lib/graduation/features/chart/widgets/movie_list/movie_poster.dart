@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nomadcoders_flutter_challenge/graduation/features/common/rating_star.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/common/rating_star.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/movie.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/utils/image_uri.dart';
 

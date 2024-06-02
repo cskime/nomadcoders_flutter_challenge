@@ -17,6 +17,7 @@ class MovieDetailAppBar extends StatelessWidget {
         ),
         child: GestureDetector(
           onTap: () => _onTap(context),
+          behavior: HitTestBehavior.opaque,
           child: const Row(
             children: [
               FaIcon(

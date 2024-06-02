@@ -6,6 +6,7 @@ class MovieDetail {
     required this.runtime,
     required this.genres,
     required this.storyline,
+    required this.companyLogoPaths,
   });
 
   final String title;
@@ -14,6 +15,7 @@ class MovieDetail {
   final int runtime;
   final List<String> genres;
   final String storyline;
+  final List<String> companyLogoPaths;
 
   MovieDetail.fromJson(Map<String, dynamic> json)
       : title = json['title'],
@@ -21,7 +23,11 @@ class MovieDetail {
         rating = json['vote_average'],
         runtime = json['runtime'],
         genres = (json['genres'] as List<dynamic>)
-            .map((e) => e['name'] as String)
+            .map((json) => json['name'] as String)
             .toList(),
-        storyline = json['overview'];
+        storyline = json['overview'],
+        companyLogoPaths = (json['production_companies'] as List<dynamic>)
+            .map<String>((json) => json['logo_path'] ?? '')
+            .where((path) => path.isNotEmpty)
+            .toList();
 }
