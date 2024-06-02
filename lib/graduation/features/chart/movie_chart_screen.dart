@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/features/chart/movie_chart_all_screen.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/gradient_box.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/movie_list/movie_chart_list.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/section/chart_section_divider.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/section/chart_section_header.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/section/segmented_header_text.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/models/chart_option.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/state/movies_scope.dart';
 
 const _headerTabs = [
@@ -29,6 +31,14 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
     setState(() {
       _selectedSegmentIndex = index;
     });
+  }
+
+  void _onShowAllPressed(ChartOption option) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => MovieChartAllScreen(
+        initialChartOption: option,
+      ),
+    ));
   }
 
   @override
@@ -101,7 +111,7 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
           children: [
             ChartSectionHeader(
               title: const Text('무비차트'),
-              onShowAllPressed: () {},
+              onShowAllPressed: () => _onShowAllPressed(ChartOption.popular),
             ),
             MovieChartList(
               movies: movieService.fetchPopularMovies(),
@@ -113,7 +123,11 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
                 texts: const ['현재상영작', '상영예정'],
                 onSegmentSelected: _onSegmentSelected,
               ),
-              onShowAllPressed: () {},
+              onShowAllPressed: () => _onShowAllPressed(
+                _selectedSegmentIndex == 0
+                    ? ChartOption.nowPlaying
+                    : ChartOption.comingSoon,
+              ),
             ),
             MovieChartList(
               movies: _selectedSegmentIndex == 0
