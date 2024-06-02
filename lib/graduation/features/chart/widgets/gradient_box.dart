@@ -5,12 +5,12 @@ class GradientBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return const DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).primaryColor,
-            const Color(0xFFEF632F),
+            Color(0xFFFA4357),
+            Color(0xFFEF632F),
           ],
         ),
       ),

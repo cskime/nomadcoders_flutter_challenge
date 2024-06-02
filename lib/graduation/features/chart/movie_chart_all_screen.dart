@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/chart_all_tab_bar.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/movie_list/movie_chart_all_list_item.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/features/detail/movie_detail_screen.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/chart_option.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/movie.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/state/movies_scope.dart';
@@ -27,6 +28,12 @@ class _MovieChartAllScreenState extends State<MovieChartAllScreen> {
     });
   }
 
+  void _onItemPressed(int id) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => MovieDetailScreen(id: id),
+    ));
+  }
+
   Future<List<Movie>> _fetchMovies() {
     final movieService = MovieServiceState.of(context).service;
     return switch (_chartOption) {
@@ -40,7 +47,7 @@ class _MovieChartAllScreenState extends State<MovieChartAllScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('영화'),
+        title: const Text('Movies'),
         centerTitle: false,
         actions: const [
           Padding(
@@ -92,7 +99,7 @@ class _MovieChartAllScreenState extends State<MovieChartAllScreen> {
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
-                                    '현재상영작보기',
+                                    'Show Now Playing',
                                     style: TextStyle(
                                       color: Colors.grey.shade500,
                                       fontSize: 12,
@@ -107,7 +114,10 @@ class _MovieChartAllScreenState extends State<MovieChartAllScreen> {
                       }
 
                       final movie = snapshot.data![index - 1];
-                      return MovieChartAllListItem(movie: movie);
+                      return MovieChartAllListItem(
+                        movie: movie,
+                        onPressed: () => _onItemPressed(movie.id),
+                      );
                     },
                     separatorBuilder: (context, index) => Divider(
                       height: 1,

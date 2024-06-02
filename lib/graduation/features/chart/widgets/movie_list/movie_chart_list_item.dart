@@ -8,51 +8,56 @@ class MovieChartListItem extends StatelessWidget {
     required this.movie,
     required this.posterAspectRatio,
     required this.index,
+    required this.onPressed,
   });
 
   final Movie movie;
   final double posterAspectRatio;
   final int index;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: AspectRatio(
-            aspectRatio: posterAspectRatio,
-            child: MoviePoster(
-              movie: movie,
-              order: index + 1,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: AspectRatio(
+              aspectRatio: posterAspectRatio,
+              child: MoviePoster(
+                movie: movie,
+                order: index + 1,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          movie.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-            height: 1,
+          const SizedBox(height: 12),
+          Text(
+            movie.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              height: 1,
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          '🚀인기도 ${movie.popularity}',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: Colors.grey.shade500,
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
+          const SizedBox(height: 4),
+          Text(
+            'Popularity ${movie.popularity}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Colors.grey.shade500,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        _BookButton()
-      ],
+          const SizedBox(height: 12),
+          _BookButton()
+        ],
+      ),
     );
   }
 }
@@ -70,7 +75,7 @@ class _BookButton extends StatelessWidget {
         vertical: 4,
       ),
       child: const Text(
-        '지금예매',
+        'NOW BOOKING',
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,

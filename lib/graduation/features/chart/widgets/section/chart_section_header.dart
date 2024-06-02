@@ -36,7 +36,7 @@ class ChartSectionHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '전체보기',
+                  'Show All',
                   style: TextStyle(color: Colors.grey.shade500),
                 ),
                 const SizedBox(width: 4),

@@ -10,10 +10,10 @@ import 'package:nomadcoders_flutter_challenge/graduation/models/chart_option.dar
 import 'package:nomadcoders_flutter_challenge/graduation/state/movies_scope.dart';
 
 const _headerTabs = [
-  '홈',
-  '이벤트',
-  '패스트오더',
-  '기프트샵',
+  'Home',
+  'Event',
+  'Order',
+  'Giftshop',
   '@CGV',
 ];
 
@@ -110,7 +110,7 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ChartSectionHeader(
-              title: const Text('무비차트'),
+              title: Text(ChartOption.popular.title),
               onShowAllPressed: () => _onShowAllPressed(ChartOption.popular),
             ),
             MovieChartList(
@@ -120,7 +120,10 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
             const ChartSectionDivider(),
             ChartSectionHeader(
               title: SegmentedHeaderText(
-                texts: const ['현재상영작', '상영예정'],
+                texts: [
+                  ChartOption.nowPlaying.title,
+                  ChartOption.comingSoon.title,
+                ],
                 onSegmentSelected: _onSegmentSelected,
               ),
               onShowAllPressed: () => _onShowAllPressed(

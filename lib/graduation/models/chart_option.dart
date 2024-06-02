@@ -4,8 +4,8 @@ enum ChartOption {
   comingSoon;
 
   String get title => switch (this) {
-        ChartOption.popular => '무비차트',
-        ChartOption.nowPlaying => '현재상영작',
-        ChartOption.comingSoon => '상영예정',
+        ChartOption.popular => 'Popular',
+        ChartOption.nowPlaying => 'Now Playing',
+        ChartOption.comingSoon => 'Coming Soon',
       };
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/features/common/rating_star.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/movie.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/utils/image_uri.dart';
 
@@ -46,12 +47,18 @@ class MoviePoster extends StatelessWidget {
                 const SizedBox(width: 8),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
-                  child: Text(
-                    '평점 ${movie.voteAverage.toInt()}/10',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: Row(
+                    children: [
+                      const RatingStar(size: 12, filled: true),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${movie.voteAverage.toInt()}/10',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],

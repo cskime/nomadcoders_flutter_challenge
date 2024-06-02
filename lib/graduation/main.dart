@@ -20,7 +20,7 @@ class _MovieAppState extends State<MovieApp> {
       child: MaterialApp(
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          primaryColor: const Color(0xFFFA4357),
+          primaryColor: const Color(0xFFCA2127),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/features/chart/widgets/movie_list/movie_chart_list_item.dart';
+import 'package:nomadcoders_flutter_challenge/graduation/features/detail/movie_detail_screen.dart';
 import 'package:nomadcoders_flutter_challenge/graduation/models/movie.dart';
 
 class MovieChartList extends StatelessWidget {
@@ -9,6 +10,12 @@ class MovieChartList extends StatelessWidget {
   });
 
   final Future<List<Movie>> movies;
+
+  void _onItemPressed(BuildContext context, int id) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => MovieDetailScreen(id: id),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +41,7 @@ class MovieChartList extends StatelessWidget {
                   movie: movie,
                   posterAspectRatio: aspectRatio,
                   index: index,
+                  onPressed: () => _onItemPressed(context, movie.id),
                 ),
               );
             },
