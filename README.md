@@ -18,6 +18,14 @@
 
 ### Flutter로 웹툰 앱 만들기
 
+|                            Scheduler App                             |                            Pomodoro App                             |
+| :------------------------------------------------------------------: | :-----------------------------------------------------------------: |
+| <img src="./documents/flutter-challenge-scheduler.gif" width="200"/> | <img src="./documents/flutter-challenge-pomodoro.gif" width="200"/> |
+
+|                            Movie App                             |                               CGV Clone                               |
+| :--------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| <img src="./documents/flutter-challenge-movie.gif" width="200"/> | <img src="./documents/flutter-challenge-graduation.gif" width="200"/> |
+
 ### 틱톡 클론코딩
 
 ### Flutter Animation 마스터클래스
