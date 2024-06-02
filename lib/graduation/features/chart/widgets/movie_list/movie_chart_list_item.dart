@@ -23,7 +23,7 @@ class MovieChartListItem extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: posterAspectRatio,
             child: MoviePoster(
-              urlString: movie.posterPath,
+              movie: movie,
               order: index + 1,
             ),
           ),
@@ -37,6 +37,17 @@ class MovieChartListItem extends StatelessWidget {
             fontWeight: FontWeight.w600,
             fontSize: 16,
             height: 1,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '🚀인기도 ${movie.popularity}',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.grey.shade500,
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
           ),
         ),
         const SizedBox(height: 12),

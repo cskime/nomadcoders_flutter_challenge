@@ -26,6 +26,7 @@ class MovieChartAllListItem extends StatelessWidget {
                 Positioned.fill(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         movie.title,
@@ -35,6 +36,32 @@ class MovieChartAllListItem extends StatelessWidget {
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        '🌟평점 ${movie.voteAverage.toInt()}/10',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade600,
+                        ),
+                        maxLines: 1,
+                      ),
+                      Text(
+                        '🚀${movie.popularity}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade600,
+                        ),
+                        maxLines: 1,
+                      ),
+                      Text(
+                        '🎥${movie.releaseDate} 개봉',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade600),
+                        maxLines: 1,
                       ),
                     ],
                   ),

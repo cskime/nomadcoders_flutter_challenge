@@ -15,7 +15,7 @@ class MovieChartList extends StatelessWidget {
     final itemWidth = MediaQuery.sizeOf(context).width * 0.4;
     const aspectRatio = 0.65;
     return SizedBox(
-      height: itemWidth / aspectRatio + 70,
+      height: itemWidth / aspectRatio + 100,
       child: FutureBuilder(
         future: movies,
         builder: (context, snapshot) {
