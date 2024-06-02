@@ -1,16 +1,23 @@
-# nomadcoders_flutter_challenge
+# Nomadcoders Flutter Challenge
 
-A new Flutter project.
+- Nomadcoders에서 Flutter 스터디에 참여하여 진행했던 챌린지 과제
+- 관련 강의
+  - [Flutter로 웹툰 앱 만들기](https://nomadcoders.co/flutter-for-beginners)
+  - [틱톡 클론코딩](https://nomadcoders.co/tiktok-clone)
+  - [Flutter Animations 마스터클래스](https://nomadcoders.co/flutter-animations-masterclass)
 
-## Getting Started
+## Skills
 
-This project is a starting point for a Flutter application.
+- Dart/Flutter
+- Packages
+  - http
+  - font_awesome_flutter
+  - flutter_svg
 
-A few resources to get you started if this is your first Flutter project:
+## Results
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Flutter로 웹툰 앱 만들기
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 틱톡 클론코딩
+
+### Flutter Animation 마스터클래스
