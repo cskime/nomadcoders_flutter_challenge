@@ -17,7 +17,6 @@ class TwitterOnboardingApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
         ),
-        hintColor: Palette.text,
       ),
       home: const DefaultTextStyle(
         style: TextStyle(color: Palette.text),
