@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/create_account_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/utils/link_text_span.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/widgets/button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/widgets/social_login_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/widgets/titled_divider.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/widgets/button.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -26,7 +27,12 @@ class InitialScreen extends StatelessWidget {
     // TODO: Social login
   }
 
-  void _onCreateAccountPressed() {}
+  void _onCreateAccountPressed(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const CreateAccountScreen(),
+      fullscreenDialog: true,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +77,8 @@ class InitialScreen extends StatelessWidget {
               const SizedBox(height: 4),
               Button(
                 title: 'Create account',
-                onPressed: _onCreateAccountPressed,
+                type: ButtonType.large,
+                onPressed: () => _onCreateAccountPressed(context),
               ),
               const SizedBox(height: 28),
               Text.rich(
@@ -109,6 +116,7 @@ class InitialScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
             ],
           ),
         ),
