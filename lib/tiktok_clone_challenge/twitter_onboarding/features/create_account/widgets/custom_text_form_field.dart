@@ -5,25 +5,39 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
-    required this.hintText,
+    this.controller,
+    this.onTextEdited,
+    this.focusNode,
+    this.onFocusChanged,
+    this.hintText,
+    this.labelText,
     this.helperText,
+    this.keyboardType,
   });
 
-  final String hintText;
+  final TextEditingController? controller;
+  final void Function()? onTextEdited;
+  final FocusNode? focusNode;
+  final void Function(bool hasFocus)? onFocusChanged;
+  final String? hintText;
+  final String? labelText;
   final String? helperText;
+  final TextInputType? keyboardType;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  late final _textEditingController = TextEditingController();
-  late final _focusNode = FocusNode();
+  late final _textEditingController =
+      widget.controller ?? TextEditingController();
+  late final _focusNode = widget.focusNode ?? FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() => setState(() {}));
+    _textEditingController.addListener(_onTextEdited);
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
@@ -48,6 +62,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ? widget.helperText
           : null;
 
+  void _onTextEdited() {
+    widget.onTextEdited?.call();
+    setState(() {});
+  }
+
+  void _onFocusChanged() {
+    widget.onFocusChanged?.call(_focusNode.hasFocus);
+    setState(() {});
+  }
+
   void _onChanged(String text) {
     setState(() {});
   }
@@ -67,7 +91,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           opacity: _opacity,
           duration: const Duration(milliseconds: 150),
           child: Text(
-            widget.hintText,
+            widget.labelText ?? widget.hintText ?? '',
             style: const TextStyle(
               color: Color(0xFF111319),
               fontSize: 18,
@@ -78,6 +102,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         TextFormField(
           controller: _textEditingController,
           focusNode: _focusNode,
+          keyboardType: widget.keyboardType,
           onChanged: _onChanged,
           cursorColor: Palette.primary,
           cursorWidth: 3,
