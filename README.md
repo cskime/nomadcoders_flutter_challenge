@@ -13,6 +13,7 @@
   - http
   - font_awesome_flutter
   - flutter_svg
+  - intl
 
 ## Results
 
@@ -27,5 +28,9 @@
 | <img src="./documents/flutter-challenge-movie.gif" width="200"/> | <img src="./documents/flutter-challenge-graduation.gif" width="200"/> |
 
 ### 틱톡 클론코딩
+
+|                              Twitter                               |            WIP            |
+| :----------------------------------------------------------------: | :-----------------------: |
+| <img src="./documents/flutter-challenge-twitter.gif" width="200"/> | <img src="" width="200"/> |
 
 ### Flutter Animation 마스터클래스

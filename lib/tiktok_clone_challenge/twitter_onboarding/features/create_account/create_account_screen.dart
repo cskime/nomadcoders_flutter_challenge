@@ -58,6 +58,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     ));
   }
 
+  DateTime? get _initialDateTime {
+    if (_dateOfBirthTextEditingController.text.isEmpty) {
+      return null;
+    }
+
+    return DateFormat.yMMMMd().parse(_dateOfBirthTextEditingController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -145,6 +153,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 children: [
                   CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.date,
+                    initialDateTime: _initialDateTime,
                     onDateTimeChanged: _onDateTimeChanged,
                   ),
                   Positioned(
