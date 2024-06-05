@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/app_bar_text_leading_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/custom_text_form_field.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/widgets/button.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/customize_experience/customize_experience_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -47,7 +48,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         DateFormat.yMMMMd().format(dateTime);
   }
 
-  void _onNextTap() {}
+  void _onNextTap() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const CustomizeExperienceScreen(),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {

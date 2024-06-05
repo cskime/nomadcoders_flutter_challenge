@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/create_account_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/utils/link_text_span.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/widgets/social_login_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/widgets/titled_divider.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/widgets/button.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -81,40 +81,21 @@ class InitialScreen extends StatelessWidget {
                 onPressed: () => _onCreateAccountPressed(context),
               ),
               const SizedBox(height: 28),
-              Text.rich(
-                TextSpan(
-                  text: 'By signing up, you agree to our ',
-                  children: [
-                    LinkTextSpan(
-                      text: 'Terms',
-                      onTap: _onTermsTap,
-                    ),
-                    const TextSpan(text: ', '),
-                    LinkTextSpan(
-                      text: 'Privacy Policy',
-                      onTap: _onPrivacyPolicyTap,
-                    ),
-                    const TextSpan(text: ', '),
-                    const TextSpan(text: 'and '),
-                    LinkTextSpan(
-                      text: 'Cookie Use',
-                      onTap: _onCookieUseTap,
-                    ),
-                    const TextSpan(text: '.'),
-                  ],
-                ),
+              LinkableText(
+                text:
+                    'By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.',
+                links: [
+                  Link(text: 'Terms', callback: _onTermsTap),
+                  Link(text: 'Privacy Policy', callback: _onPrivacyPolicyTap),
+                  Link(text: 'Cookie Use', callback: _onCookieUseTap),
+                ],
               ),
               const SizedBox(height: 40),
-              Text.rich(
-                TextSpan(
-                  text: 'Have an account already? ',
-                  children: [
-                    LinkTextSpan(
-                      text: 'Log in',
-                      onTap: _onLoginTap,
-                    ),
-                  ],
-                ),
+              LinkableText(
+                text: 'Have an account already? Log in',
+                links: [
+                  Link(text: 'Log in', callback: _onLoginTap),
+                ],
               ),
               const SizedBox(height: 24),
             ],
