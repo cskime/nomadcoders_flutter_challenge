@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField({
+  const    CustomTextFormField({
     super.key,
     this.controller,
     this.onTextEdited,
@@ -13,6 +13,7 @@ class CustomTextFormField extends StatefulWidget {
     this.labelText,
     this.helperText,
     this.keyboardType,
+    this.readOnly = false,
   });
 
   final TextEditingController? controller;
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? labelText;
   final String? helperText;
   final TextInputType? keyboardType;
+  final bool readOnly;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -106,6 +108,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           onChanged: _onChanged,
           cursorColor: Palette.primary,
           cursorWidth: 3,
+          readOnly: widget.readOnly,
           decoration: InputDecoration(
             // hint
             hintText: widget.hintText,

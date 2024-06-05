@@ -1,36 +1,20 @@
 import 'package:flutter/material.dart';
-
-enum ButtonType {
-  large,
-  small;
-
-  double get height => switch (this) {
-        ButtonType.large => 56,
-        ButtonType.small => 40,
-      };
-
-  double get fontSize => switch (this) {
-        ButtonType.large => 18,
-        ButtonType.small => 16,
-      };
-
-  FontWeight get fontWeight => switch (this) {
-        ButtonType.large => FontWeight.w800,
-        ButtonType.small => FontWeight.w700,
-      };
-}
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 
 class Button extends StatelessWidget {
   const Button({
     super.key,
     required this.title,
     required this.type,
+    required this.size,
     this.enabled = true,
     this.onPressed,
   });
 
   final String title;
   final ButtonType type;
+  final ButtonSize size;
   final bool enabled;
   final void Function()? onPressed;
 
@@ -40,34 +24,34 @@ class Button extends StatelessWidget {
       onTap: enabled ? onPressed : null,
       child: Opacity(
         opacity: enabled ? 1 : 0.3,
-        child: _widgetForType(type),
+        child: _widgetForType(size),
       ),
     );
   }
 
-  Widget _widgetForType(ButtonType type) {
+  Widget _widgetForType(ButtonSize size) {
     final widget = Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      height: type.height,
+      height: size.height,
       decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(type.height / 2),
+        color: type.backgroundColor,
+        borderRadius: BorderRadius.circular(size.height / 2),
       ),
       child: Center(
         child: Text(
           title,
           style: TextStyle(
             color: Colors.white,
-            fontSize: type.fontSize,
-            fontWeight: type.fontWeight,
+            fontSize: size.fontSize,
+            fontWeight: size.fontWeight,
           ),
         ),
       ),
     );
 
-    return switch (type) {
-      ButtonType.large => widget,
-      ButtonType.small => FittedBox(child: widget)
+    return switch (size) {
+      ButtonSize.large => widget,
+      ButtonSize.small => FittedBox(child: widget)
     };
   }
 }

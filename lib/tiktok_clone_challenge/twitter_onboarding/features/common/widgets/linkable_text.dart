@@ -5,10 +5,12 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 class Link {
   const Link({
     required this.text,
+    this.style,
     required this.callback,
   });
 
   final String text;
+  final TextStyle? style;
   final void Function() callback;
 
   @override
@@ -70,7 +72,8 @@ class LinkableText extends StatelessWidget {
     for (int linkIndex = 0; linkIndex < sortedLinks.length; linkIndex++) {
       final positionedLink = sortedLinks[linkIndex];
       splitted.add(text.substring(substringIndex, positionedLink.position));
-      substringIndex = positionedLink.position + positionedLink.link.text.length;
+      substringIndex =
+          positionedLink.position + positionedLink.link.text.length;
     }
     splitted.add(text.substring(substringIndex));
 
