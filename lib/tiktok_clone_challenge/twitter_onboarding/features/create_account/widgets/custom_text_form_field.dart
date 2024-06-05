@@ -3,9 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  const    CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     this.controller,
+    this.text,
     this.onTextEdited,
     this.focusNode,
     this.onFocusChanged,
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatefulWidget {
   });
 
   final TextEditingController? controller;
+  final String? text;
   final void Function()? onTextEdited;
   final FocusNode? focusNode;
   final void Function(bool hasFocus)? onFocusChanged;
@@ -32,7 +34,7 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late final _textEditingController =
-      widget.controller ?? TextEditingController();
+      widget.controller ?? TextEditingController(text: widget.text);
   late final _focusNode = widget.focusNode ?? FocusNode();
 
   @override

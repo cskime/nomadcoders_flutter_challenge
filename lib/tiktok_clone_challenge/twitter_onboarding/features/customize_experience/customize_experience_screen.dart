@@ -6,9 +6,15 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/create_account_sign_up_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
 class CustomizeExperienceScreen extends StatefulWidget {
-  const CustomizeExperienceScreen({super.key});
+  const CustomizeExperienceScreen({
+    super.key,
+    required this.userData,
+  });
+
+  final UserData userData;
 
   @override
   State<CustomizeExperienceScreen> createState() =>
@@ -30,7 +36,9 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
 
   void _onNextPressd() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const CreateAccountSignUpScreen(),
+      builder: (context) => CreateAccountSignUpScreen(
+        userData: widget.userData,
+      ),
     ));
   }
 

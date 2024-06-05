@@ -6,9 +6,15 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/custom_text_form_field.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
 class CreateAccountSignUpScreen extends StatelessWidget {
-  const CreateAccountSignUpScreen({super.key});
+  const CreateAccountSignUpScreen({
+    super.key,
+    required this.userData,
+  });
+
+  final UserData userData;
 
   void _onBackButtonPressed(BuildContext context) {
     Navigator.of(context).pop();
@@ -37,22 +43,25 @@ class CreateAccountSignUpScreen extends StatelessWidget {
               ),
             ],
           ),
-          const Form(
+          Form(
             child: Column(
               children: [
                 CustomTextFormField(
                   readOnly: true,
+                  text: userData.name,
                   hintText: 'Name',
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 CustomTextFormField(
                   readOnly: true,
+                  text: userData.phoneOrEmail,
                   hintText: 'Phone number or email address',
                   labelText: 'Email',
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 CustomTextFormField(
                   readOnly: true,
+                  text: userData.dateOfBirth,
                   hintText: 'Date of birth',
                   keyboardType: TextInputType.none,
                 ),
