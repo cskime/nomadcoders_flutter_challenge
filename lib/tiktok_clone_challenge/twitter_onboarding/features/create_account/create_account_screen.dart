@@ -68,6 +68,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return BaseScreen(
       appBarLeading: const AppBarLeadingTextButton(
         text: CreateAccountScreen._cancelText,
@@ -78,16 +79,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 36, bottom: 24),
+                padding: const EdgeInsets.only(top: 36, bottom: 24),
                 child: Text(
                   'Create your account',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: textTheme.headlineMedium,
                 ),
               ),
             ],

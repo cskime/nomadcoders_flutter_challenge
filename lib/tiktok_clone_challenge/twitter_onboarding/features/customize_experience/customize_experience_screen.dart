@@ -54,23 +54,23 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
           const SizedBox(height: 24),
           Text(
             'Customize your experience',
-            style: Theme.of(context).textTheme.displayLarge,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           const SizedBox(height: 24),
           Text(
             'Track where you see Twitter content across the web',
-            style: Theme.of(context).textTheme.displaySmall,
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
                   'Twitter uses this data to personalize your experience. THis web browsing history will never be stored with your name, email, or phone number.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w600),
                 ),
               ),
               Switch.adaptive(

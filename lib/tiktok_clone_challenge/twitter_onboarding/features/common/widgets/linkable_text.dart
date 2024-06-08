@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/text_link_span.dart';
 
 @immutable
@@ -81,14 +82,24 @@ class LinkableText extends StatelessWidget {
     for (int index = 0; index < sortedLinks.length; index++) {
       final link = sortedLinks[index];
       children.addAll([
-        TextLinkSpan(text: link.link.text, onTap: link.link.callback),
-        TextSpan(text: splitted[index + 1]),
+        TextLinkSpan(
+          text: link.link.text,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Palette.primary,
+                fontWeight: FontWeight.w500,
+              ),
+          onTap: link.link.callback,
+        ),
+        TextSpan(
+          text: splitted[index + 1],
+        ),
       ]);
     }
 
     return Text.rich(
       TextSpan(
         text: splitted.first,
+        style: Theme.of(context).textTheme.bodyMedium,
         children: children,
       ),
     );

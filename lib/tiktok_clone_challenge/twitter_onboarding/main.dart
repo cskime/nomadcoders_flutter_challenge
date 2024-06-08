@@ -18,12 +18,10 @@ class TwitterOnboardingApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 32,
+          headlineLarge: TextStyle(
             fontWeight: FontWeight.w900,
           ),
-          displaySmall: TextStyle(
-            fontSize: 24,
+          headlineMedium: TextStyle(
             fontWeight: FontWeight.w900,
           ),
         ),

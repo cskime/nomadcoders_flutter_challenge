@@ -29,16 +29,13 @@ class CreateAccountSignUpScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Row(
+          Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 36, bottom: 24),
+                padding: const EdgeInsets.only(top: 36, bottom: 24),
                 child: Text(
                   'Create your account',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
             ],
