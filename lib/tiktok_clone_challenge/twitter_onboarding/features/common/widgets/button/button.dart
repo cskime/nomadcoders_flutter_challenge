@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 
-class Button extends StatefulWidget {
+class Button extends StatelessWidget {
   const Button({
     super.key,
     required this.title,
     required this.type,
     required this.size,
     this.enabled = true,
-    this.future,
+    this.loading = false,
     this.onPressed,
   });
 
@@ -18,38 +18,16 @@ class Button extends StatefulWidget {
   final ButtonType type;
   final ButtonSize size;
   final bool enabled;
-  final Future<void> Function()? future;
+  final bool loading;
   final void Function()? onPressed;
-
-  @override
-  State<Button> createState() => _ButtonState();
-}
-
-class _ButtonState extends State<Button> {
-  var _loading = false;
-
-  void _onTap() {
-    if (widget.onPressed == null) {
-      return;
-    }
-
-    if (widget.future == null) {
-      widget.onPressed!();
-      return;
-    }
-
-    setState(() {
-      _loading = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _onTap,
+      onTap: onPressed,
       child: Opacity(
-        opacity: widget.enabled ? 1 : 0.3,
-        child: _widgetForType(widget.size),
+        opacity: enabled ? 1 : 0.3,
+        child: _widgetForType(size),
       ),
     );
   }
@@ -59,37 +37,20 @@ class _ButtonState extends State<Button> {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       height: size.height,
       decoration: BoxDecoration(
-        color: this.widget.type.backgroundColor,
+        color: type.backgroundColor,
         borderRadius: BorderRadius.circular(size.height / 2),
       ),
       child: Center(
-        child: FutureBuilder(
-          future: this.widget.future?.call(),
-          builder: (context, snapshot) {
-            final titleText = Text(
-              this.widget.title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: size.fontSize,
-                fontWeight: size.fontWeight,
+        child: loading
+            ? const CupertinoActivityIndicator(color: Colors.white)
+            : Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: size.fontSize,
+                  fontWeight: size.fontWeight,
+                ),
               ),
-            );
-
-            if (this.widget.future == null || !_loading) {
-              return titleText;
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CupertinoActivityIndicator(
-                color: Colors.white,
-              );
-            }
-
-            _loading = false;
-            this.widget.onPressed!();
-            return titleText;
-          },
-        ),
       ),
     );
 

@@ -5,13 +5,21 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 class BaseScreen extends StatelessWidget {
   const BaseScreen({
     super.key,
-    required this.body,
+    this.largeTitle,
+    this.title,
+    this.description,
+    required this.children,
+    this.footer,
     this.bottomNavigationBar,
     this.appBarLeading,
     this.appBarLeadingWidth,
   });
 
-  final Widget body;
+  final String? largeTitle;
+  final String? title;
+  final String? description;
+  final List<Widget> children;
+  final Widget? footer;
   final Widget? bottomNavigationBar;
   final Widget? appBarLeading;
   final double? appBarLeadingWidth;
@@ -47,7 +55,44 @@ class BaseScreen extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: body,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (largeTitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 24),
+                            child: Text(
+                              largeTitle!,
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                          ),
+                        if (title != null)
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: largeTitle == null ? 36 : 24,
+                              bottom: 24,
+                            ),
+                            child: Text(
+                              title!,
+                              style: Theme.of(context).textTheme.headlineMedium,
+                            ),
+                          ),
+                        if (description != null)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 36),
+                            child: Text(
+                              description!,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ),
+                        ...children,
+                        if (footer != null) ...[
+                          const Spacer(),
+                          footer!,
+                          const SizedBox(height: 24),
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ),

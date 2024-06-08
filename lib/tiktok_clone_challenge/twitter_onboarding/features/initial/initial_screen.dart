@@ -39,57 +39,53 @@ class InitialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return BaseScreen(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Center(
-              child: Text(
-                "See what's happening in the word right now.",
-                style: textTheme.headlineMedium,
-                maxLines: 2,
-              ),
+      children: [
+        Expanded(
+          child: Center(
+            child: Text(
+              "See what's happening in the word right now.",
+              style: textTheme.headlineMedium,
+              maxLines: 2,
             ),
           ),
-          SocialLoginButton(
-            type: SocialLoginType.google,
-            onPressed: _onSocialLoginPressed,
-          ),
-          const SizedBox(height: 16),
-          SocialLoginButton(
-            type: SocialLoginType.apple,
-            onPressed: _onSocialLoginPressed,
-          ),
-          const SizedBox(height: 16),
-          const TitledDivider(),
-          const SizedBox(height: 4),
-          Button(
-            title: 'Create account',
-            type: ButtonType.secondary,
-            size: ButtonSize.large,
-            onPressed: () => _onCreateAccountPressed(context),
-          ),
-          const SizedBox(height: 28),
-          LinkableText(
-            text:
-                'By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.',
-            links: [
-              Link(text: 'Terms', callback: _onTermsTap),
-              Link(text: 'Privacy Policy', callback: _onPrivacyPolicyTap),
-              Link(text: 'Cookie Use', callback: _onCookieUseTap),
-            ],
-          ),
-          const SizedBox(height: 40),
-          LinkableText(
-            text: 'Have an account already? Log in',
-            links: [
-              Link(text: 'Log in', callback: _onLoginTap),
-            ],
-          ),
-          const SizedBox(height: 24),
-        ],
-      ),
+        ),
+        SocialLoginButton(
+          type: SocialLoginType.google,
+          onPressed: _onSocialLoginPressed,
+        ),
+        const SizedBox(height: 16),
+        SocialLoginButton(
+          type: SocialLoginType.apple,
+          onPressed: _onSocialLoginPressed,
+        ),
+        const SizedBox(height: 16),
+        const TitledDivider(),
+        const SizedBox(height: 4),
+        Button(
+          title: 'Create account',
+          type: ButtonType.secondary,
+          size: ButtonSize.large,
+          onPressed: () => _onCreateAccountPressed(context),
+        ),
+        const SizedBox(height: 28),
+        LinkableText(
+          text:
+              'By signing up, you agree to our Terms, Privacy Policy, and Cookie Use.',
+          links: [
+            Link(text: 'Terms', callback: _onTermsTap),
+            Link(text: 'Privacy Policy', callback: _onPrivacyPolicyTap),
+            Link(text: 'Cookie Use', callback: _onCookieUseTap),
+          ],
+        ),
+        const SizedBox(height: 40),
+        LinkableText(
+          text: 'Have an account already? Log in',
+          links: [
+            Link(text: 'Log in', callback: _onLoginTap),
+          ],
+        ),
+        const SizedBox(height: 24),
+      ],
     );
   }
 }

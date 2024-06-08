@@ -5,8 +5,8 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/custom_text_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/app_bar_text_leading_button.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/custom_text_form_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/customize_experience/customize_experience_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
@@ -68,7 +68,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return BaseScreen(
       appBarLeading: const AppBarLeadingTextButton(
         text: CreateAccountScreen._cancelText,
@@ -76,71 +75,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       appBarLeadingWidth: AppBarLeadingTextButton.fitWidth(
         text: CreateAccountScreen._cancelText,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 36, bottom: 24),
-                child: Text(
-                  'Create your account',
-                  style: textTheme.headlineMedium,
-                ),
-              ),
-            ],
-          ),
-          Form(
-            child: Column(
-              children: [
-                CustomTextFormField(
-                  controller: _nameTextEditingController,
-                  onTextEdited: _onTextEdited,
-                  hintText: 'Name',
-                ),
-                const SizedBox(height: 24),
-                CustomTextFormField(
-                  controller: _emailTextEditingController,
-                  onTextEdited: _onTextEdited,
-                  hintText: 'Phone number or email address',
-                  labelText: 'Email',
-                ),
-                const SizedBox(height: 24),
-                CustomTextFormField(
-                  controller: _dateOfBirthTextEditingController,
-                  onTextEdited: _onTextEdited,
-                  onFocusChanged: _onDateTextFieldFocusChanged,
-                  hintText: 'Date of birth',
-                  helperText:
-                      'This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.',
-                  keyboardType: TextInputType.none,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 12,
-                bottom: 8,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Spacer(),
-                  Button(
-                    title: 'Next',
-                    type: ButtonType.secondary,
-                    size: ButtonSize.small,
-                    enabled: _nextEnabled,
-                    onPressed: _onNextTap,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      title: 'Create your account',
       bottomNavigationBar: _showsDatePicker
           ? BottomAppBar(
               color: Colors.white,
@@ -167,6 +102,58 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               ),
             )
           : null,
+      children: [
+        Form(
+          child: Column(
+            children: [
+              CustomTextField(
+                controller: _nameTextEditingController,
+                onTextEdited: _onTextEdited,
+                hintText: 'Name',
+              ),
+              const SizedBox(height: 24),
+              CustomTextField(
+                controller: _emailTextEditingController,
+                onTextEdited: _onTextEdited,
+                hintText: 'Phone number or email address',
+                labelText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(height: 24),
+              CustomTextField(
+                controller: _dateOfBirthTextEditingController,
+                onTextEdited: _onTextEdited,
+                onFocusChanged: _onDateTextFieldFocusChanged,
+                hintText: 'Date of birth',
+                helperText:
+                    'This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.',
+                keyboardType: TextInputType.none,
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 12,
+              bottom: 8,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                const Spacer(),
+                Button(
+                  title: 'Next',
+                  type: ButtonType.secondary,
+                  size: ButtonSize.small,
+                  enabled: _nextEnabled,
+                  onPressed: _onNextTap,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,9 +4,9 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/custom_text_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/confirmation_code_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/custom_text_form_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
 class CreateAccountSignUpScreen extends StatelessWidget {
@@ -34,45 +34,9 @@ class CreateAccountSignUpScreen extends StatelessWidget {
         icon: const FaIcon(FontAwesomeIcons.arrowLeft),
         onPressed: () => _onBackButtonPressed(context),
       ),
-      body: Column(
+      title: 'Create your account',
+      footer: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 36, bottom: 24),
-                child: Text(
-                  'Create your account',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-            ],
-          ),
-          Form(
-            child: Column(
-              children: [
-                CustomTextFormField(
-                  readOnly: true,
-                  text: userData.name,
-                  hintText: 'Name',
-                ),
-                const SizedBox(height: 24),
-                CustomTextFormField(
-                  readOnly: true,
-                  text: userData.phoneOrEmail,
-                  hintText: 'Phone number or email address',
-                  labelText: 'Email',
-                ),
-                const SizedBox(height: 24),
-                CustomTextFormField(
-                  readOnly: true,
-                  text: userData.dateOfBirth,
-                  hintText: 'Date of birth',
-                  keyboardType: TextInputType.none,
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
           LinkableText(
             text:
                 'By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use. Twitter may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy, like keeping your account secure and personalizing our services, including ads. Learn more. Others will be able to find you by email or phone number, when provided, unless you choose otherwise here.',
@@ -93,6 +57,33 @@ class CreateAccountSignUpScreen extends StatelessWidget {
           ),
         ],
       ),
+      children: [
+        Form(
+          child: Column(
+            children: [
+              CustomTextField(
+                readOnly: true,
+                text: userData.name,
+                hintText: 'Name',
+              ),
+              const SizedBox(height: 24),
+              CustomTextField(
+                readOnly: true,
+                text: userData.phoneOrEmail,
+                hintText: 'Phone number or email address',
+                labelText: 'Email',
+              ),
+              const SizedBox(height: 24),
+              CustomTextField(
+                readOnly: true,
+                text: userData.dateOfBirth,
+                hintText: 'Date of birth',
+                keyboardType: TextInputType.none,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
