@@ -5,6 +5,7 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/confirmation_code_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/widgets/custom_text_form_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
@@ -18,6 +19,12 @@ class CreateAccountSignUpScreen extends StatelessWidget {
 
   void _onBackButtonPressed(BuildContext context) {
     Navigator.of(context).pop();
+  }
+
+  void _onSignUpPressed(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ConfirmationCodeScreen(userData: userData),
+    ));
   }
 
   @override
@@ -78,10 +85,11 @@ class CreateAccountSignUpScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          const Button(
+          Button(
             title: 'Sign Up',
             type: ButtonType.primary,
             size: ButtonSize.large,
+            onPressed: () => _onSignUpPressed(context),
           ),
         ],
       ),

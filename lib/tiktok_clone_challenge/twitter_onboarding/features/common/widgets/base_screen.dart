@@ -34,6 +34,7 @@ class BaseScreen extends StatelessWidget {
           surfaceTintColor: Colors.white,
           leadingWidth: appBarLeadingWidth,
           leading: appBarLeading,
+          automaticallyImplyLeading: false,
         ),
         body: SafeArea(
           child: LayoutBuilder(
