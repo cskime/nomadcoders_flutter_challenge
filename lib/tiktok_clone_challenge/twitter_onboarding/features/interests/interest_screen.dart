@@ -4,6 +4,7 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/interest_detail_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/models/interest.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/widgets/interest_item.dart';
 
@@ -15,16 +16,22 @@ class InterestScreen extends StatefulWidget {
 }
 
 class _InterestScreenState extends State<InterestScreen> {
-  final _selected = <Interest>{};
+  final _selected = <String>{};
   final _maxSelection = 3;
 
-  void _onSelected(Interest interest) {
+  void _onSelected(String interest) {
     if (_selected.contains(interest)) {
       _selected.remove(interest);
     } else if (_selected.length < _maxSelection) {
       _selected.add(interest);
     }
     setState(() {});
+  }
+
+  void _onNextPressed() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const InterestDetailScreen(),
+    ));
   }
 
   @override
@@ -72,9 +79,9 @@ class _InterestScreenState extends State<InterestScreen> {
               padding: const EdgeInsets.all(16).copyWith(top: 32),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                  childCount: Interest.values.length,
+                  childCount: dummyInterests.length,
                   (context, index) {
-                    final interest = Interest.values[index];
+                    final interest = dummyInterests[index];
                     return InterestItem(
                       interest: interest,
                       selected: _selected.contains(interest),
@@ -110,6 +117,7 @@ class _InterestScreenState extends State<InterestScreen> {
                 type: ButtonType.secondary,
                 size: ButtonSize.small,
                 enabled: _selected.length == _maxSelection,
+                onPressed: _onNextPressed,
               )
             ],
           ),

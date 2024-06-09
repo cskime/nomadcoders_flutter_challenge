@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/models/interest.dart';
 
 class InterestItem extends StatelessWidget {
   const InterestItem({
@@ -11,9 +10,9 @@ class InterestItem extends StatelessWidget {
     required this.onSelected,
   });
 
-  final Interest interest;
+  final String interest;
   final bool selected;
-  final void Function(Interest interest) onSelected;
+  final void Function(String interest) onSelected;
 
   void _onTap() {
     onSelected(interest);
@@ -39,7 +38,7 @@ class InterestItem extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                interest.title,
+                interest,
                 style: TextStyle(
                   color: selected ? Colors.white : Colors.black,
                   fontSize: 16,
