@@ -29,8 +29,8 @@
 
 ### 틱톡 클론코딩
 
-|                              Twitter                               |            WIP            |
-| :----------------------------------------------------------------: | :-----------------------: |
-| <img src="./documents/flutter-challenge-twitter.gif" width="200"/> | <img src="" width="200"/> |
+|                              Twitter                               |                              Twitter 2                               |
+| :----------------------------------------------------------------: | :------------------------------------------------------------------: |
+| <img src="./documents/flutter-challenge-twitter.gif" width="200"/> | <img src="./documents/flutter-challenge-twitter-2.gif" width="200"/> |
 
 ### Flutter Animation 마스터클래스
