@@ -5,6 +5,7 @@
   - [Flutter로 웹툰 앱 만들기](https://nomadcoders.co/flutter-for-beginners)
   - [틱톡 클론코딩](https://nomadcoders.co/tiktok-clone)
   - [Flutter Animations 마스터클래스](https://nomadcoders.co/flutter-animations-masterclass)
+- [개발 일지](./documents/log.md)
 
 ## Skills
 
@@ -19,18 +20,18 @@
 
 ### Flutter로 웹툰 앱 만들기
 
-|                            Scheduler App                             |                            Pomodoro App                             |
-| :------------------------------------------------------------------: | :-----------------------------------------------------------------: |
-| <img src="./documents/flutter-challenge-scheduler.gif" width="200"/> | <img src="./documents/flutter-challenge-pomodoro.gif" width="200"/> |
+|         [Scheduler App](./lib/webtoon_app_challenge/scheduler_app/)         |         [Pomodoro App](./lib/webtoon_app_challenge/pomodoro_app/)          |
+| :-------------------------------------------------------------------------: | :------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-scheduler.gif" width="200"/> | <img src="./documents/images/flutter-challenge-pomodoro.gif" width="200"/> |
 
-|                            Movie App                             |                               CGV Clone                               |
-| :--------------------------------------------------------------: | :-------------------------------------------------------------------: |
-| <img src="./documents/flutter-challenge-movie.gif" width="200"/> | <img src="./documents/flutter-challenge-graduation.gif" width="200"/> |
+|           [Movie App](./lib/webtoon_app_challenge/movie_app/)           |             [CGV Clone](./lib/webtoon_app_challenge/movie_cgv/)              |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-movie.gif" width="200"/> | <img src="./documents/images/flutter-challenge-graduation.gif" width="200"/> |
 
 ### 틱톡 클론코딩
 
-|                              Twitter                               |                              Twitter 2                               |
-| :----------------------------------------------------------------: | :------------------------------------------------------------------: |
-| <img src="./documents/flutter-challenge-twitter.gif" width="200"/> | <img src="./documents/flutter-challenge-twitter-2.gif" width="200"/> |
+|                 [Twitter](./lib/tiktok_clone_challenge/)                  |                 [Twitter 2](./lib/tiktok_clone_challenge/)                  |
+| :-----------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-twitter.gif" width="200"/> | <img src="./documents/images/flutter-challenge-twitter-2.gif" width="200"/> |
 
 ### Flutter Animation 마스터클래스
