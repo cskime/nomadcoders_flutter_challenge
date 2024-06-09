@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ConfirmCodeDigit extends StatelessWidget {
-  const ConfirmCodeDigit({
+class VerificationCodeDigit extends StatelessWidget {
+  const VerificationCodeDigit({
     super.key,
     required this.number,
     required this.active,

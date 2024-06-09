@@ -5,12 +5,12 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/widgets/confirm_code_input.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/create_account/password_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/verification/widgets/verification_code_input.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
-class ConfirmationCodeScreen extends StatefulWidget {
-  const ConfirmationCodeScreen({
+class VerificationCodeScreen extends StatefulWidget {
+  const VerificationCodeScreen({
     super.key,
     required this.userData,
   });
@@ -18,10 +18,10 @@ class ConfirmationCodeScreen extends StatefulWidget {
   final UserData userData;
 
   @override
-  State<ConfirmationCodeScreen> createState() => _ConfirmationCodeScreenState();
+  State<VerificationCodeScreen> createState() => _ConfirmationCodeScreenState();
 }
 
-class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
+class _ConfirmationCodeScreenState extends State<VerificationCodeScreen> {
   var _codeFilled = false;
   var _loading = false;
   void _onBackButtonPressed(BuildContext context) {
@@ -85,7 +85,7 @@ class _ConfirmationCodeScreenState extends State<ConfirmationCodeScreen> {
         ],
       ),
       children: [
-        ConfirmCodeInput(onCodeChanged: _onCodeFilled),
+        VerificationCodeInput(onCodeChanged: _onCodeFilled),
         const SizedBox(height: 24),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

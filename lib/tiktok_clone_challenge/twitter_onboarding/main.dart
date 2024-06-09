@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/confirmation_code_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/initial_screen.dart';
 
 void main() {
   runApp(const TwitterOnboardingApp());
@@ -38,13 +37,7 @@ class TwitterOnboardingApp extends StatelessWidget {
       ),
       home: const DefaultTextStyle(
         style: TextStyle(color: Palette.text),
-        child: ConfirmationCodeScreen(
-          userData: UserData(
-            name: 'John Mobbon',
-            phoneOrEmail: 'john.mobbin@gmail.com',
-            dateOfBirth: 'Feburary 4, 1995',
-          ),
-        ),
+        child: InitialScreen(),
       ),
     );
   }

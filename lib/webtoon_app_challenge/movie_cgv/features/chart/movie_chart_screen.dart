@@ -38,6 +38,7 @@ class _MovieChartScreenState extends State<MovieChartScreen> {
     final movieService = MovieServiceState.of(context).service;
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: CustomScrollView(
           slivers: [
             SliverAppBar(

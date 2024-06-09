@@ -6,7 +6,7 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/custom_text_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/confirmation_code_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/verification/verification_code_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/models/user_data.dart';
 
 class CreateAccountSignUpScreen extends StatelessWidget {
@@ -23,7 +23,7 @@ class CreateAccountSignUpScreen extends StatelessWidget {
 
   void _onSignUpPressed(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ConfirmationCodeScreen(userData: userData),
+      builder: (context) => VerificationCodeScreen(userData: userData),
     ));
   }
 

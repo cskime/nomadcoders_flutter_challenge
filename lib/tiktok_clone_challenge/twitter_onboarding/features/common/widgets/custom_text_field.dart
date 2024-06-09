@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
 
-enum CustomTextFieldLabelTextBehavior { automatic, always }
+enum CustomTextFieldLabelTextBehavior { automatic, fixedSpace, always }
 
-enum CustomTextFieldHelperTextBehavior { automatic, always }
+enum CustomTextFieldHelperTextBehavior { automatic, fixedSpace, always }
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -79,27 +79,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
         size: 24,
       );
 
+  bool get _showsCheckmarkIcon => widget.validator == null
+      ? _textEditingController.text.isNotEmpty
+      : widget.validator!(_textEditingController.text);
+
   bool get _showsHelperText =>
-      widget.helperText != null &&
-      (_focusNode.hasFocus || _textEditingController.text.isNotEmpty);
+      switch (widget.customTextFieldHelperTextBehavior) {
+        CustomTextFieldHelperTextBehavior.automatic =>
+          (widget.helperText != null) &&
+              (_focusNode.hasFocus || _textEditingController.text.isNotEmpty),
+        CustomTextFieldHelperTextBehavior.fixedSpace => true,
+        CustomTextFieldHelperTextBehavior.always => widget.helperText != null,
+      };
 
   bool get _showsLabelText => switch (widget.customTextFieldLabelTextBehavior) {
         CustomTextFieldLabelTextBehavior.automatic =>
           (widget.labelText != null || widget.hintText != null) &&
               _textEditingController.text.isNotEmpty,
-        CustomTextFieldLabelTextBehavior.always => true,
+        CustomTextFieldLabelTextBehavior.fixedSpace => true,
+        CustomTextFieldLabelTextBehavior.always => _labelText != null,
       };
-
-  bool get _showsCheckmarkIcon => widget.validator == null
-      ? _textEditingController.text.isNotEmpty
-      : widget.validator!(_textEditingController.text);
 
   String? get _labelText {
     final text = widget.labelText ?? widget.hintText;
     return switch (widget.customTextFieldLabelTextBehavior) {
-      CustomTextFieldLabelTextBehavior.automatic => text!,
-      CustomTextFieldLabelTextBehavior.always =>
-        _textEditingController.text.isEmpty ? '' : text!,
+      CustomTextFieldLabelTextBehavior.automatic => text,
+      CustomTextFieldLabelTextBehavior.fixedSpace =>
+        _textEditingController.text.isEmpty ? '' : text,
+      CustomTextFieldLabelTextBehavior.always => text,
     };
   }
 

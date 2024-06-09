@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/confirmation/widgets/confirm_code_digit.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/verification/widgets/verification_code_digit.dart';
 
-class ConfirmCodeInput extends StatefulWidget {
-  const ConfirmCodeInput({
+class VerificationCodeInput extends StatefulWidget {
+  const VerificationCodeInput({
     super.key,
     required this.onCodeChanged,
   });
@@ -10,10 +10,10 @@ class ConfirmCodeInput extends StatefulWidget {
   final void Function(bool isFilled) onCodeChanged;
 
   @override
-  State<ConfirmCodeInput> createState() => _ConfirmCodeInputState();
+  State<VerificationCodeInput> createState() => _VerificationCodeInputState();
 }
 
-class _ConfirmCodeInputState extends State<ConfirmCodeInput> {
+class _VerificationCodeInputState extends State<VerificationCodeInput> {
   final _editingController = TextEditingController();
   final _focusNode = FocusNode();
   final _spacing = 24.0;
@@ -45,7 +45,7 @@ class _ConfirmCodeInputState extends State<ConfirmCodeInput> {
     final digits = _stringNumbers.indexed
         .map(
           (element) => Expanded(
-            child: ConfirmCodeDigit(
+            child: VerificationCodeDigit(
               number: int.tryParse(element.$2) ?? -1,
               active: element.$1 == _currentPosition,
             ),
