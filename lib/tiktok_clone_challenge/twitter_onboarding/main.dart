@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/constants/palette.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/initial/initial_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/interest_screen.dart';
 
 void main() {
   runApp(const TwitterOnboardingApp());
@@ -34,7 +34,7 @@ class TwitterOnboardingApp extends StatelessWidget {
       ),
       home: const DefaultTextStyle(
         style: TextStyle(color: Palette.text),
-        child: InitialScreen(),
+        child: InterestScreen(),
       ),
     );
   }

@@ -82,7 +82,10 @@ class BaseScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 36),
                             child: Text(
                               description!,
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(height: 1.3),
                             ),
                           ),
                         ...children,

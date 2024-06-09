@@ -5,6 +5,7 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onb
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_size.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/button/button_type.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/custom_text_field.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/twitter_onboarding/features/interests/interest_screen.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -34,6 +35,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return value.length >= 8;
   }
 
+  void _onNextPressed() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const InterestScreen(),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -48,7 +55,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         type: ButtonType.secondary,
         size: ButtonSize.large,
         enabled: _validator(_textEditingController.text),
-        onPressed: () => (),
+        onPressed: _onNextPressed,
       ),
       children: [
         CustomTextField(
