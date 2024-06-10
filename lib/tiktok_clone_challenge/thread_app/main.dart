@@ -14,12 +14,23 @@ class ThreadApp extends StatelessWidget {
       theme: ThemeData(
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+        ),
         textTheme: TextTheme(
-          titleMedium: const TextStyle(fontSize: 18),
-          bodyMedium: const TextStyle(fontSize: 18),
+          titleMedium: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+          bodyMedium: const TextStyle(fontSize: 16),
           labelMedium: TextStyle(
             color: Colors.grey.shade500,
-            fontSize: 18,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
         ),
