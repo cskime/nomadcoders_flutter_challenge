@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_image.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_repliers_avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_user_avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/post.dart';
@@ -74,6 +75,12 @@ class PostListItem extends StatelessWidget {
                             post.body,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
+                          if (post.imageUrls.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child:
+                                  PostListItemImage(imageUrls: post.imageUrls),
+                            ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 12),
                             child: Wrap(

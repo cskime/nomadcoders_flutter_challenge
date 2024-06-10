@@ -4,7 +4,7 @@ class Post {
   Post({
     required this.user,
     required this.body,
-    this.imagePaths = const [],
+    this.imageUrls = const [],
     required this.commentCount,
     required this.likeCount,
     this.repliers = const [],
@@ -13,7 +13,7 @@ class Post {
 
   final User user;
   final String body;
-  final List<String> imagePaths;
+  final List<String> imageUrls;
   final int commentCount;
   final int likeCount;
   final List<User> repliers;
@@ -41,6 +41,9 @@ final dummyPosts = [
       verified: true,
     ),
     body: 'Vine after seeing the Treads logo unveiled',
+    imageUrls: [
+      'assets/images/thread-image.jpg',
+    ],
     commentCount: 36,
     likeCount: 391,
     repliers: [
@@ -83,6 +86,11 @@ final dummyPosts = [
       verified: true,
     ),
     body: 'my phone feels like a vibrator with all these notifications rn',
+    imageUrls: [
+      'assets/images/thread-image.jpg',
+      'assets/images/thread-image.jpg',
+      'assets/images/thread-image.jpg',
+    ],
     commentCount: 64,
     likeCount: 631,
     repliers: [
@@ -110,6 +118,11 @@ final dummyPosts = [
       verified: true,
     ),
     body: 'Vine after seeing the Treads logo unveiled',
+    imageUrls: [
+      'assets/images/thread-image.jpg',
+      'assets/images/thread-image.jpg',
+      'assets/images/thread-image.jpg',
+    ],
     commentCount: 36,
     likeCount: 391,
     repliers: [
