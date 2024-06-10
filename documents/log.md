@@ -109,7 +109,7 @@
 
 - Post widget에서 profile image와 content들은 각각 `Column`을 사용하고 있음
 - Content 길이가 늘어남에 따라 profile image 아래 vertical bar가 남은 영역을 차지할 수 있도록 `Expanded` widget을 사용하려고 하면 "RenderFlex' exception 발생
-  <img src="./images/thread-clone-post-renderflex-error.png" width="600" />
+  <div><img src="./images/thread-clone-post-renderflex-error.png" width="600" /></div>
 - `Column`은 height constraint가 unlimited이기 때문에 `Expanded`와 함께 사용하면 높이가 설정되지 않아서 exception error가 발생한다.
 - 이 문제를 해결하기 위해 두 `Column`을 포함하고 있는 `Row`를 `IntrinsicHeight`으로 wrap
 - `IntrinsicHeight`은 `Row` 아래에 있는 두 `Column`의 `children` widget들의 layout size를 계산해서 `Row`가 계산된 height을 사용하도록 함
