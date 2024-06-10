@@ -11,14 +11,6 @@ class PostListItemUserAvatar extends StatelessWidget {
 
   final User user;
 
-  // TODO: 이미지 들어있는 post 개발
-  // TODO: avatar에 이미지 넣기
-  // TODO: IntrinsicHeight 사용법 한번 더 이해하고 해결 방법 정리하기
-  //       - post 내용에 따라 세로 선이 늘어나야 함
-  //       - Parent widget의 height constraint가 infinity이므로 Expanded 같은 widget을 쓸 수 없는 문제
-  //       - 왼쪽/오른쪽 column을 묶는 IntrinsicHeight을 추가해서 post content height으로 constraint를 주도록 수정
-  //       - Column 영역 등을 사각형으로 그려가면서 설명해 보기
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,7 +20,7 @@ class PostListItemUserAvatar extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: PostListItemAvatar(placeholder: user.initial),
+            child: PostListItemAvatar.asset(user.profileImagePath),
           ),
           Align(
             alignment: Alignment.bottomRight,

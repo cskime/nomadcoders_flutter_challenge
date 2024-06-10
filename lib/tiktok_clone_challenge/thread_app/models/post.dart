@@ -36,10 +36,7 @@ class Post {
 
 final dummyPosts = [
   Post(
-    user: User(
-      username: 'publity',
-      verified: true,
-    ),
+    user: dummyUsers[0],
     body: 'Vine after seeing the Treads logo unveiled',
     imageUrls: [
       'assets/images/thread-image.jpg',
@@ -47,44 +44,35 @@ final dummyPosts = [
     commentCount: 36,
     likeCount: 391,
     repliers: [
-      User(username: 'tropicalseductions', verified: true),
+      dummyUsers[1],
     ],
     uploadDate: DateTime.now().subtract(const Duration(seconds: 14)),
   ),
   Post(
-    user: User(
-      username: 'thetinderblog',
-      verified: true,
-    ),
+    user: dummyUsers[1],
     body: 'Elon alone on Twitter right now...',
     commentCount: 36,
     likeCount: 391,
     repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
+      dummyUsers[2],
+      dummyUsers[3],
     ],
     uploadDate: DateTime.now().subtract(const Duration(minutes: 5)),
   ),
   Post(
-    user: User(
-      username: 'tropicalseductions',
-      verified: true,
-    ),
+    user: dummyUsers[2],
     body: 'Drop a comment here to test things out.',
     commentCount: 2,
     likeCount: 4,
     repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
-      User(username: 'plantswithkrystal_', verified: true),
+      dummyUsers[0],
+      dummyUsers[1],
+      dummyUsers[3],
     ],
     uploadDate: DateTime.now().subtract(const Duration(hours: 2)),
   ),
   Post(
-    user: User(
-      username: 'shityoushouldcareabout',
-      verified: true,
-    ),
+    user: dummyUsers[3],
     body: 'my phone feels like a vibrator with all these notifications rn',
     imageUrls: [
       'assets/images/thread-image.jpg',
@@ -94,18 +82,15 @@ final dummyPosts = [
     commentCount: 64,
     likeCount: 631,
     repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
-      User(username: 'plantswithkrystal_', verified: true),
-      User(username: 'terracottacoco', verified: true),
+      dummyUsers[0],
+      dummyUsers[1],
+      dummyUsers[2],
+      dummyUsers[4],
     ],
     uploadDate: DateTime.now().subtract(const Duration(days: 3)),
   ),
   Post(
-    user: User(
-      username: 'plantswithkrystal',
-      verified: true,
-    ),
+    user: dummyUsers[4],
     body:
         'If you\'re reading this, go water that thirsty plant. You\'re welcome ☺️',
     commentCount: 8,
@@ -113,73 +98,61 @@ final dummyPosts = [
     uploadDate: DateTime.now().subtract(const Duration(days: 14)),
   ),
   Post(
-    user: User(
-      username: 'publity',
-      verified: true,
-    ),
+    user: dummyUsers[0],
     body: 'Vine after seeing the Treads logo unveiled',
+    imageUrls: [
+      'assets/images/thread-image.jpg',
+    ],
+    commentCount: 36,
+    likeCount: 391,
+    repliers: [
+      dummyUsers[1],
+    ],
+    uploadDate: DateTime.now().subtract(const Duration(seconds: 14)),
+  ),
+  Post(
+    user: dummyUsers[1],
+    body: 'Elon alone on Twitter right now...',
+    commentCount: 36,
+    likeCount: 391,
+    repliers: [
+      dummyUsers[2],
+      dummyUsers[3],
+    ],
+    uploadDate: DateTime.now().subtract(const Duration(minutes: 5)),
+  ),
+  Post(
+    user: dummyUsers[2],
+    body: 'Drop a comment here to test things out.',
+    commentCount: 2,
+    likeCount: 4,
+    repliers: [
+      dummyUsers[0],
+      dummyUsers[1],
+      dummyUsers[3],
+    ],
+    uploadDate: DateTime.now().subtract(const Duration(hours: 2)),
+  ),
+  Post(
+    user: dummyUsers[3],
+    body: 'my phone feels like a vibrator with all these notifications rn',
     imageUrls: [
       'assets/images/thread-image.jpg',
       'assets/images/thread-image.jpg',
       'assets/images/thread-image.jpg',
     ],
-    commentCount: 36,
-    likeCount: 391,
-    repliers: [
-      User(username: 'tropicalseductions', verified: true),
-    ],
-    uploadDate: DateTime.now().subtract(const Duration(seconds: 14)),
-  ),
-  Post(
-    user: User(
-      username: 'thetinderblog',
-      verified: true,
-    ),
-    body: 'Elon alone on Twitter right now...',
-    commentCount: 36,
-    likeCount: 391,
-    repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
-    ],
-    uploadDate: DateTime.now().subtract(const Duration(minutes: 5)),
-  ),
-  Post(
-    user: User(
-      username: 'tropicalseductions',
-      verified: true,
-    ),
-    body: 'Drop a comment here to test things out.',
-    commentCount: 2,
-    likeCount: 4,
-    repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
-      User(username: 'plantswithkrystal_', verified: true),
-    ],
-    uploadDate: DateTime.now().subtract(const Duration(hours: 2)),
-  ),
-  Post(
-    user: User(
-      username: 'shityoushouldcareabout',
-      verified: true,
-    ),
-    body: 'my phone feels like a vibrator with all these notifications rn',
     commentCount: 64,
     likeCount: 631,
     repliers: [
-      User(username: 'tropicalseductions', verified: true),
-      User(username: 'shityoushouldcareabout', verified: true),
-      User(username: 'plantswithkrystal_', verified: true),
-      User(username: 'terracottacoco', verified: true),
+      dummyUsers[0],
+      dummyUsers[1],
+      dummyUsers[2],
+      dummyUsers[4],
     ],
     uploadDate: DateTime.now().subtract(const Duration(days: 3)),
   ),
   Post(
-    user: User(
-      username: 'plantswithkrystal',
-      verified: true,
-    ),
+    user: dummyUsers[4],
     body:
         'If you\'re reading this, go water that thirsty plant. You\'re welcome ☺️',
     commentCount: 8,

@@ -23,7 +23,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
           child: SizedBox(
             width: avatarSize,
             height: avatarSize,
-            child: PostListItemAvatar(placeholder: repliers.first.initial),
+            child: PostListItemAvatar.asset(repliers.first.profileImagePath),
           ),
         ),
       ]),
@@ -37,7 +37,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
       shape: BoxShape.circle,
     );
     final avatarSize = _boxSize * 0.6;
-    const fontSize = 14.0;
+
     return SizedBox(
       width: _boxSize,
       height: avatarSize,
@@ -48,10 +48,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
             width: avatarSize,
             height: avatarSize,
             decoration: borderDecoration,
-            child: PostListItemAvatar(
-              placeholder: repliers[0].initial,
-              fontSize: fontSize,
-            ),
+            child: PostListItemAvatar.asset(repliers[0].profileImagePath),
           ),
         ),
         Align(
@@ -60,10 +57,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
             width: avatarSize,
             height: avatarSize,
             decoration: borderDecoration,
-            child: PostListItemAvatar(
-              placeholder: repliers[1].initial,
-              fontSize: fontSize,
-            ),
+            child: PostListItemAvatar.asset(repliers[1].profileImagePath),
           ),
         ),
       ]),
@@ -89,10 +83,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.6,
               height: _boxSize * 0.6,
               decoration: borderDecoration,
-              child: PostListItemAvatar(
-                placeholder: repliers[0].initial,
-                fontSize: 16,
-              ),
+              child: PostListItemAvatar.asset(repliers[0].profileImagePath),
             ),
           ),
           Align(
@@ -101,10 +92,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.5,
               height: _boxSize * 0.5,
               decoration: borderDecoration,
-              child: PostListItemAvatar(
-                placeholder: repliers[2].initial,
-                fontSize: 14,
-              ),
+              child: PostListItemAvatar.asset(repliers[2].profileImagePath),
             ),
           ),
           Align(
@@ -113,10 +101,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.4,
               height: _boxSize * 0.4,
               decoration: borderDecoration,
-              child: PostListItemAvatar(
-                placeholder: repliers[2].initial,
-                fontSize: 8,
-              ),
+              child: PostListItemAvatar.asset(repliers[2].profileImagePath),
             ),
           ),
         ],

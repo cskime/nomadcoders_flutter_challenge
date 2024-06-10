@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PostListItemAvatar extends StatelessWidget {
   const PostListItemAvatar({
     super.key,
     this.profileImage,
-    required this.placeholder,
-    this.fontSize,
   });
 
+  factory PostListItemAvatar.asset(String? imageUrl) {
+    return PostListItemAvatar(
+      profileImage: imageUrl == null ? null : AssetImage(imageUrl),
+    );
+  }
+
   final ImageProvider<Object>? profileImage;
-  final String placeholder;
-  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      backgroundColor: Colors.black,
-      foregroundColor: Colors.white,
-      foregroundImage: profileImage,
-      radius: 20,
-      child: Text(
-        placeholder,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      clipBehavior: Clip.hardEdge,
+      child: profileImage == null
+          ? const Icon(
+              FontAwesomeIcons.user,
+            )
+          : Image(image: profileImage!),
     );
   }
 }
