@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/models/post_more_item.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post_more/models/post_more_item.dart';
 
 enum PostMoreSectionItemType {
   normal,
