@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/bottom_sheet_handle.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/models/post_more_item.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/more/post_more_section.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/more/post_more_section_item.dart';
@@ -29,7 +30,7 @@ class PostMoreBottomSheet extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 16, bottom: 20),
-                child: _Handle(),
+                child: BottomSheetHandle(),
               ),
               PostMoreSection(
                 items: [
@@ -61,22 +62,6 @@ class PostMoreBottomSheet extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _Handle extends StatelessWidget {
-  const _Handle();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 52,
-      height: 6,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(3),
       ),
     );
   }
