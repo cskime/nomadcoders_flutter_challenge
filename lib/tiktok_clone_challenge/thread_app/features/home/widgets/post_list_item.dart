@@ -11,11 +11,12 @@ class PostListItem extends StatelessWidget {
 
   final Post post;
 
-  void _onMoreTap(BuildContext context) {
-    showModalBottomSheet(
+  void _onMoreTap(BuildContext context) async {
+    final item = await showModalBottomSheet(
       context: context,
       builder: (context) => const PostMoreBottomSheet(),
     );
+    print(item);
   }
 
   @override
