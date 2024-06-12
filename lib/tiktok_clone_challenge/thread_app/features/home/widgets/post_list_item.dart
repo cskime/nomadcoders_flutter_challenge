@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/more/post_more_bottom_sheet.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_image.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_repliers_avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_user_avatar.dart';
@@ -9,6 +10,13 @@ class PostListItem extends StatelessWidget {
   const PostListItem({super.key, required this.post});
 
   final Post post;
+
+  void _onMoreTap(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const PostMoreBottomSheet(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +73,12 @@ class PostListItem extends StatelessWidget {
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               const SizedBox(width: 12),
-                              const Icon(
-                                FontAwesomeIcons.ellipsis,
-                                size: 18,
+                              GestureDetector(
+                                onTap: () => _onMoreTap(context),
+                                child: const Icon(
+                                  FontAwesomeIcons.ellipsis,
+                                  size: 18,
+                                ),
                               ),
                             ],
                           ),
