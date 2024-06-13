@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/favorite/favorite_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/home_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/new_post/new_post_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/new_post/write_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/profile_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/search/search_screen.dart';
 
@@ -17,6 +17,16 @@ class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
   var _currentIndex = 0;
 
   void _onTap(int index) {
+    if (index == 2) {
+      showModalBottomSheet(
+        context: context,
+        useSafeArea: true,
+        isScrollControlled: true,
+        builder: (context) => const WriteScreen(),
+      );
+      return;
+    }
+
     setState(() {
       _currentIndex = index;
     });
@@ -24,7 +34,6 @@ class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
 
   Widget get _body => switch (_currentIndex) {
         1 => const SearchScreen(),
-        2 => const NewPostScreen(),
         3 => const FavoriteScreen(),
         4 => const ProfileScreen(),
         _ => const HomeScreen(),
