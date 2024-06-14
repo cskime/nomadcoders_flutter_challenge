@@ -30,12 +30,12 @@
 
 ### 틱톡 클론코딩
 
-|       [Twitter 1](./lib/tiktok_clone_challenge/twitter_onboarding/)       |        [Twitter 2](./lib/tiktok_clone_challenge/twitter_onboarding/)        |
-| :-----------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| <img src="./documents/images/flutter-challenge-twitter.gif" width="200"/> | <img src="./documents/images/flutter-challenge-twitter-2.gif" width="200"/> |
+|        [Twitter 1](./lib/tiktok_clone_challenge/twitter_onboarding/)        |        [Twitter 2](./lib/tiktok_clone_challenge/twitter_onboarding/)        |
+| :-------------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-twitter-1.gif" width="200"/> | <img src="./documents/images/flutter-challenge-twitter-2.gif" width="200"/> |
 
-|            [Thread 1](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 2](./lib/tiktok_clone_challenge/thread_app/)            |
-| :------------------------------------------------------------------------: | :------------------------------------------------------------------------: |
-| <img src="./documents/images/flutter-challenge-thread-1.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-2.gif" width="200"/> |
+|            [Thread 1](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 2](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 3](./lib/tiktok_clone_challenge/thread_app/)            |
+| :------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-thread-1.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-2.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-3.gif" width="200"/> |
 
 ### Flutter Animation 마스터클래스
