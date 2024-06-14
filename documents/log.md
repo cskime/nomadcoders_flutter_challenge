@@ -116,3 +116,16 @@
 - `IntrinsicHeight`에 의해 content height으로 높이가 고정되었으므로 `Expanded`를 사용해서 available space 전체에 vertical height을 그릴 수 있다.
 
 ### Modal bottom sheet를 사용할 때 content가 keyboard에 가리는 문제
+
+**[구현 코드](../lib/tiktok_clone_challenge/thread_app/features/post/new-post/write_screen.dart)**
+
+- `showModalBottomSheet`로 띄우는 widget은 keyboard가 나타나도 content 영역이 자동으로 줄어들지 않음
+- Content가 keyboard에 가리지 않도록 content 영역의 크기를 조절해 주어야 함
+- 다음과 같이 keyboard가 나타났을 때 content가 나타나는 영역의 크기를 계산하도록 구현
+  - `MediaQuery.viewInsetsOf(context).bottom`
+    - `MediaQuery.viewInsets`는 screen에서 system UI에 의해 가려지는 inset을 반환
+    - 가상 keyboard가 screen을 가리고 있을 때, 이 값의 `bottom`은 keyboard 높이가 된다.
+  - `LayoutBuilder`
+    - Parent widget의 constraints를 사용해서 child widget을 build 할 수 있음
+    - Bottom sheet의 전체 height에서 keyboard height을 제외한 영역에 content가 보여야 함
+    - `BoxConstraints.maxHeight - keyboardHeight`으로 content height 계산
