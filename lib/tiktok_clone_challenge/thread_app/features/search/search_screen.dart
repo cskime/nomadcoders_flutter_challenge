@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/search/widgets/user_search_list_tile.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/search/widgets/user_search_text_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -12,7 +12,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final users = [...dummyUsers, ...dummyUsers];
-  var displayingUsers = <User>[];
+  late var displayingUsers = users;
 
   void _onSearchChanged(String text) {
     setState(() {
@@ -40,12 +40,10 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             centerTitle: false,
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: CupertinoSearchTextField(
-                onChanged: _onSearchChanged,
-              ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: UserSearchTextField(
+              onSearchChanged: _onSearchChanged,
             ),
           ),
           SliverList.builder(

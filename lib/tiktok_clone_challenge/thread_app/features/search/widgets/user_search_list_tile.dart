@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 class UserSearchListTile extends StatelessWidget {
@@ -53,14 +54,17 @@ class UserSearchListTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${user.followerCount} followers',
+                  '${NumberFormat.compact().format(user.followerCount)} followers',
                   style: Theme.of(context).textTheme.bodyMedium,
                 )
               ],
             ),
           ),
           const SizedBox(width: 16),
-          _FollowButton(),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: _FollowButton(),
+          ),
         ],
       ),
     );
