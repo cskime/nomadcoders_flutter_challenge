@@ -16,7 +16,11 @@ class MainNaviagtionScreen extends StatefulWidget {
 class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
   var _currentIndex = 0;
 
-  void _onTap(int index) {
+  void _onTap() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onItemTap(int index) {
     if (index == 2) {
       showModalBottomSheet(
         context: context,
@@ -41,39 +45,42 @@ class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _body,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        elevation: 0,
-        currentIndex: _currentIndex,
-        onTap: _onTap,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.house),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.magnifyingGlass),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.penToSquare),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.solidHeart),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.user),
-            label: 'Search',
-          ),
-        ],
+    return GestureDetector(
+      onTap: _onTap,
+      child: Scaffold(
+        body: _body,
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          elevation: 0,
+          currentIndex: _currentIndex,
+          onTap: _onItemTap,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.house),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.magnifyingGlass),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.penToSquare),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.solidHeart),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.user),
+              label: 'Search',
+            ),
+          ],
+        ),
       ),
     );
   }
