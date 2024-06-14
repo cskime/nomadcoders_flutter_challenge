@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/common/widgets/bottom_sheet_handle.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post_more/models/post_more_item.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post_more/widgets/post_more_section.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post_more/widgets/post_more_section_item.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/models/post_more_item.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/widgets/post_more_section.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/widgets/post_more_section_item.dart';
 
 class PostMoreBottomSheet extends StatelessWidget {
   const PostMoreBottomSheet({super.key});

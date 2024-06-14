@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post_more/widgets/post_more_section_item.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/widgets/post_more_section_item.dart';
 
 class PostMoreSection extends StatelessWidget {
   const PostMoreSection({

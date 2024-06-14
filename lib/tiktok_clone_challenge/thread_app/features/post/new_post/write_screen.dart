@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/new_post/widgets/write_post_app_bar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/new_post/widgets/write_post_bottom_bar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/new_post/widgets/write_post_edit_area.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/widgets/write_post_app_bar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/widgets/write_post_bottom_bar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/widgets/write_post_edit_area.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 final _myUser = dummyUsers[0];
