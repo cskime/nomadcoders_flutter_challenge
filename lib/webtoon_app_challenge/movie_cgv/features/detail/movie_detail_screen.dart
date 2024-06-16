@@ -108,7 +108,7 @@ class MovieDetailScreen extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 48),
-                            const _BuyTicketButton(),
+                            _BuyTicketButton(),
                           ],
                         ),
                       ),
@@ -129,28 +129,21 @@ class MovieDetailScreen extends StatelessWidget {
 }
 
 class _BuyTicketButton extends StatelessWidget {
-  const _BuyTicketButton({this.onPressed});
-
-  final void Function()? onPressed;
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.6,
-        height: 48,
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: const Center(
-          child: Text(
-            'Buy ticket',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+    return Container(
+      width: MediaQuery.sizeOf(context).width * 0.6,
+      height: 48,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Center(
+        child: Text(
+          'Buy ticket',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
