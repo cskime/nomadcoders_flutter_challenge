@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/privacy_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -51,14 +52,19 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  void _onPrivacyTap(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PrivacyScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Settings",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text("Settings"),
         shape: Border(
           bottom: BorderSide(color: Colors.grey.shade300),
         ),
@@ -73,9 +79,10 @@ class SettingsScreen extends StatelessWidget {
             leading: Icon(FontAwesomeIcons.bell),
             title: Text("Notifications", style: _textStyle),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.lock),
-            title: Text("Privacy", style: _textStyle),
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.lock),
+            title: const Text("Privacy", style: _textStyle),
+            onTap: () => _onPrivacyTap(context),
           ),
           const ListTile(
             leading: Icon(FontAwesomeIcons.circleUser),
