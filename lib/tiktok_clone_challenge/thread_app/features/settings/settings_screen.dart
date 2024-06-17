@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,36 +18,44 @@ class SettingsScreen extends StatelessWidget {
     Navigator.of(context).pop();
   }
 
-  void _onLogoutTap(BuildContext context) {
-    showAdaptiveDialog(
-      context: context,
-      builder: (context) => AlertDialog.adaptive(
-        title: const Text("Log out?"),
-        actions: Platform.isIOS
-            ? [
-                CupertinoDialogAction(
-                  textStyle: const TextStyle(color: Colors.blue),
-                  child: const Text("Cancel"),
-                  onPressed: () => _onLogoutCancelPressed(context),
-                ),
-                CupertinoDialogAction(
-                  isDestructiveAction: true,
-                  child: const Text("OK"),
-                  onPressed: () => _onLogoutOKPressed(context),
-                ),
-              ]
-            : [
-                TextButton(
-                  onPressed: () => _onLogoutCancelPressed(context),
-                  child: const Text("Cancel"),
-                ),
-                TextButton(
-                  onPressed: () => _onLogoutOKPressed(context),
-                  child: const Text("OK"),
-                ),
-              ],
-      ),
-    );
+  void _onLogoutTap(BuildContext context, {required bool isIOS}) {
+    if (isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: const Text("Log out?"),
+          actions: [
+            CupertinoDialogAction(
+              textStyle: const TextStyle(color: Colors.blue),
+              child: const Text("Cancel"),
+              onPressed: () => _onLogoutCancelPressed(context),
+            ),
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              child: const Text("OK"),
+              onPressed: () => _onLogoutOKPressed(context),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Log out?"),
+          actions: [
+            TextButton(
+              onPressed: () => _onLogoutCancelPressed(context),
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () => _onLogoutOKPressed(context),
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   void _onPrivacyTap(BuildContext context) {
@@ -102,10 +108,17 @@ class SettingsScreen extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              "Log out",
+              "Log out (iOS)",
               style: _textStyle.copyWith(color: Colors.blue),
             ),
-            onTap: () => _onLogoutTap(context),
+            onTap: () => _onLogoutTap(context, isIOS: true),
+          ),
+          ListTile(
+            title: Text(
+              "Log out (Android)",
+              style: _textStyle.copyWith(color: Colors.blue),
+            ),
+            onTap: () => _onLogoutTap(context, isIOS: false),
           ),
         ],
       ),

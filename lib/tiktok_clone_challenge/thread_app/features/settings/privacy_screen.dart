@@ -26,13 +26,31 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
       body: ListView(
         children: [
           SwitchListTile.adaptive(
-            title: const Text(
-              "Private profile",
+            title: const Row(
+              children: [
+                Icon(FontAwesomeIcons.lock),
+                SizedBox(width: 16),
+                Text("Private profile"),
+              ],
             ),
+            subtitle: const Text("iOS style Switch"),
+            value: _usesPrivateProfile,
+            onChanged: _onPrivateProfileChanged,
+          ),
+          SwitchListTile(
+            title: const Row(
+              children: [
+                Icon(FontAwesomeIcons.lock),
+                SizedBox(width: 16),
+                Text("Private profile"),
+              ],
+            ),
+            subtitle: const Text("Android style Switch"),
             value: _usesPrivateProfile,
             onChanged: _onPrivateProfileChanged,
           ),
           const ListTile(
+            leading: Icon(FontAwesomeIcons.threads),
             title: Text("Mentions"),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -54,6 +72,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
           ),
           const ListTile(
+            leading: Icon(FontAwesomeIcons.bellSlash),
             title: Text("Muted"),
             trailing: Icon(
               FontAwesomeIcons.chevronRight,
@@ -62,6 +81,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
           ),
           const ListTile(
+            leading: Icon(FontAwesomeIcons.eyeSlash),
             title: Text("Hidden Words"),
             trailing: Icon(
               FontAwesomeIcons.chevronRight,
@@ -70,6 +90,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             ),
           ),
           const ListTile(
+            leading: Icon(FontAwesomeIcons.users),
             title: Text("Profiles you follow"),
             trailing: Icon(
               FontAwesomeIcons.chevronRight,
