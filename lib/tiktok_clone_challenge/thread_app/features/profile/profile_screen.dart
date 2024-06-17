@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/multiple_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_body_post.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/link_button.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/own_posts_list_item.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/own_posts/profile_own_posts_list_view.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_tab_bar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/replies_posts/replies_posts_list_view.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 final _user = dummyUsers.first;
@@ -19,8 +19,8 @@ class ProfileScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: SafeArea(
-        child: CustomScrollView(
-          slivers: [
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => [
             const SliverAppBar(
               leading: Icon(FontAwesomeIcons.globe),
               actions: [
@@ -106,75 +106,13 @@ class ProfileScreen extends StatelessWidget {
               pinned: true,
               delegate: ProfileTabBar(),
             ),
-            SliverList.list(
-              children: [
-                const OwnPostsListItem(
-                  bodyText: Text.rich(
-                    TextSpan(
-                      text: "Give ",
-                      children: [
-                        TextSpan(
-                          text: "@john_mobbin",
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                        TextSpan(
-                          text:
-                              " a follow if you want to see more travel content!",
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                OwnPostsListItem(
-                  bodyText: const Text("Tea. Spillage."),
-                  body: PostListItemBodyPost(
-                    userProfileImagePath: _user.profileImagePath!,
-                    username: "iwetmyyplants",
-                    verifiedUser: true,
-                    bodyText:
-                        "I'm just going to say what we are all thinking and knowing is about to go downity down: there is about to be some piping hot tea spillage on here daily that people wiill be...",
-                    imageUrls: const [
-                      'assets/images/thread-image.jpg',
-                    ],
-                  ),
-                ),
-                const OwnPostsListItem(
-                  bodyText: Text.rich(
-                    TextSpan(
-                      text: "Give ",
-                      children: [
-                        TextSpan(
-                          text: "@john_mobbin",
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                        ),
-                        TextSpan(
-                          text:
-                              " a follow if you want to see more travel content!",
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                OwnPostsListItem(
-                  bodyText: const Text("Tea. Spillage."),
-                  body: PostListItemBodyPost(
-                    userProfileImagePath: _user.profileImagePath!,
-                    username: "iwetmyyplants",
-                    verifiedUser: true,
-                    bodyText:
-                        "I'm just going to say what we are all thinking and knowing is about to go downity down: there is about to be some piping hot tea spillage on here daily that people wiill be...",
-                    imageUrls: const [
-                      'assets/images/thread-image.jpg',
-                    ],
-                  ),
-                ),
-              ],
-            ),
           ],
+          body: TabBarView(
+            children: [
+              ProfileOwnPostsListView(user: _user),
+              const RepliesPostsListView(),
+            ],
+          ),
         ),
       ),
     );

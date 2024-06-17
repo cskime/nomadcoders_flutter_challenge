@@ -27,6 +27,7 @@ class PostListItemBodyPost extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(12),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -57,6 +58,11 @@ class PostListItemBodyPost extends StatelessWidget {
               child: Image.asset(imageUrls.first),
             )
           ],
+          const SizedBox(height: 16),
+          const Text(
+            "256 replies",
+            style: TextStyle(color: Colors.grey),
+          ),
         ],
       ),
     );
