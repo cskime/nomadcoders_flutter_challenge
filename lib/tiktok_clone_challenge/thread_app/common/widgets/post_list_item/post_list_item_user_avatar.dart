@@ -7,9 +7,11 @@ class PostListItemUserAvatar extends StatelessWidget {
   const PostListItemUserAvatar({
     super.key,
     required this.user,
+    required this.showsFollowButton,
   });
 
   final User user;
+  final bool showsFollowButton;
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +24,24 @@ class PostListItemUserAvatar extends StatelessWidget {
             alignment: Alignment.center,
             child: Avatar.asset(imageUrl: user.profileImagePath),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Container(
-              width: 22,
-              height: 22,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                border: Border.all(color: Colors.white, width: 3),
-                shape: BoxShape.circle,
+          if (showsFollowButton)
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                width: 22,
+                height: 22,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border.all(color: Colors.white, width: 3),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  FontAwesomeIcons.plus,
+                  color: Colors.white,
+                  size: 10,
+                ),
               ),
-              child: const Icon(
-                FontAwesomeIcons.plus,
-                color: Colors.white,
-                size: 10,
-              ),
-            ),
-          )
+            )
         ],
       ),
     );

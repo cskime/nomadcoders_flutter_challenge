@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/multiple_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_image.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_user_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/models/post_more_item.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/post_more_bottom_sheet.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_report/post_report_bottom_sheet.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/post.dart';
 
 class PostListItem extends StatelessWidget {
-  const PostListItem({super.key, required this.post});
+  const PostListItem({
+    super.key,
+    required this.avatar,
+    required this.action,
+    required this.title,
+    required this.verified,
+    required this.updated,
+    required this.bodyText,
+    this.body,
+    this.footer,
+  });
 
-  final Post post;
-
-  void _onMoreTap(BuildContext context) async {
-    final item = await showModalBottomSheet(
-      context: context,
-      builder: (context) => const PostMoreBottomSheet(),
-    );
-
-    if (!context.mounted) {
-      return;
-    }
-
-    if (item == PostMoreItem.report) {
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        useSafeArea: true,
-        builder: (context) => const PostReportBottomSheet(),
-      );
-    }
-  }
+  final Widget avatar;
+  final Widget action;
+  final String title;
+  final String updated;
+  final bool verified;
+  final String bodyText;
+  final Widget? body;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +42,8 @@ class PostListItem extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        PostListItemUserAvatar(user: post.user),
-                        if (post.repliers.isNotEmpty) ...[
+                        avatar,
+                        if (footer != null) ...[
                           const SizedBox(height: 4),
                           Expanded(
                             child: SizedBox(
@@ -73,7 +63,7 @@ class PostListItem extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                post.user.username,
+                                title,
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(width: 4),
@@ -84,28 +74,21 @@ class PostListItem extends StatelessWidget {
                               ),
                               const Spacer(),
                               Text(
-                                post.updated,
+                                updated,
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                               const SizedBox(width: 12),
-                              GestureDetector(
-                                onTap: () => _onMoreTap(context),
-                                child: const Icon(
-                                  FontAwesomeIcons.ellipsis,
-                                  size: 18,
-                                ),
-                              ),
+                              action,
                             ],
                           ),
                           Text(
-                            post.body,
+                            bodyText,
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
-                          if (post.imageUrls.isNotEmpty)
+                          if (body != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 8),
-                              child:
-                                  PostListItemImage(imageUrls: post.imageUrls),
+                              child: body,
                             ),
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 12),
@@ -125,20 +108,7 @@ class PostListItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  MultipleAvatar(
-                    paths: post.repliers
-                        .map((user) => user.profileImagePath!)
-                        .toList(),
-                  ),
-                  const SizedBox(width: 10),
-                  Text(
-                    '${post.commentCount} ${post.commentCount > 1 ? 'replies' : 'reply'} · ${post.likeCount} likes',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                ],
-              ),
+              if (footer != null) footer!,
             ],
           ),
         ),
