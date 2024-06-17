@@ -105,10 +105,10 @@ class PostListItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (footer != null) footer!,
             ],
           ),
         ),
+        if (footer != null) footer!,
         Divider(color: Colors.grey.shade200),
       ],
     );

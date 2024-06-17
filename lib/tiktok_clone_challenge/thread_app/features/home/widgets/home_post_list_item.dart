@@ -61,17 +61,21 @@ class HomePostListItem extends StatelessWidget {
       body: post.imageUrls.isEmpty
           ? null
           : PostListItemImage(imageUrls: post.imageUrls),
-      footer: Row(
-        children: [
-          MultipleAvatar(
-            paths: post.repliers.map((user) => user.profileImagePath!).toList(),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            '${post.commentCount} ${post.commentCount > 1 ? 'replies' : 'reply'} · ${post.likeCount} likes',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-        ],
+      footer: Padding(
+        padding: const EdgeInsets.only(left: 12, right: 16),
+        child: Row(
+          children: [
+            MultipleAvatar(
+              paths:
+                  post.repliers.map((user) => user.profileImagePath!).toList(),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              '${post.commentCount} ${post.commentCount > 1 ? 'replies' : 'reply'} · ${post.likeCount} likes',
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+          ],
+        ),
       ),
     );
   }

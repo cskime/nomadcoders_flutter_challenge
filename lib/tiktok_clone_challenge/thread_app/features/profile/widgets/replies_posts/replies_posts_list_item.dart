@@ -10,11 +10,13 @@ class RepliesPostsListItem extends StatelessWidget {
     required this.username,
     required this.bodyText,
     this.body,
+    this.footer,
   });
 
   final String username;
   final Widget bodyText;
   final Widget? body;
+  final Widget? footer;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class RepliesPostsListItem extends StatelessWidget {
       updated: "5h",
       bodyText: bodyText,
       body: body,
+      footer: footer,
     );
   }
 }
