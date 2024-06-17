@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/common/widgets/bottom_sheet_handle.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/bottom_sheet_handle.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_report/widgets/post_report_list_item.dart';
 
 class PostReportBottomSheet extends StatelessWidget {

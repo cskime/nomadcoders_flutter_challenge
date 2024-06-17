@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PostListItemAvatar extends StatelessWidget {
-  const PostListItemAvatar({
+class Avatar extends StatelessWidget {
+  const Avatar({
     super.key,
+    this.size = 40,
     this.profileImage,
   });
 
-  factory PostListItemAvatar.asset(String? imageUrl) {
-    return PostListItemAvatar(
+  factory Avatar.asset({
+    String? imageUrl,
+    double size = 40,
+  }) {
+    return Avatar(
+      size: size,
       profileImage: imageUrl == null ? null : AssetImage(imageUrl),
     );
   }
 
+  final double size;
   final ImageProvider<Object>? profileImage;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: size,
+      height: size,
       decoration: const BoxDecoration(shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
       child: profileImage == null

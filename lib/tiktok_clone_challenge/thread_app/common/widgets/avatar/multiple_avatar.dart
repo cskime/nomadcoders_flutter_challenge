@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 
-class PostListItemRepliersAvatar extends StatelessWidget {
-  const PostListItemRepliersAvatar({
+class MultipleAvatar extends StatelessWidget {
+  const MultipleAvatar({
     super.key,
-    required this.repliers,
+    required this.paths,
   });
 
-  final List<User> repliers;
+  final List<String> paths;
 
   final double _boxSize = 48;
 
@@ -23,7 +22,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
           child: SizedBox(
             width: avatarSize,
             height: avatarSize,
-            child: PostListItemAvatar.asset(repliers.first.profileImagePath),
+            child: Avatar.asset(imageUrl: paths.first),
           ),
         ),
       ]),
@@ -48,7 +47,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
             width: avatarSize,
             height: avatarSize,
             decoration: borderDecoration,
-            child: PostListItemAvatar.asset(repliers[0].profileImagePath),
+            child: Avatar.asset(imageUrl: paths[0]),
           ),
         ),
         Align(
@@ -57,7 +56,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
             width: avatarSize,
             height: avatarSize,
             decoration: borderDecoration,
-            child: PostListItemAvatar.asset(repliers[1].profileImagePath),
+            child: Avatar.asset(imageUrl: paths[1]),
           ),
         ),
       ]),
@@ -83,7 +82,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.6,
               height: _boxSize * 0.6,
               decoration: borderDecoration,
-              child: PostListItemAvatar.asset(repliers[0].profileImagePath),
+              child: Avatar.asset(imageUrl: paths[0]),
             ),
           ),
           Align(
@@ -92,7 +91,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.5,
               height: _boxSize * 0.5,
               decoration: borderDecoration,
-              child: PostListItemAvatar.asset(repliers[2].profileImagePath),
+              child: Avatar.asset(imageUrl: paths[2]),
             ),
           ),
           Align(
@@ -101,7 +100,7 @@ class PostListItemRepliersAvatar extends StatelessWidget {
               width: _boxSize * 0.4,
               height: _boxSize * 0.4,
               decoration: borderDecoration,
-              child: PostListItemAvatar.asset(repliers[2].profileImagePath),
+              child: Avatar.asset(imageUrl: paths[2]),
             ),
           ),
         ],
@@ -111,15 +110,15 @@ class PostListItemRepliersAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (repliers.isEmpty) {
+    if (paths.isEmpty) {
       return Container(width: _boxSize);
     }
 
-    if (repliers.length == 1) {
+    if (paths.length == 1) {
       return _singleAvatar;
     }
 
-    if (repliers.length == 2) {
+    if (paths.length == 2) {
       return _doubleAvatars;
     }
 

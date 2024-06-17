@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/widgets/post_list_item_avatar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 class PostListItemUserAvatar extends StatelessWidget {
@@ -20,7 +20,7 @@ class PostListItemUserAvatar extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: PostListItemAvatar.asset(user.profileImagePath),
+            child: Avatar.asset(imageUrl: user.profileImagePath),
           ),
           Align(
             alignment: Alignment.bottomRight,
