@@ -54,7 +54,10 @@ class HomePostListItem extends StatelessWidget {
       title: post.user.username,
       verified: post.user.verified,
       updated: post.updated,
-      bodyText: post.body,
+      bodyText: Text(
+        post.body,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
       body: post.imageUrls.isEmpty
           ? null
           : PostListItemImage(imageUrls: post.imageUrls),

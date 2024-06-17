@@ -19,7 +19,7 @@ class PostListItem extends StatelessWidget {
   final String title;
   final String updated;
   final bool verified;
-  final String bodyText;
+  final Widget bodyText;
   final Widget? body;
   final Widget? footer;
 
@@ -81,10 +81,7 @@ class PostListItem extends StatelessWidget {
                               action,
                             ],
                           ),
-                          Text(
-                            bodyText,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
+                          bodyText,
                           if (body != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 8),

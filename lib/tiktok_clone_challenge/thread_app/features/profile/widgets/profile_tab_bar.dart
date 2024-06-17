@@ -7,19 +7,22 @@ class ProfileTabBar extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return const TabBar(
-      labelStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+    return const ColoredBox(
+      color: Colors.white,
+      child: TabBar(
+        labelStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        labelColor: Colors.black,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: Colors.black,
+        indicatorSize: TabBarIndicatorSize.tab,
+        tabs: [
+          Tab(text: "Threads"),
+          Tab(text: "Replies"),
+        ],
       ),
-      labelColor: Colors.black,
-      unselectedLabelColor: Colors.grey,
-      indicatorColor: Colors.black,
-      indicatorSize: TabBarIndicatorSize.tab,
-      tabs: [
-        Tab(text: "Threads"),
-        Tab(text: "Replies"),
-      ],
     );
   }
 
