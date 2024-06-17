@@ -7,12 +7,19 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_tab_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/replies_posts/replies_posts_list_view.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/settings_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 final _user = dummyUsers.first;
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  void _onSettingsPressed(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const SettingsScreen(),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +28,16 @@ class ProfileScreen extends StatelessWidget {
       child: SafeArea(
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
-            const SliverAppBar(
-              leading: Icon(FontAwesomeIcons.globe),
+            SliverAppBar(
+              leading: const Icon(FontAwesomeIcons.globe),
               actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(FontAwesomeIcons.cameraRetro),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(FontAwesomeIcons.cameraRetro),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(right: 16),
-                  child: Icon(FontAwesomeIcons.bars),
+                IconButton(
+                  onPressed: () => _onSettingsPressed(context),
+                  icon: const Icon(FontAwesomeIcons.bars),
                 ),
               ],
             ),
