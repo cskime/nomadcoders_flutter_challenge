@@ -6,7 +6,7 @@ void main() {
 }
 
 class ThreadApp extends StatelessWidget {
-  const ThreadApp({super.key});
+  const ThreadApp({super.key});  
 
   @override
   Widget build(BuildContext context) {
