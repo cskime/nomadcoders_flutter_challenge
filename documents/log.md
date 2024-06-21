@@ -20,6 +20,8 @@
 
 **[구현 코드](../lib/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart)**
 
+> 개념을 확장해서 text의 부분적 styling을 쉽게 할 수 있는 [`customizable_text` package](https://github.com/cskime/customizable_text)를 배포했습니다.
+
 - Text에서 특정 단어에 다른 style을 줄 때 `RichText`를 사용함
 - `RichText`는 전체 text의 길이와 다른 style을 갖는 단어의 개수가 많아질수록 `RichText`의 `children` 코드가 복잡해지고 변경하기 어려워지는 문제가 있음
 - 전체 text와 그 중에서 다른 style을 적용할 text list만 전달해서 다른 style을 적용할 수 있는 `LinkableText` widget 구현
@@ -27,7 +29,6 @@
   - 특정 단어에 개별적으로 style 적용
   - `TapGestureRecognizer`를 사용하여 링크를 실행시킬 수 있는 callback 제공
 - 길고 복잡한 custom text를 쉽고 직관적으로 만들 수 있음
-- 개념을 확장해서 text의 부분적 styling을 쉽게 만들어 주는 `customizable_text` package로 배포 (개발중...)
 - 사용 예시
   - Before
     ```dart
