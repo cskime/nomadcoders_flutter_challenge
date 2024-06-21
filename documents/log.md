@@ -129,3 +129,16 @@
     - Parent widget의 constraints를 사용해서 child widget을 build 할 수 있음
     - Bottom sheet의 전체 height에서 keyboard height을 제외한 영역에 content가 보여야 함
     - `BoxConstraints.maxHeight - keyboardHeight`으로 content height 계산
+
+### `camera` package의 `CameraPreview` size 조절
+
+<img src="./images/camera-preview-sizing.jpeg" width="200" />
+
+**[구현 코드](../lib/tiktok_clone_challenge/thread_app/features/camera/camera_screen.dart)**
+
+- `camera` package에서 camera 화면을 보여주기 위해 `CameraPreview` 사용
+- `CameraPreview`는 내부적으로 `previewSize`를 이용해서 `AspectRatio` widget을 사용하여 preview size 비율이 고정됨
+- `CameraPreview`를 화면 전체에 보여주려고 하는 경우, screen width가 max width constraint로 사용되므로 `CameraPreview` 크기를 비율에 맞게 키울 수 없다.
+- `CameraPreview`가 기존의 size constraint를 벗어날 수 있도록 `OverflowBox`를 사용하고 `maxWidth`와 `maxHeight`을 변경하려는 size로 설정하면 전체 화면에 딱 맞게 크기를 키울 수 있다.
+  - [참고한 코드](https://github.com/flutter/flutter/issues/15953#issuecomment-855182376)
+  - Screen size와 `CameraPreview`의 내장 `previewSize`를 사용하여 `CameraPreview` height이 screen height일 때 늘어나야 하는 `CameraPreview` width를 계산
