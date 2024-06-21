@@ -9,12 +9,16 @@
 
 ## Skills
 
-- Dart/Flutter
+- Dart
+- Flutter
 - Packages
-  - http
-  - font_awesome_flutter
-  - flutter_svg
-  - intl
+  - [http](https://pub.dev/packages/http) : API 통신을 위한 package
+  - [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter) : FontAwesome의 free icon을 사용하기 위한 package
+  - [flutter_svg](https://pub.dev/packages/flutter_svg) : `.svg` image를 사용하기 위한 package
+  - [intl](https://pub.dev/packages/intl) : Date formatting을 위한 package
+  - [camera](https://pub.dev/packages/camera) : Camera 촬영을 위한 package
+  - [permission_handler](https://pub.dev/packages/permission_handler) : 카메라, 마이크, 사진첩 등 권한 요청을 위한 package
+  - [image_picker](https://pub.dev/packages/image_picker) : 사진첩에서 image를 가져오기 위한 package
 
 ## Results
 
