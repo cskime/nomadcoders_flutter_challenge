@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class UserSearchTextField extends SliverPersistentHeaderDelegate {
   UserSearchTextField({this.onSearchChanged});
@@ -12,11 +13,17 @@ class UserSearchTextField extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
+    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: CupertinoSearchTextField(
         onChanged: onSearchChanged,
+        style: TextStyle(
+          color: ThreadTheme.foregroundColor(
+            isDarkMode: isDarkMode,
+          ),
+        ),
       ),
     );
   }

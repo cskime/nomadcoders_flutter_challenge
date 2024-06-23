@@ -22,7 +22,7 @@ class WritePostAppBar extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).appBarTheme.backgroundColor,
         borderRadius: borderRadius,
       ),
       child: Stack(
@@ -35,9 +35,9 @@ class WritePostAppBar extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () => _onClose(context),
-                    child: const Text(
+                    child: Text(
                       'Cancel',
-                      style: TextStyle(fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),

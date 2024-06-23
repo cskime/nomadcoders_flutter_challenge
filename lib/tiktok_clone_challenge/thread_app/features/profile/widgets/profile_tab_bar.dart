@@ -7,16 +7,13 @@ class ProfileTabBar extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return const ColoredBox(
-      color: Colors.white,
-      child: TabBar(
+    return ColoredBox(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: const TabBar(
         labelStyle: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
-        labelColor: Colors.black,
-        unselectedLabelColor: Colors.grey,
-        indicatorColor: Colors.black,
         indicatorSize: TabBarIndicatorSize.tab,
         tabs: [
           Tab(text: "Threads"),

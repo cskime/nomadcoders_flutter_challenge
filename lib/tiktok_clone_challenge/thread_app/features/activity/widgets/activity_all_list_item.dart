@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/activity/models/activity.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/activity/models/activity_type.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class ActivityAllListItem extends StatelessWidget {
   const ActivityAllListItem({
@@ -12,6 +13,7 @@ class ActivityAllListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return ListTile(
       leading: SizedBox(
         height: double.infinity,
@@ -56,7 +58,11 @@ class ActivityAllListItem extends StatelessWidget {
               style: Theme.of(context).textTheme.labelMedium,
               overflow: TextOverflow.ellipsis,
             ),
-          if (activity.body != null) Text(activity.body!)
+          if (activity.body != null)
+            Text(
+              activity.body!,
+              style: Theme.of(context).textTheme.bodyMedium,
+            )
         ],
       ),
       trailing: activity.type == ActivityType.requests
@@ -69,12 +75,13 @@ class ActivityAllListItem extends StatelessWidget {
                 horizontal: 12,
                 vertical: 6,
               ),
-              child: const Text(
+              child: Text(
                 'Following',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: ThreadTheme.foregroundColor(
+                        isDarkMode: isDarkMode,
+                      ),
+                    ),
               ),
             )
           : null,

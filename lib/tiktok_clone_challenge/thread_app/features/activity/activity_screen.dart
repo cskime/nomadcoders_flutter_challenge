@@ -35,13 +35,13 @@ class _ActivityScreenState extends State<ActivityScreen>
     return SafeArea(
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const SliverAppBar(
+          SliverAppBar(
             title: Text(
               'Activity',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context)
+                  .appBarTheme
+                  .titleTextStyle
+                  ?.copyWith(fontSize: 32),
             ),
             centerTitle: false,
           ),

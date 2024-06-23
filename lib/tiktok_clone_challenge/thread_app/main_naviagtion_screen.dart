@@ -50,12 +50,6 @@ class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
       child: Scaffold(
         body: _body,
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          elevation: 0,
           currentIndex: _currentIndex,
           onTap: _onItemTap,
           items: const [

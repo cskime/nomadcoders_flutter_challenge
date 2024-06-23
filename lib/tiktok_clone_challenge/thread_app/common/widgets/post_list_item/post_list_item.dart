@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class PostListItem extends StatelessWidget {
   const PostListItem({
@@ -25,6 +26,7 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return Column(
       children: [
         Padding(
@@ -109,7 +111,7 @@ class PostListItem extends StatelessWidget {
           ),
         ),
         if (footer != null) footer!,
-        Divider(color: Colors.grey.shade200),
+        const Divider(height: 1),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class WritePostTextField extends StatelessWidget {
   const WritePostTextField({
@@ -10,8 +11,12 @@ class WritePostTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return TextField(
       controller: controller,
+      style: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
       keyboardType: TextInputType.multiline,
       autocorrect: false,
       minLines: 1,

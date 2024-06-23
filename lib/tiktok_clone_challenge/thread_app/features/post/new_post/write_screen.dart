@@ -51,8 +51,8 @@ class _WriteScreenState extends State<WriteScreen> {
             );
 
             return Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: borderRadius,
               ),
               child: Stack(
@@ -82,9 +82,11 @@ class _WriteScreenState extends State<WriteScreen> {
                     left: 0,
                     right: 0,
                     bottom: keyboardHeight,
-                    child: WritePostBottomBar(
-                      height: bottomBarHeight,
-                      canPost: _textEditingController.text.isNotEmpty,
+                    child: SafeArea(
+                      child: WritePostBottomBar(
+                        height: bottomBarHeight,
+                        canPost: _textEditingController.text.isNotEmpty,
+                      ),
                     ),
                   )
                 ],
