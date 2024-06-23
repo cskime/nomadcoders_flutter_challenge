@@ -42,6 +42,6 @@
 | :------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :------------------------------------------------------------------------: |
 | <img src="./documents/images/flutter-challenge-thread-1.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-2.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-3.gif" width="200"/> |
 |            [Thread 4](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 5](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 6](./lib/tiktok_clone_challenge/thread_app/)            |
-| <img src="./documents/images/flutter-challenge-thread-4.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-5.gif" width="200"/> |                        <img src="./" width="200"/>                         |
+| <img src="./documents/images/flutter-challenge-thread-4.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-5.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-6.gif" width="200"/> |
 
 ### Flutter Animation 마스터클래스
