@@ -42,6 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             centerTitle: false,
+            shape: Border(),
           ),
           SliverPersistentHeader(
             pinned: true,

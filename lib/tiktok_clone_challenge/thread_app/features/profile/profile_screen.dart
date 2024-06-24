@@ -42,6 +42,7 @@ class ProfileScreen extends StatelessWidget {
                   icon: const Icon(FontAwesomeIcons.bars),
                 ),
               ],
+              shape: const Border(),
             ),
             SliverToBoxAdapter(
               child: Padding(
@@ -56,10 +57,7 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               Text(
                                 _user.username,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Row(
                                 children: [

@@ -13,12 +13,9 @@ class PostReportListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Align(
+        const Align(
           alignment: Alignment.topCenter,
-          child: Divider(
-            height: 1,
-            color: Colors.grey.shade400,
-          ),
+          child: Divider(height: 1),
         ),
         ListTile(
           minVerticalPadding: 20,

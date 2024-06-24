@@ -14,11 +14,15 @@ class UserSearchTextField extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     final isDarkMode = ThreadTheme.isDarkTheme(context);
+    final Color? backgroundColor = isDarkMode ? Colors.grey.shade800 : null;
+    final itemColor = isDarkMode ? Colors.grey : CupertinoColors.secondaryLabel;
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: CupertinoSearchTextField(
         onChanged: onSearchChanged,
+        backgroundColor: backgroundColor,
+        itemColor: itemColor,
         style: TextStyle(
           color: ThreadTheme.foregroundColor(
             isDarkMode: isDarkMode,

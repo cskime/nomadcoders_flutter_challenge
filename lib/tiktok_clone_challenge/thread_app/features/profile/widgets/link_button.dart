@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class LinkButton extends StatelessWidget {
   const LinkButton({
@@ -10,9 +11,10 @@ class LinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade200,
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.symmetric(
@@ -21,10 +23,7 @@ class LinkButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
+        style: Theme.of(context).textTheme.labelMedium,
       ),
     );
   }

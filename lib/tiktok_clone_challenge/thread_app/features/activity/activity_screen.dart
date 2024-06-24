@@ -46,6 +46,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                   ?.copyWith(fontSize: 32),
             ),
             centerTitle: false,
+            shape: const Border(),
           ),
           SliverPersistentHeader(
             pinned: true,

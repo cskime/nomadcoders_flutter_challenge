@@ -15,7 +15,6 @@ class PostReportBottomSheet extends StatelessWidget {
       minChildSize: 0.7,
       builder: (context, scrollController) => Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
@@ -34,10 +33,7 @@ class PostReportBottomSheet extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Divider(
-              color: Colors.grey.shade300,
-              height: 36,
-            ),
+            const Divider(height: 36),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(

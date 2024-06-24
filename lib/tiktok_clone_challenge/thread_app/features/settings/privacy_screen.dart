@@ -22,6 +22,10 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.w500,
+        );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Privacy"),
@@ -29,11 +33,14 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
       body: ListView(
         children: [
           SwitchListTile.adaptive(
-            title: const Row(
+            title: Row(
               children: [
-                Icon(FontAwesomeIcons.lock),
-                SizedBox(width: 16),
-                Text("Private profile"),
+                const Icon(FontAwesomeIcons.lock),
+                const SizedBox(width: 16),
+                Text(
+                  "Private profile",
+                  style: textStyle,
+                ),
               ],
             ),
             subtitle: const Text("iOS style Switch"),
@@ -41,21 +48,27 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             onChanged: _onPrivateProfileChanged,
           ),
           SwitchListTile(
-            title: const Row(
+            title: Row(
               children: [
-                Icon(FontAwesomeIcons.lock),
-                SizedBox(width: 16),
-                Text("Private profile"),
+                const Icon(FontAwesomeIcons.lock),
+                const SizedBox(width: 16),
+                Text(
+                  "Private profile",
+                  style: textStyle,
+                ),
               ],
             ),
             subtitle: const Text("Android style Switch"),
             value: _usesPrivateProfile,
             onChanged: _onPrivateProfileChanged,
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.threads),
-            title: Text("Mentions"),
-            trailing: Row(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.threads),
+            title: Text(
+              "Mentions",
+              style: textStyle,
+            ),
+            trailing: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
@@ -74,28 +87,37 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ],
             ),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.bellSlash),
-            title: Text("Muted"),
-            trailing: Icon(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.bellSlash),
+            title: Text(
+              "Muted",
+              style: textStyle,
+            ),
+            trailing: const Icon(
               FontAwesomeIcons.chevronRight,
               color: Colors.grey,
               size: 20,
             ),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.eyeSlash),
-            title: Text("Hidden Words"),
-            trailing: Icon(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.eyeSlash),
+            title: Text(
+              "Hidden Words",
+              style: textStyle,
+            ),
+            trailing: const Icon(
               FontAwesomeIcons.chevronRight,
               color: Colors.grey,
               size: 20,
             ),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.users),
-            title: Text("Profiles you follow"),
-            trailing: Icon(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.users),
+            title: Text(
+              "Profiles you follow",
+              style: textStyle,
+            ),
+            trailing: const Icon(
               FontAwesomeIcons.chevronRight,
               color: Colors.grey,
               size: 20,
@@ -126,19 +148,25 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ],
             ),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.circleXmark),
-            title: Text("Blocked profiles"),
-            trailing: Icon(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.circleXmark),
+            title: Text(
+              "Blocked profiles",
+              style: textStyle,
+            ),
+            trailing: const Icon(
               FontAwesomeIcons.arrowUpRightFromSquare,
               color: Colors.grey,
               size: 20,
             ),
           ),
-          const ListTile(
-            leading: Icon(FontAwesomeIcons.heartCrack),
-            title: Text("Hide likes"),
-            trailing: Icon(
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.heartCrack),
+            title: Text(
+              "Hide likes",
+              style: textStyle,
+            ),
+            trailing: const Icon(
               FontAwesomeIcons.arrowUpRightFromSquare,
               color: Colors.grey,
               size: 20,

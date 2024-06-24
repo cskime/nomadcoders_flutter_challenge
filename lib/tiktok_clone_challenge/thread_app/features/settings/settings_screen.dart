@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/privacy_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = "settings";
@@ -67,83 +66,58 @@ class SettingsScreen extends StatelessWidget {
     IconData iconData, {
     required bool isDarkMode,
   }) {
-    return Icon(
-      iconData,
-      color: ThreadTheme.foregroundColor(
-        isDarkMode: isDarkMode,
-      ),
-    );
+    return Icon(iconData);
   }
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ThreadTheme.isDarkTheme(context);
-    final textStyle = TextStyle(
-      color: ThreadTheme.foregroundColor(isDarkMode: isDarkMode),
-      fontWeight: FontWeight.w500,
-    );
-
+    final logoutTextStyle = Theme.of(context)
+        .listTileTheme
+        .titleTextStyle
+        ?.copyWith(color: Colors.blue);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
       ),
       body: ListView(
         children: [
-          ListTile(
-            leading: leadingIcon(
-              FontAwesomeIcons.userPlus,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("Follow and invite friends", style: textStyle),
+          const ListTile(
+            leading: Icon(FontAwesomeIcons.userPlus),
+            title: Text("Follow and invite friends"),
+          ),
+          const ListTile(
+            leading: Icon(FontAwesomeIcons.bell),
+            title: Text("Notifications"),
           ),
           ListTile(
-            leading: leadingIcon(
-              FontAwesomeIcons.bell,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("Notifications", style: textStyle),
-          ),
-          ListTile(
-            leading: leadingIcon(
-              FontAwesomeIcons.lock,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("Privacy", style: textStyle),
+            leading: const Icon(FontAwesomeIcons.lock),
+            title: const Text("Privacy"),
             onTap: () => _onPrivacyTap(context),
           ),
-          ListTile(
-            leading: leadingIcon(
-              FontAwesomeIcons.circleUser,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("Account", style: textStyle),
+          const ListTile(
+            leading: Icon(FontAwesomeIcons.circleUser),
+            title: Text("Account"),
           ),
-          ListTile(
-            leading: leadingIcon(
-              FontAwesomeIcons.solidLifeRing,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("Help", style: textStyle),
+          const ListTile(
+            leading: Icon(FontAwesomeIcons.solidLifeRing),
+            title: Text("Help"),
           ),
-          ListTile(
-            leading: leadingIcon(
-              Icons.info_outline_rounded,
-              isDarkMode: isDarkMode,
-            ),
-            title: Text("About", style: textStyle),
+          const ListTile(
+            leading: Icon(Icons.info_outline_rounded),
+            title: Text("About"),
           ),
           const Divider(height: 1),
           ListTile(
             title: Text(
               "Log out (iOS)",
-              style: textStyle.copyWith(color: Colors.blue),
+              style: logoutTextStyle,
             ),
             onTap: () => _onLogoutTap(context, isIOS: true),
           ),
           ListTile(
             title: Text(
               "Log out (Android)",
-              style: textStyle.copyWith(color: Colors.blue),
+              style: logoutTextStyle,
             ),
             onTap: () => _onLogoutTap(context, isIOS: false),
           ),

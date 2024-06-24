@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/username_label.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 class UserSearchListTile extends StatelessWidget {
@@ -26,24 +27,9 @@ class UserSearchListTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        user.username,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(overflow: TextOverflow.ellipsis),
-                      ),
-                    ),
-                    const SizedBox(width: 4),
-                    const Icon(
-                      Icons.verified,
-                      color: Colors.blue,
-                      size: 18,
-                    )
-                  ],
+                UsernameLabel(
+                  text: user.username,
+                  verified: user.verified,
                 ),
                 Text(
                   user.name,
@@ -83,9 +69,9 @@ class _FollowButton extends StatelessWidget {
         horizontal: 24,
         vertical: 4,
       ),
-      child: const Text(
+      child: Text(
         'Follow',
-        style: TextStyle(fontWeight: FontWeight.w600),
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

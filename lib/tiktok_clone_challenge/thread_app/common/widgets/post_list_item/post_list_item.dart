@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/username_label.dart';
 
 class PostListItem extends StatelessWidget {
   const PostListItem({
@@ -26,7 +26,6 @@ class PostListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ThreadTheme.isDarkTheme(context);
     return Column(
       children: [
         Padding(
@@ -47,10 +46,10 @@ class PostListItem extends StatelessWidget {
                         avatar,
                         if (footer != null) ...[
                           const SizedBox(height: 4),
-                          Expanded(
-                            child: SizedBox(
+                          const Expanded(
+                            child: VerticalDivider(
+                              thickness: 2,
                               width: 2,
-                              child: ColoredBox(color: Colors.grey.shade300),
                             ),
                           ),
                           const SizedBox(height: 4),
@@ -64,16 +63,7 @@ class PostListItem extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                title,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                              const SizedBox(width: 4),
-                              const Icon(
-                                Icons.verified,
-                                color: Colors.blue,
-                                size: 16,
-                              ),
+                              UsernameLabel(text: title, verified: verified),
                               const Spacer(),
                               Text(
                                 updated,

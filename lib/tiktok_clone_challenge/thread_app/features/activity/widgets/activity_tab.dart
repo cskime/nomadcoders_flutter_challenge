@@ -11,10 +11,7 @@ class ActivityTab extends StatelessWidget {
   final String title;
   final bool selected;
 
-  Color backgroundColor({
-    required bool selected,
-    required bool isDarkMode,
-  }) {
+  Color backgroundColor({required bool isDarkMode}) {
     if (selected) {
       return isDarkMode ? Colors.white : Colors.black;
     } else {
@@ -22,14 +19,19 @@ class ActivityTab extends StatelessWidget {
     }
   }
 
-  Color foregroundColor({
-    required bool selected,
-    required bool isDarkMode,
-  }) {
+  Color foregroundColor({required bool isDarkMode}) {
     if (selected) {
       return isDarkMode ? Colors.black : Colors.white;
     } else {
       return isDarkMode ? Colors.white : Colors.black;
+    }
+  }
+
+  Color borderColor({required bool isDarkMode}) {
+    if (selected) {
+      return isDarkMode ? Colors.white : Colors.black;
+    } else {
+      return isDarkMode ? Colors.grey : Colors.grey.shade400;
     }
   }
 
@@ -40,9 +42,9 @@ class ActivityTab extends StatelessWidget {
       width: 100,
       height: 36,
       decoration: BoxDecoration(
-        color: backgroundColor(selected: selected, isDarkMode: isDarkMode),
+        color: backgroundColor(isDarkMode: isDarkMode),
         border: Border.all(
-          color: selected ? Colors.black : Colors.grey.shade400,
+          color: borderColor(isDarkMode: isDarkMode),
         ),
         borderRadius: BorderRadius.circular(10),
       ),
@@ -50,10 +52,7 @@ class ActivityTab extends StatelessWidget {
         child: Text(
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: foregroundColor(
-                  selected: selected,
-                  isDarkMode: isDarkMode,
-                ),
+                color: foregroundColor(isDarkMode: isDarkMode),
               ),
         ),
       ),
