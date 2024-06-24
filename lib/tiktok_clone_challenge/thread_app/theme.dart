@@ -90,8 +90,16 @@ abstract final class ThreadTheme {
         color: foregroundColor,
       ),
       tabBarTheme: TabBarTheme(
-        labelColor: foregroundColor,
-        unselectedLabelColor: Colors.grey,
+        labelStyle: TextStyle(
+          color: foregroundColor,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: const TextStyle(
+          color: Colors.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
         indicatorColor: foregroundColor,
       ),
       listTileTheme: ListTileThemeData(

@@ -10,10 +10,6 @@ class ProfileTabBar extends SliverPersistentHeaderDelegate {
     return ColoredBox(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: const TabBar(
-        labelStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
         indicatorSize: TabBarIndicatorSize.tab,
         tabs: [
           Tab(text: "Threads"),
