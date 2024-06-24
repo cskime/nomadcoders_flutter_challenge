@@ -114,7 +114,7 @@ class _CameraScreenState extends State<CameraScreen>
   }
 
   void _onLibraryPressed() async {
-    final files = await ImagePicker().pickMultiImage();
+    final files = await ImagePicker().pickMultiImage(limit: 4);
     if (files.isEmpty) return;
     _onClose(files);
   }
