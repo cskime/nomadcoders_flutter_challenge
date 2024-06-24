@@ -143,3 +143,29 @@
 - `CameraPreview`가 기존의 size constraint를 벗어날 수 있도록 `OverflowBox`를 사용하고 `maxWidth`와 `maxHeight`을 변경하려는 size로 설정하면 전체 화면에 딱 맞게 크기를 키울 수 있다.
   - [참고한 코드](https://github.com/flutter/flutter/issues/15953#issuecomment-855182376)
   - Screen size와 `CameraPreview`의 내장 `previewSize`를 사용하여 `CameraPreview` height이 screen height일 때 늘어나야 하는 `CameraPreview` width를 계산
+
+### `go_router`의 `push()`로 routing 할 때 url이 바뀌지 않는 문제
+
+- 강의에서 배운 것과 달리 web browser 환경에서 `context.push()`를 사용했을 때 url path가 바뀌지 않음
+- 강의에서 사용한 `go_router` package 버전은 v6.0.2인데, 과제에서는 v14.2.0을 사용했음
+- Package change log를 살펴보고 `go_router` v8.0 버전 부터 push method가 URL을 갱신하지 않도록 수정된 것을 확인
+  > Imperatively pushed GoRoute no longer change URL.<br>
+  > Browser backward and forward button respects imperative route operations
+- "**Imperatively pushed GoRoute**"란 `context.push()`와 같은 명령형 routing을 의미
+- 즉, `go_router` v8.0부터 `context.push~()` 종류의 method를 호출해서 화면을 전환할 때 URL path가 변경되지 않는다.
+- `kIsWeb` flag를 사용해서 web 환경일 때만 `GoRouter.optionURLReflectsImperativeAPIs` 값을 `true`로 바꿔주면 이전과 같이 동작한다.
+  ```dart
+  void main() {
+    if (kIsWeb) {
+      GoRouter.optionURLReflectsImperativeAPIs = true;
+    }
+    runApp(const ThreadApp());
+  }
+  ```
+- `optionURLReflectsImperativeAPIs`는 이전 버전과의 호환성을 위한 옵션인데, route stack의 최상위 `GoRoute`가 항상 deeplinking이 가능한 것은 아니기 때문에 `true`로 설정하는 것을 피하라고 강력히 권고한다고 한다.
+  > This option is for backward compatibility. It is strongly suggested against setting this value to true, as the URL of the top-most GoRoute is not always deeplink-able.
+- `optionURLReflectsImperativeAPIs` 속성은 web에만 영향을 미치므로, mobile과 web을 동시에 개발하면서 deeplink까지 고려한다면 이 속성을 `true`로 설정하지 않을 수 있도록 routing 전략을 다르게 가져가야 할 것 같다.
+- 참고
+  - [go_router CHANGELOG.md](https://github.com/flutter/packages/blob/main/packages/go_router/CHANGELOG.md#800)
+  - [Related GitHub issue](https://github.com/flutter/flutter/issues/129893#issuecomment-1617762284)
+  - [optionURLReflectsImperativeAPIs](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/optionURLReflectsImperativeAPIs.html)

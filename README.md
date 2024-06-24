@@ -19,6 +19,7 @@
   - [camera](https://pub.dev/packages/camera) : Camera 촬영을 위한 package
   - [permission_handler](https://pub.dev/packages/permission_handler) : 카메라, 마이크, 사진첩 등 권한 요청을 위한 package
   - [image_picker](https://pub.dev/packages/image_picker) : 사진첩에서 image를 가져오기 위한 package
+  - [go_router](https://pub.dev/packages/go_router) : 선언적, 구조적 routing 코드 작성 및 web 환경 navigation 연습을 위한 package
 
 ## Results
 
