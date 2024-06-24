@@ -4,6 +4,9 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
 
 class SearchScreen extends StatefulWidget {
+  static const routeName = "search";
+  static const routeUrl = "/search";
+
   const SearchScreen({super.key});
 
   @override

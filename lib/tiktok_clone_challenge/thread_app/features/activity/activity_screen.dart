@@ -5,6 +5,8 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/activity/widgets/activity_tab_bar.dart';
 
 class ActivityScreen extends StatefulWidget {
+  static const routeName = "activity";
+  static const routeUrl = "/activity";
   const ActivityScreen({super.key});
 
   @override

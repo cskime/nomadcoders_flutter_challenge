@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/activity/activity_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/home_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/write_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/profile_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/search/search_screen.dart';
 
-class MainNaviagtionScreen extends StatefulWidget {
-  const MainNaviagtionScreen({super.key});
+class MainNavigationScreen extends StatefulWidget {
+  static const tabs = [
+    HomeScreen.routeName,
+    SearchScreen.routeName,
+    "write",
+    ActivityScreen.routeName,
+    ProfileScreen.routeName,
+  ];
+  static final routeUrl = "/:tab(${tabs.join("|")})";
+
+  const MainNavigationScreen({
+    super.key,
+    required this.tab,
+  });
+
+  final String tab;
 
   @override
-  State<MainNaviagtionScreen> createState() => _MainNaviagtionScreenState();
+  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
-class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
-  var _currentIndex = 0;
+class _MainNavigationScreenState extends State<MainNavigationScreen> {
+  late int _currentIndex = MainNavigationScreen.tabs.indexOf(widget.tab);
 
   void _onTap() {
     FocusScope.of(context).unfocus();
@@ -31,6 +46,7 @@ class _MainNaviagtionScreenState extends State<MainNaviagtionScreen> {
       return;
     }
 
+    context.go("/${MainNavigationScreen.tabs[index]}");
     setState(() {
       _currentIndex = index;
     });

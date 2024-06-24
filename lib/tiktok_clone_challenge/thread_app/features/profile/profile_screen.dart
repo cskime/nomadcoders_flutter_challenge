@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/multiple_avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/link_button.dart';
@@ -13,12 +14,13 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 final _user = dummyUsers.first;
 
 class ProfileScreen extends StatelessWidget {
+  static const routeName = "profile";
+  static const routeUrl = "/profile";
+
   const ProfileScreen({super.key});
 
   void _onSettingsPressed(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const SettingsScreen(),
-    ));
+    context.pushNamed(SettingsScreen.routeName);
   }
 
   @override

@@ -4,6 +4,9 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/post.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const routeName = "";
+  static const routeUrl = "/";
+
   const HomeScreen({super.key});
 
   @override

@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/privacy_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
 
 class SettingsScreen extends StatelessWidget {
+  static const routeName = "settings";
+  static const routeUrl = "/settings";
+
   const SettingsScreen({super.key});
 
   void _onLogoutCancelPressed(BuildContext context) {
@@ -56,11 +60,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _onPrivacyTap(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const PrivacyScreen(),
-      ),
-    );
+    context.pushNamed(PrivacyScreen.routeName);
   }
 
   Icon leadingIcon(

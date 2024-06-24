@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PrivacyScreen extends StatefulWidget {
+  static const routeName = "privacy";
+  static const routeUrl = "privacy";
+
   const PrivacyScreen({super.key});
 
   @override
