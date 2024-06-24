@@ -14,16 +14,20 @@ class CameraScreen extends StatefulWidget {
   State<CameraScreen> createState() => _CameraScreenState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _CameraScreenState extends State<CameraScreen>
+    with WidgetsBindingObserver {
   late CameraController _cameraController;
   bool _cameraGranted = false;
-
+  bool get _cameraInitialized => _cameraController.value.isInitialized;
   final resolution = ResolutionPreset.medium;
   bool _selfieMode = false;
+
+  bool _appInBackground = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initPermission();
   }
 
@@ -116,6 +120,28 @@ class _CameraScreenState extends State<CameraScreen> {
   }
 
   @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+
+    if (!_cameraGranted || !_cameraInitialized) {
+      return;
+    }
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        _appInBackground = true;
+        setState(() {});
+        _cameraController.dispose();
+      case AppLifecycleState.resumed:
+        if (!_appInBackground) return;
+        _appInBackground = false;
+        await _initCamera();
+      default:
+        return;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -123,29 +149,30 @@ class _CameraScreenState extends State<CameraScreen> {
         fit: StackFit.expand,
         children: [
           _cameraGranted
-              ? _cameraController.value.isInitialized
+              ? _cameraInitialized
                   ? Stack(
                       children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(32),
-                              bottomRight: Radius.circular(32),
+                        if (!_appInBackground)
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(32),
+                                bottomRight: Radius.circular(32),
+                              ),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: Builder(
+                              builder: (context) {
+                                final sizeConstraint =
+                                    _previewSizeConstraint(context);
+                                return OverflowBox(
+                                  maxWidth: sizeConstraint.width,
+                                  maxHeight: sizeConstraint.height,
+                                  child: CameraPreview(_cameraController),
+                                );
+                              },
                             ),
                           ),
-                          clipBehavior: Clip.hardEdge,
-                          child: Builder(
-                            builder: (context) {
-                              final sizeConstraint =
-                                  _previewSizeConstraint(context);
-                              return OverflowBox(
-                                maxWidth: sizeConstraint.width,
-                                maxHeight: sizeConstraint.height,
-                                child: CameraPreview(_cameraController),
-                              );
-                            },
-                          ),
-                        ),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: CameraControl(
