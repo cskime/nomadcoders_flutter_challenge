@@ -15,7 +15,6 @@ class WritePostBottomBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: height,
-      color: Theme.of(context).appBarTheme.backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -24,9 +24,9 @@ class WritePostTextField extends StatelessWidget {
       autofocus: true,
       decoration: const InputDecoration(
         hintText: "Start a thread...",
-        hintStyle: TextStyle(
-          fontWeight: FontWeight.normal,
-        ),
+        // hintStyle: TextStyle(
+        //   fontWeight: FontWeight.normal,
+        // ),
         isDense: true,
         border: UnderlineInputBorder(
           borderSide: BorderSide.none,

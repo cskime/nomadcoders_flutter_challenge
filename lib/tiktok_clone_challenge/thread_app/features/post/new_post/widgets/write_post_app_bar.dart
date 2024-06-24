@@ -22,7 +22,6 @@ class WritePostAppBar extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-        color: Theme.of(context).appBarTheme.backgroundColor,
         borderRadius: borderRadius,
       ),
       child: Stack(
@@ -52,12 +51,9 @@ class WritePostAppBar extends StatelessWidget {
               ],
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment.bottomCenter,
-            child: Divider(
-              height: 1,
-              color: Colors.grey.shade300,
-            ),
+            child: Divider(height: 1),
           )
         ],
       ),

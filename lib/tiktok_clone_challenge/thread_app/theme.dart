@@ -10,9 +10,10 @@ abstract final class ThreadTheme {
   static final light = _createThemeData(
     backgroundColor: Colors.white,
     foregroundColor: foregroundColor(),
-    dividerColor: _dividerColor(),
-    listTileSubtitleColor: _listTileSubtitleColor(),
+    dividerColor: Colors.grey.shade300,
+    listTileSubtitleColor: Colors.grey.shade700,
     bottomSheetBackgroundColor: Colors.white,
+    textFieldHintTextColor: Colors.grey.shade700,
     bottomBarBackgroundColor: Colors.white,
     bottomBarForegroundColor: Colors.black,
   );
@@ -20,24 +21,20 @@ abstract final class ThreadTheme {
   static final dark = _createThemeData(
     backgroundColor: Colors.black,
     foregroundColor: foregroundColor(isDarkMode: true),
-    dividerColor: _dividerColor(isDarkMode: true),
-    listTileSubtitleColor: _listTileSubtitleColor(isDarkMode: true),
+    dividerColor: Colors.grey.shade800,
+    listTileSubtitleColor: Colors.grey.shade500,
     bottomSheetBackgroundColor: Colors.grey.shade900,
+    textFieldHintTextColor: Colors.grey.shade500,
     bottomBarBackgroundColor: Colors.black,
     bottomBarForegroundColor: Colors.white,
   );
-
-  static Color _dividerColor({bool isDarkMode = false}) =>
-      isDarkMode ? Colors.grey.shade800 : Colors.grey.shade300;
-
-  static Color _listTileSubtitleColor({bool isDarkMode = false}) =>
-      isDarkMode ? Colors.grey.shade500 : Colors.grey.shade700;
 
   static ThemeData _createThemeData({
     required Color backgroundColor,
     required Color foregroundColor,
     required Color dividerColor,
     required Color listTileSubtitleColor,
+    required Color textFieldHintTextColor,
     required Color bottomSheetBackgroundColor,
     required Color bottomBarBackgroundColor,
     required Color bottomBarForegroundColor,
@@ -114,6 +111,11 @@ abstract final class ThreadTheme {
       ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: bottomSheetBackgroundColor,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        hintStyle: TextStyle(
+          color: textFieldHintTextColor,
+        ),
       ),
     );
   }

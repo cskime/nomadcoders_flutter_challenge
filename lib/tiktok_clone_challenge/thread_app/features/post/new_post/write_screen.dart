@@ -51,8 +51,7 @@ class _WriteScreenState extends State<WriteScreen> {
             );
 
             return Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+              decoration: const BoxDecoration(
                 borderRadius: borderRadius,
               ),
               child: Stack(
