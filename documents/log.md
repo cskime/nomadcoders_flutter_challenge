@@ -20,7 +20,7 @@
 
 **[구현 코드](../lib/tiktok_clone_challenge/twitter_onboarding/features/common/widgets/linkable_text.dart)**
 
-> 개념을 확장해서 text의 부분적 styling을 쉽게 할 수 있는 [`customizable_text` package](https://github.com/cskime/customizable_text)를 배포했습니다.
+> 개념을 확장해서 text의 특정 문자열에 style을 쉽게 할 수 있는 [`customizable_text` package](https://github.com/cskime/customizable_text)를 개발하고 배포했습니다.
 
 - Text에서 특정 단어에 다른 style을 줄 때 `RichText`를 사용함
 - `RichText`는 전체 text의 길이와 다른 style을 갖는 단어의 개수가 많아질수록 `RichText`의 `children` 코드가 복잡해지고 변경하기 어려워지는 문제가 있음
@@ -57,14 +57,18 @@
     ```
   - After
     ```dart
+    final linkTextStyle = TextStyle(
+      color: Palette.primary,
+      fontWeight: FontWeight.w500,
+    );
     LinkableText(
       text: 'By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use. Twitter may use your contact information, including your email address and phone number for purposes outlined in our Privacy Policy, like keeping your account secure and personalizing our services, including ads. Learn more. Others will be able to find you by email or phone number, when provided, unless you choose otherwise here.',
       links: [
-        Link(text: 'Terms of Service', callback: () {}),
-        Link(text: 'Privacy Policy', callback: () {}),
-        Link(text: 'Cookie Use', callback: () {}),
-        Link(text: 'Learn more', callback: () {}),
-        Link(text: 'here', callback: () {}),
+        Link(text: 'Terms of Service', style: linkTextStyle, callback: () {}),
+        Link(text: 'Privacy Policy', style: linkTextStyle, callback: () {}),
+        Link(text: 'Cookie Use', style: linkTextStyle, callback: () {}),
+        Link(text: 'Learn more', style: linkTextStyle, callback: () {}),
+        Link(text: 'here', style: linkTextStyle, callback: () {}),
       ],
     ),
     ```
