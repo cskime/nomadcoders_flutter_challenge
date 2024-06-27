@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/privacy_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/privacy_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/view_models/settings_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = "settings";
@@ -72,33 +74,25 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _onAppearanceTap(BuildContext context) {
-    final modes = [ThemeMode.light, ThemeMode.dark, ThemeMode.system];
-
     void buttonPressed(ThemeMode mode) {
+      context.read<SettingsViewModel>().switchThemeMode(mode);
       context.pop();
     }
 
-    String title(ThemeMode mode) {
-      return switch (mode) {
-        ThemeMode.light => "Light",
-        ThemeMode.dark => "Dark",
-        ThemeMode.system => "System",
-      };
-    }
-
-    List<Widget> actions = modes.map((mode) {
+    List<Widget> actions = ThemeMode.values.map((mode) {
+      final title = context.read<SettingsViewModel>().appearanceTitle(mode);
       final textStyle = Theme.of(context).textTheme.bodyMedium;
       return Platform.isIOS
           ? CupertinoDialogAction(
               onPressed: () => buttonPressed(mode),
               child: Text(
-                title(mode),
+                title,
                 style: textStyle?.copyWith(color: Colors.blue),
               ),
             )
           : TextButton(
               onPressed: () => buttonPressed(mode),
-              child: Text(title(mode), style: textStyle),
+              child: Text(title, style: textStyle),
             );
     }).toList();
 
@@ -138,10 +132,10 @@ class SettingsScreen extends StatelessWidget {
             title: Text("Account"),
           ),
           ListTile(
-            leading: const Icon(Icons.light_mode_outlined),
+            leading: const Icon(FontAwesomeIcons.circleHalfStroke),
             title: const Text("Appearance"),
             trailing: Text(
-              "Light",
+              context.watch<SettingsViewModel>().currentAppearanceTitle,
               style: Theme.of(context).textTheme.labelMedium,
             ),
             onTap: () => _onAppearanceTap(context),
