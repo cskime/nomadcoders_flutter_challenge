@@ -20,6 +20,7 @@
   - [permission_handler](https://pub.dev/packages/permission_handler) : 카메라, 마이크, 사진첩 등 권한 요청을 위한 package
   - [image_picker](https://pub.dev/packages/image_picker) : 사진첩에서 image를 가져오기 위한 package
   - [go_router](https://pub.dev/packages/go_router) : 선언적, 구조적 routing 코드 작성 및 web 환경 navigation 연습을 위한 package
+  - [provider](https://pub.dev/packages/provider) : 설정 화면에서 appearance 변경 기능을 구현하기 위한 `ThemeMode` 상태 관리에 사용
 
 ## Results
 
@@ -44,5 +45,7 @@
 | <img src="./documents/images/flutter-challenge-thread-1.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-2.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-3.gif" width="200"/> |
 |            [Thread 4](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 5](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 6](./lib/tiktok_clone_challenge/thread_app/)            |
 | <img src="./documents/images/flutter-challenge-thread-4.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-5.gif" width="200"/> | <img src="./documents/images/flutter-challenge-thread-6.gif" width="200"/> |
+|            [Thread 7](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 8](./lib/tiktok_clone_challenge/thread_app/)            |            [Thread 9](./lib/tiktok_clone_challenge/thread_app/)            |
+| <img src="./documents/images/flutter-challenge-thread-7.gif" width="200"/> |                <img src="./documents/images/" width="200"/>                |                <img src="./documents/images/" width="200"/>                |
 
 ### Flutter Animation 마스터클래스
