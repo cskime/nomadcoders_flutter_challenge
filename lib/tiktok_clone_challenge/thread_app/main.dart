@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/view_models/settings_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/services/theme_mode_service.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/theme.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   if (kIsWeb) {
@@ -13,30 +12,20 @@ void main() {
   }
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeModeService(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => SettingsViewModel(
-            themeModeService: context.read(),
-          ),
-        ),
-      ],
-      child: const ThreadApp(),
+    const ProviderScope(
+      child: ThreadApp(),
     ),
   );
 }
 
-class ThreadApp extends StatelessWidget {
+class ThreadApp extends ConsumerWidget {
   const ThreadApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       routerConfig: router,
-      themeMode: context.watch<ThemeModeService>().themeMode,
+      themeMode: ref.watch(themeModeServiceProvider),
       theme: ThreadTheme.light,
       darkTheme: ThreadTheme.dark,
     );

@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/privacy_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/view_models/settings_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/privacy_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   static const routeName = "settings";
   static const routeUrl = "/settings";
 
@@ -66,21 +66,14 @@ class SettingsScreen extends StatelessWidget {
     context.pushNamed(PrivacyScreen.routeName);
   }
 
-  Icon leadingIcon(
-    IconData iconData, {
-    required bool isDarkMode,
-  }) {
-    return Icon(iconData);
-  }
-
-  void _onAppearanceTap(BuildContext context) {
+  void _onAppearanceTap(BuildContext context, WidgetRef ref) {
     void buttonPressed(ThemeMode mode) {
-      context.read<SettingsViewModel>().switchThemeMode(mode);
+      ref.read(settingsViewModelProvider.notifier).switchThemeMode(mode);
       context.pop();
     }
 
     List<Widget> actions = ThemeMode.values.map((mode) {
-      final title = context.read<SettingsViewModel>().appearanceTitle(mode);
+      final title = _appearanceTitle(mode);
       final textStyle = Theme.of(context).textTheme.bodyMedium;
       return Platform.isIOS
           ? CupertinoDialogAction(
@@ -102,8 +95,14 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  String _appearanceTitle(ThemeMode mode) => switch (mode) {
+        ThemeMode.system => "System",
+        ThemeMode.light => "Light",
+        ThemeMode.dark => "Dark",
+      };
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final logoutTextStyle = Theme.of(context)
         .listTileTheme
         .titleTextStyle
@@ -135,10 +134,10 @@ class SettingsScreen extends StatelessWidget {
             leading: const Icon(FontAwesomeIcons.circleHalfStroke),
             title: const Text("Appearance"),
             trailing: Text(
-              context.watch<SettingsViewModel>().currentAppearanceTitle,
+              _appearanceTitle(ref.watch(settingsViewModelProvider)),
               style: Theme.of(context).textTheme.labelMedium,
             ),
-            onTap: () => _onAppearanceTap(context),
+            onTap: () => _onAppearanceTap(context, ref),
           ),
           const ListTile(
             leading: Icon(FontAwesomeIcons.solidLifeRing),

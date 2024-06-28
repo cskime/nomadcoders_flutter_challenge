@@ -11,26 +11,24 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          const SliverAppBar(
-            title: Icon(
-              FontAwesomeIcons.threads,
-              size: 36,
-            ),
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          title: Icon(
+            FontAwesomeIcons.threads,
+            size: 36,
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: dummyPosts.length,
-              (context, index) {
-                final post = dummyPosts[index];
-                return HomePostListItem(post: post);
-              },
-            ),
-          )
-        ],
-      ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            childCount: dummyPosts.length,
+            (context, index) {
+              final post = dummyPosts[index];
+              return HomePostListItem(post: post);
+            },
+          ),
+        )
+      ],
     );
   }
 }
