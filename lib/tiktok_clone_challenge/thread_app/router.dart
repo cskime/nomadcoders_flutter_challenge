@@ -1,16 +1,22 @@
 import 'package:go_router/go_router.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/login_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/sign_in_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/sign_up_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/privacy_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/settings_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/main_navigation_screen.dart';
 
 final router = GoRouter(
-  initialLocation: LoginScreen.routeUrl,
+  initialLocation: SignInScreen.routeUrl,
   routes: [
     GoRoute(
-      name: LoginScreen.routeName,
-      path: LoginScreen.routeUrl,
-      builder: (context, state) => const LoginScreen(),
+      name: SignInScreen.routeName,
+      path: SignInScreen.routeUrl,
+      builder: (context, state) => const SignInScreen(),
+    ),
+    GoRoute(
+      name: SignUpScreen.routeName,
+      path: SignUpScreen.routeUrl,
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       path: MainNavigationScreen.routeUrl,

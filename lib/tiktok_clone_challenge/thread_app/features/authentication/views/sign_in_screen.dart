@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/login_form_button.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/login_form_field.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/sign_up_screen.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_button.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_field.dart';
 
-class LoginScreen extends ConsumerWidget {
-  static const routeName = "login";
-  static const routeUrl = "/login";
+class SignInScreen extends ConsumerWidget {
+  static const routeName = "signIn";
+  static const routeUrl = "/signIn";
 
-  const LoginScreen({super.key});
+  const SignInScreen({super.key});
 
   void _onTap(BuildContext context) {
     FocusScope.of(context).unfocus();
+  }
+
+  void _onCreateAccountPressed(BuildContext context) {
+    context.pushNamed(SignUpScreen.routeName);
   }
 
   @override
@@ -44,15 +50,15 @@ class LoginScreen extends ConsumerWidget {
                     const Form(
                       child: Column(
                         children: [
-                          LoginFormField(
+                          AuthFormField(
                             hintText: "Mobile number or email",
                           ),
                           SizedBox(height: 12),
-                          LoginFormField(
+                          AuthFormField(
                             hintText: "Password",
                           ),
                           SizedBox(height: 12),
-                          LoginFormButton(),
+                          AuthFormButton(title: "Log in"),
                         ],
                       ),
                     ),
@@ -73,16 +79,20 @@ class LoginScreen extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: const Center(
-                      child: Text(
-                        "Create new account",
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                  GestureDetector(
+                    onTap: () => _onCreateAccountPressed(context),
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Center(
+                        child: Text(
+                          "Create new account",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),

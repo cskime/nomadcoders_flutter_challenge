@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginFormField extends StatelessWidget {
-  const LoginFormField({
+class AuthFormField extends StatelessWidget {
+  const AuthFormField({
     super.key,
     required this.hintText,
   });
