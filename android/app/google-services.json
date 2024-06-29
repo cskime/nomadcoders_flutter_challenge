@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586068989468",
+    "project_id": "tiktok-challenge-cskim",
+    "storage_bucket": "tiktok-challenge-cskim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586068989468:android:4a8771f569ac450dd6f1d9",
+        "android_client_info": {
+          "package_name": "com.example.nomadcoders_flutter_challenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjZFBssumDQ1hsQfdIwA1ca2jymM3Haks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
