@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/sign_in_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/view_models/settings_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/privacy_screen.dart';
 
@@ -18,13 +19,20 @@ class SettingsScreen extends ConsumerWidget {
     Navigator.of(context).pop();
   }
 
-  void _onLogoutOKPressed(BuildContext context) {
-    Navigator.of(context).pop();
+  void _onLogoutOKPressed(BuildContext context, WidgetRef ref) async {
+    await ref.read(settingsViewModelProvider.notifier).logOut();
+    if (context.mounted) {
+      Navigator.of(context).pop();
+    }
   }
 
-  void _onLogoutTap(BuildContext context, {required bool isIOS}) {
+  void _onLogoutTap(
+    BuildContext context,
+    WidgetRef ref, {
+    required bool isIOS,
+  }) async {
     if (isIOS) {
-      showCupertinoDialog(
+      await showCupertinoDialog(
         context: context,
         builder: (context) => CupertinoAlertDialog(
           title: const Text("Log out?"),
@@ -37,13 +45,13 @@ class SettingsScreen extends ConsumerWidget {
             CupertinoDialogAction(
               isDestructiveAction: true,
               child: const Text("OK"),
-              onPressed: () => _onLogoutOKPressed(context),
+              onPressed: () => _onLogoutOKPressed(context, ref),
             ),
           ],
         ),
       );
     } else {
-      showDialog(
+      await showDialog(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text("Log out?"),
@@ -53,12 +61,16 @@ class SettingsScreen extends ConsumerWidget {
               child: const Text("Cancel"),
             ),
             TextButton(
-              onPressed: () => _onLogoutOKPressed(context),
+              onPressed: () => _onLogoutOKPressed(context, ref),
               child: const Text("OK"),
             ),
           ],
         ),
       );
+    }
+
+    if (context.mounted) {
+      context.goNamed(SignInScreen.routeName);
     }
   }
 
@@ -153,14 +165,14 @@ class SettingsScreen extends ConsumerWidget {
               "Log out (iOS)",
               style: logoutTextStyle,
             ),
-            onTap: () => _onLogoutTap(context, isIOS: true),
+            onTap: () => _onLogoutTap(context, ref, isIOS: true),
           ),
           ListTile(
             title: Text(
               "Log out (Android)",
               style: logoutTextStyle,
             ),
-            onTap: () => _onLogoutTap(context, isIOS: false),
+            onTap: () => _onLogoutTap(context, ref, isIOS: false),
           ),
         ],
       ),
