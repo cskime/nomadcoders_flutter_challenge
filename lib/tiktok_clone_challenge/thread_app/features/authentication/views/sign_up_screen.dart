@@ -2,27 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/util/form_validator.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/view_models/sign_up_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_field.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/home_screen.dart';
 
-class SignUpScreen extends ConsumerWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   static const routeName = "signUp";
   static const routeUrl = "/signUp";
 
   const SignUpScreen({super.key});
 
-  void _onTap(BuildContext context) {
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
+  var formValues = <String, String>{};
+
+  void _onTap() {
     FocusScope.of(context).unfocus();
   }
 
-  void _onLoginPressed(BuildContext context) {
+  void _onSaved({required String key, required String value}) {
+    formValues[key] = value;
+  }
+
+  void _onSignUpPressed() async {
+    final formState = _formKey.currentState!;
+    final valid = formState.validate();
+
+    if (!valid) {
+      return;
+    }
+
+    formState.save();
+
+    await ref.read(signUpViewModelProvider.notifier).signUpWithEmailAndPassword(
+          email: formValues["email"]!,
+          password: formValues["password"]!,
+        );
+
+    if (mounted) {
+      context.go(HomeScreen.routeUrl);
+    }
+  }
+
+  void _onLoginPressed() {
     context.pop();
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final isLoading = ref.watch(signUpViewModelProvider).isLoading;
     return GestureDetector(
-      onTap: () => _onTap(context),
+      onTap: _onTap,
       child: Scaffold(
           backgroundColor: const Color(0xFFF5FAF3),
           body: SafeArea(
@@ -46,19 +82,33 @@ class SignUpScreen extends ConsumerWidget {
                         size: 96,
                       ),
                     ),
-                    const Form(
+                    Form(
+                      key: _formKey,
                       child: Column(
                         children: [
                           AuthFormField(
                             hintText: "Mobile number or email",
+                            validator: FormValidator.emailValidator,
+                            onSaved: (value) => _onSaved(
+                              key: "email",
+                              value: value!,
+                            ),
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           AuthFormField(
                             hintText: "Password",
+                            obscureText: true,
+                            validator: FormValidator.passwordValidator,
+                            onSaved: (value) => _onSaved(
+                              key: "password",
+                              value: value!,
+                            ),
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           AuthFormButton(
                             title: "Sign up",
+                            onPressed: _onSignUpPressed,
+                            isEnabled: !isLoading,
                           ),
                         ],
                       ),
@@ -76,7 +126,7 @@ class SignUpScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
-                    onTap: () => _onLoginPressed(context),
+                    onTap: _onLoginPressed,
                     behavior: HitTestBehavior.opaque,
                     child: Container(
                       decoration: BoxDecoration(

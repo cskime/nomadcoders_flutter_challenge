@@ -5,19 +5,21 @@ class AuthFormButton extends StatelessWidget {
     super.key,
     required this.title,
     this.onPressed,
+    this.isEnabled = true,
   });
 
   final String title;
   final void Function()? onPressed;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: isEnabled ? onPressed : null,
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF0B64E1),
+          color: isEnabled ? const Color(0xFF0B64E1) : Colors.grey,
           borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsets.symmetric(vertical: 16),

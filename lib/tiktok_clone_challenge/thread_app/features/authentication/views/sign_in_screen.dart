@@ -2,18 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/util/form_validator.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/view_models/sign_in_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/sign_up_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_field.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/home/home_screen.dart';
 
-class SignInScreen extends ConsumerWidget {
+class SignInScreen extends ConsumerStatefulWidget {
   static const routeName = "signIn";
   static const routeUrl = "/signIn";
 
   const SignInScreen({super.key});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends ConsumerState<SignInScreen> {
+  final _formKey = GlobalKey<FormState>();
+  var formValues = <String, String>{};
+
   void _onTap(BuildContext context) {
     FocusScope.of(context).unfocus();
+  }
+
+  void _onSaved({required String key, required String value}) {
+    formValues[key] = value;
+  }
+
+  void _onSignInPressed() async {
+    final formState = _formKey.currentState!;
+    final valid = formState.validate();
+
+    if (!valid) {
+      return;
+    }
+
+    formState.save();
+
+    await ref.read(signInViewModelProvider.notifier).signInWithEmailAndPassword(
+          email: formValues["email"]!,
+          password: formValues["password"]!,
+        );
+
+    if (mounted) {
+      context.go(HomeScreen.routeUrl);
+    }
   }
 
   void _onCreateAccountPressed(BuildContext context) {
@@ -21,7 +56,8 @@ class SignInScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final isLoading = ref.watch(signInViewModelProvider).isLoading;
     return GestureDetector(
       onTap: () => _onTap(context),
       child: Scaffold(
@@ -47,18 +83,34 @@ class SignInScreen extends ConsumerWidget {
                         size: 96,
                       ),
                     ),
-                    const Form(
+                    Form(
+                      key: _formKey,
                       child: Column(
                         children: [
                           AuthFormField(
                             hintText: "Mobile number or email",
+                            validator: FormValidator.emailValidator,
+                            onSaved: (value) => _onSaved(
+                              key: "email",
+                              value: value!,
+                            ),
                           ),
-                          SizedBox(height: 12),
+                          const SizedBox(height: 12),
                           AuthFormField(
                             hintText: "Password",
+                            obscureText: true,
+                            validator: FormValidator.passwordValidator,
+                            onSaved: (value) => _onSaved(
+                              key: "password",
+                              value: value!,
+                            ),
                           ),
-                          SizedBox(height: 12),
-                          AuthFormButton(title: "Log in"),
+                          const SizedBox(height: 12),
+                          AuthFormButton(
+                            title: "Log in",
+                            onPressed: _onSignInPressed,
+                            isEnabled: !isLoading,
+                          ),
                         ],
                       ),
                     ),
