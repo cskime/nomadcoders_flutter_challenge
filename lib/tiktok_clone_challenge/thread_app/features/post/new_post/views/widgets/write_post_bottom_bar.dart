@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WritePostBottomBar extends StatelessWidget {
@@ -5,10 +6,14 @@ class WritePostBottomBar extends StatelessWidget {
     super.key,
     required this.height,
     required this.canPost,
+    required this.loading,
+    required this.onPostPressed,
   });
 
   final double height;
   final bool canPost;
+  final bool loading;
+  final void Function()? onPostPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +27,19 @@ class WritePostBottomBar extends StatelessWidget {
             'Anyone can reply',
             style: TextStyle(color: Colors.grey),
           ),
-          Text(
-            'Post',
-            style: TextStyle(
-              color: canPost ? Colors.blue : Colors.grey,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          loading
+              ? const CupertinoActivityIndicator()
+              : GestureDetector(
+                  onTap: onPostPressed,
+                  child: Text(
+                    'Post',
+                    style: TextStyle(
+                      color: canPost ? Colors.blue : Colors.grey,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
         ],
       ),
     );

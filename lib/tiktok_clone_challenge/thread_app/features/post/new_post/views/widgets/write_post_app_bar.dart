@@ -6,16 +6,13 @@ class WritePostAppBar extends StatelessWidget {
     required this.title,
     required this.height,
     required this.borderRadius,
+    required this.onClose,
   });
 
   final String title;
   final double height;
   final BorderRadius borderRadius;
-
-  void _onClose(BuildContext context) {
-    FocusScope.of(context).unfocus();
-    Navigator.of(context).pop();
-  }
+  final void Function()? onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class WritePostAppBar extends StatelessWidget {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => _onClose(context),
+                    onTap: onClose,
                     child: Text(
                       'Cancel',
                       style: Theme.of(context).textTheme.bodyMedium,
