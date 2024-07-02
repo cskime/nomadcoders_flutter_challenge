@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_body_post.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/own_posts/own_posts_list_item.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/models/user_profile.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/own_posts/own_posts_list_item.dart';
 
 class ProfileOwnPostsListView extends StatelessWidget {
   const ProfileOwnPostsListView({
@@ -9,14 +9,15 @@ class ProfileOwnPostsListView extends StatelessWidget {
     required this.user,
   });
 
-  final User user;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const OwnPostsListItem(
-          bodyText: Text.rich(
+        OwnPostsListItem(
+          profileImageUrl: user.profileImageUrl!,
+          bodyText: const Text.rich(
             TextSpan(
               text: "Give ",
               children: [
@@ -34,9 +35,10 @@ class ProfileOwnPostsListView extends StatelessWidget {
           ),
         ),
         OwnPostsListItem(
+          profileImageUrl: user.profileImageUrl!,
           bodyText: const Text("Tea. Spillage."),
           body: PostListItemBodyPost(
-            userProfileImagePath: user.profileImagePath!,
+            userProfileImagePath: user.profileImageUrl!,
             username: "iwetmyyplants",
             verifiedUser: true,
             bodyText:
@@ -46,8 +48,9 @@ class ProfileOwnPostsListView extends StatelessWidget {
             ],
           ),
         ),
-        const OwnPostsListItem(
-          bodyText: Text.rich(
+        OwnPostsListItem(
+          profileImageUrl: user.profileImageUrl!,
+          bodyText: const Text.rich(
             TextSpan(
               text: "Give ",
               children: [
@@ -65,9 +68,10 @@ class ProfileOwnPostsListView extends StatelessWidget {
           ),
         ),
         OwnPostsListItem(
+          profileImageUrl: user.profileImageUrl!,
           bodyText: const Text("Tea. Spillage."),
           body: PostListItemBodyPost(
-            userProfileImagePath: user.profileImagePath!,
+            userProfileImagePath: user.profileImageUrl!,
             username: "iwetmyyplants",
             verifiedUser: true,
             bodyText:

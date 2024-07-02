@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/username_label.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/models/user_profile.dart';
 
 class UserSearchListTile extends StatelessWidget {
   const UserSearchListTile({
@@ -9,7 +9,7 @@ class UserSearchListTile extends StatelessWidget {
     required this.user,
   });
 
-  final User user;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class UserSearchListTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage(user.profileImagePath!),
+            backgroundImage: AssetImage(user.profileImageUrl!),
           ),
           const SizedBox(width: 16),
           Expanded(

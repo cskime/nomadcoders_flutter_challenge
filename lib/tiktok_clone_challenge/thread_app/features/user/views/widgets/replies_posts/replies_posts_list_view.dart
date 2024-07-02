@@ -3,8 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_body_post.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_user_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/replies_posts/replies_posts_list_item.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/replies_posts/replies_posts_list_item.dart';
 
 class RepliesPostsListView extends StatelessWidget {
   const RepliesPostsListView({super.key});
@@ -12,12 +11,12 @@ class RepliesPostsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
+      children: const [
         RepliesPostsListItem(
           username: "john_mobbin",
-          bodyText: const Text("Always a dream to see the Median in Morocco!"),
+          bodyText: Text("Always a dream to see the Median in Morocco!"),
           body: PostListItemBodyPost(
-            userProfileImagePath: dummyUsers[1].profileImagePath!,
+            userProfileImagePath: "assets/images/thread-profile-image-1.jpg",
             username: "earthpix",
             verifiedUser: true,
             bodyText:
@@ -25,19 +24,21 @@ class RepliesPostsListView extends StatelessWidget {
           ),
           footer: PostListItem(
             avatar: PostListItemUserAvatar(
-                user: dummyUsers[1], showsFollowButton: false),
-            action: const FaIcon(FontAwesomeIcons.ellipsis),
+              profileImageUrl: "assets/images/thread-profile-image-1.jpg",
+              showsFollowButton: false,
+            ),
+            action: FaIcon(FontAwesomeIcons.ellipsis),
             title: "jane_mobbin",
             verified: false,
             updated: "5h",
-            bodyText: const Text("See you there!"),
+            bodyText: Text("See you there!"),
           ),
         ),
         RepliesPostsListItem(
           username: "john_mobbin",
-          bodyText: const Text("Always a dream to see the Median in Morocco!"),
+          bodyText: Text("Always a dream to see the Median in Morocco!"),
           body: PostListItemBodyPost(
-            userProfileImagePath: dummyUsers[1].profileImagePath!,
+            userProfileImagePath: "assets/images/thread-profile-image-1.jpg",
             username: "earthpix",
             verifiedUser: true,
             bodyText:
@@ -45,19 +46,21 @@ class RepliesPostsListView extends StatelessWidget {
           ),
           footer: PostListItem(
             avatar: PostListItemUserAvatar(
-                user: dummyUsers[1], showsFollowButton: false),
-            action: const FaIcon(FontAwesomeIcons.ellipsis),
+              profileImageUrl: "assets/images/thread-profile-image-1.jpg",
+              showsFollowButton: false,
+            ),
+            action: FaIcon(FontAwesomeIcons.ellipsis),
             title: "jane_mobbin",
             verified: false,
             updated: "5h",
-            bodyText: const Text("See you there!"),
+            bodyText: Text("See you there!"),
           ),
         ),
         RepliesPostsListItem(
           username: "john_mobbin",
-          bodyText: const Text("Always a dream to see the Median in Morocco!"),
+          bodyText: Text("Always a dream to see the Median in Morocco!"),
           body: PostListItemBodyPost(
-            userProfileImagePath: dummyUsers[1].profileImagePath!,
+            userProfileImagePath: "assets/images/thread-profile-image-1.jpg",
             username: "earthpix",
             verifiedUser: true,
             bodyText:
@@ -65,12 +68,14 @@ class RepliesPostsListView extends StatelessWidget {
           ),
           footer: PostListItem(
             avatar: PostListItemUserAvatar(
-                user: dummyUsers[1], showsFollowButton: false),
-            action: const FaIcon(FontAwesomeIcons.ellipsis),
+              profileImageUrl: "assets/images/thread-profile-image-1.jpg",
+              showsFollowButton: false,
+            ),
+            action: FaIcon(FontAwesomeIcons.ellipsis),
             title: "jane_mobbin",
             verified: false,
             updated: "5h",
-            bodyText: const Text("See you there!"),
+            bodyText: Text("See you there!"),
           ),
         ),
       ],

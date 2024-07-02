@@ -22,7 +22,7 @@ class ActivityAllListItem extends StatelessWidget {
             CircleAvatar(
               radius: 24,
               backgroundImage: AssetImage(
-                activity.user.profileImagePath!,
+                activity.profileImageUrl,
               ),
             ),
             Positioned(
@@ -37,7 +37,7 @@ class ActivityAllListItem extends StatelessWidget {
         children: [
           Flexible(
             child: Text(
-              activity.user.username,
+              activity.username,
               style: Theme.of(context).textTheme.titleMedium,
               overflow: TextOverflow.ellipsis,
             ),

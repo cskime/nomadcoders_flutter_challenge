@@ -4,9 +4,6 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_app_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_bottom_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_edit_area.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
-
-final _myUser = dummyUsers[0];
 
 class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
@@ -42,7 +39,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(writeViewModelProvider).isLoading;
+    final isUploading = ref.watch(writeViewModelProvider).isLoading;
     return DraggableScrollableSheet(
       initialChildSize: 1,
       minChildSize: 1,
@@ -75,11 +72,21 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                     right: 0,
                     child: SizedBox(
                       height: inputHeight,
-                      child: WritePostEditArea(
-                        userProfileImage: AssetImage(_myUser.profileImagePath!),
-                        username: _myUser.username,
-                        textEditingController: _textEditingController,
-                      ),
+                      child: ref.read(writeViewModelMyUserProvider).when(
+                            data: (data) => WritePostEditArea(
+                              userProfileImage: AssetImage(
+                                data.profileImageUrl!,
+                              ),
+                              username: data.username,
+                              textEditingController: _textEditingController,
+                            ),
+                            error: (error, stackTrace) => const Center(
+                              child: Text("Fail to fetch user profile."),
+                            ),
+                            loading: () => const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            ),
+                          ),
                     ),
                   ),
                   Align(
@@ -99,7 +106,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                       child: WritePostBottomBar(
                         height: bottomBarHeight,
                         canPost: _textEditingController.text.isNotEmpty,
-                        loading: isLoading,
+                        loading: isUploading,
                         onPostPressed: _onPostPressed,
                       ),
                     ),

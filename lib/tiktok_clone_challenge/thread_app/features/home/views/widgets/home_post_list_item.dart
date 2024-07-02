@@ -4,10 +4,10 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_image.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/post_list_item/post_list_item_user_avatar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/models/post.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/models/post_more_item.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_more/post_more_bottom_sheet.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/post_report/post_report_bottom_sheet.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/post.dart';
 
 class HomePostListItem extends StatelessWidget {
   const HomePostListItem({
@@ -41,7 +41,7 @@ class HomePostListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return PostListItem(
       avatar: PostListItemUserAvatar(
-        user: post.user,
+        profileImageUrl: post.authorProfileImageUrl,
         showsFollowButton: true,
       ),
       action: GestureDetector(
@@ -51,8 +51,8 @@ class HomePostListItem extends StatelessWidget {
           size: 18,
         ),
       ),
-      title: post.user.username,
-      verified: post.user.verified,
+      title: post.authorName,
+      verified: post.authorVerified,
       updated: post.updated,
       bodyText: Text(
         post.body,
@@ -66,12 +66,11 @@ class HomePostListItem extends StatelessWidget {
         child: Row(
           children: [
             MultipleAvatar(
-              paths:
-                  post.repliers.map((user) => user.profileImagePath!).toList(),
+              paths: post.replierProfileImageUrls,
             ),
             const SizedBox(width: 10),
             Text(
-              '${post.commentCount} ${post.commentCount > 1 ? 'replies' : 'reply'} · ${post.likeCount} likes',
+              '${post.replyCount} ${post.replyCount > 1 ? 'replies' : 'reply'} · ${post.likeCount} likes',
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ],

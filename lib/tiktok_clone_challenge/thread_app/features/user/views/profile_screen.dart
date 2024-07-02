@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/multiple_avatar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/link_button.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/own_posts/profile_own_posts_list_view.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_button.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/profile_tab_bar.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/profile/widgets/replies_posts/replies_posts_list_view.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/settings/views/settings_screen.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/models/user.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/view_models/profile_view_model.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/link_button.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/own_posts/profile_own_posts_list_view.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/profile_button.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/profile_tab_bar.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/views/widgets/replies_posts/replies_posts_list_view.dart';
 
-final _user = dummyUsers.first;
-
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   static const routeName = "profile";
   static const routeUrl = "/profile";
 
@@ -24,7 +23,21 @@ class ProfileScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(profileViewModelProvider);
+
+    if (user.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
+
+    if (user.hasError) {
+      return const Center(
+        child: Text("Something went wrong."),
+      );
+    }
+
     return DefaultTabController(
       length: 2,
       child: SafeArea(
@@ -56,38 +69,39 @@ class ProfileScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _user.username,
+                                user.value!.username,
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Row(
                                 children: [
-                                  Text(_user.name),
+                                  Text(user.value!.name),
                                   const SizedBox(width: 8),
                                   const LinkButton(title: "threads.net"),
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Text(_user.bio),
+                              Text(user.value!.bio),
                             ],
                           ),
                         ),
                         Avatar.asset(
                           size: 72,
-                          imageUrl: _user.profileImagePath!,
+                          imageUrl: user.value!.profileImageUrl!,
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        MultipleAvatar(
-                          paths: _user.followers
-                              .map((user) => user.profileImagePath!)
-                              .toList(),
+                        const MultipleAvatar(
+                          // paths: user.value!.followers
+                          //     .map((user) => user.profileImageUrl!)
+                          //     .toList(),
+                          paths: [],
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          "${_user.followers.length} followers",
+                          "${user.value!.followerCount} followers",
                           style: TextStyle(color: Colors.grey.shade600),
                         )
                       ],
@@ -116,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
           ],
           body: TabBarView(
             children: [
-              ProfileOwnPostsListView(user: _user),
+              ProfileOwnPostsListView(user: user.value!),
               const RepliesPostsListView(),
             ],
           ),
