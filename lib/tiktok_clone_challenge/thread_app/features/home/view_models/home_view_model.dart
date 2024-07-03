@@ -16,4 +16,10 @@ class HomeViewModel extends AsyncNotifier<List<Post>> {
     _postsRepository = ref.read(postsRepositoryProvider);
     return await _postsRepository.fetchPosts();
   }
+
+  Future<void> fetchPosts() async {
+    state = await AsyncValue.guard(
+      () async => await _postsRepository.fetchPosts(),
+    );
+  }
 }

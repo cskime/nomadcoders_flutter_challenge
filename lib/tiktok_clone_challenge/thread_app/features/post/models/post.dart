@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Post {
   Post({
     required this.authorId,
     required this.authorName,
-    required this.authorProfileImageUrl,
+    this.authorProfileImageUrl,
     required this.authorVerified,
     required this.body,
     this.imageUrls = const [],
@@ -17,7 +19,7 @@ class Post {
 
   final String authorId;
   final String authorName;
-  final String authorProfileImageUrl;
+  final String? authorProfileImageUrl;
   final bool authorVerified;
   final String body;
   final List<String> imageUrls;
@@ -25,7 +27,7 @@ class Post {
   final int replyCount;
   final List<String> repliers;
   final List<String> replierProfileImageUrls;
-  final String timestamp;
+  final Timestamp timestamp;
 
   Post.fromJson(Map<String, dynamic> json)
       : authorId = json["authorId"],
@@ -47,18 +49,16 @@ class Post {
         "authorProfileImageUrl": authorProfileImageUrl,
         "authorVerified": authorVerified,
         "body": body,
-        "imageUrls": imageUrls.toString(),
+        "imageUrls": imageUrls,
         "likeCount": likeCount,
         "replyCount": replyCount,
-        "repliers": repliers.toString(),
-        "replierProfileImageUrls": replierProfileImageUrls.toString(),
+        "repliers": repliers,
+        "replierProfileImageUrls": replierProfileImageUrls,
         "timestamp": timestamp,
       };
 
   String get updated {
-    final timestampDate = DateTime.fromMillisecondsSinceEpoch(
-      int.parse(timestamp),
-    );
+    final timestampDate = timestamp.toDate();
     final ago = DateTime.now().difference(timestampDate).inSeconds;
 
     if (ago / 60 < 1) {

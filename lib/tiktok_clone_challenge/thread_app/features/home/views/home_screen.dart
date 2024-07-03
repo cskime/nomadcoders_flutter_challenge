@@ -10,34 +10,50 @@ class HomeScreen extends ConsumerWidget {
 
   const HomeScreen({super.key});
 
+  Future<void> _onRefresh(WidgetRef ref) async {
+    await ref.read(homeViewModelProvider.notifier).fetchPosts();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(homeViewModelProvider).when(
-          data: (data) => CustomScrollView(
-            slivers: [
-              const SliverAppBar(
-                title: Icon(
-                  FontAwesomeIcons.threads,
-                  size: 36,
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: data.length,
-                  (context, index) => HomePostListItem(post: data[index]),
-                ),
-              ),
-            ],
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text(
-              error.toString(),
-              textAlign: TextAlign.center,
+    return RefreshIndicator.adaptive(
+      displacement: MediaQuery.viewPaddingOf(context).top,
+      edgeOffset: MediaQuery.viewPaddingOf(context).top,
+      onRefresh: () => _onRefresh(ref),
+      child: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Icon(
+              FontAwesomeIcons.threads,
+              size: 36,
             ),
           ),
-          loading: () => const Center(
-            child: CircularProgressIndicator.adaptive(),
-          ),
-        );
+          ref.watch(homeViewModelProvider).when(
+                data: (data) => data.isEmpty
+                    ? const Center(child: Text("There's no posts."))
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          childCount: data.length,
+                          (context, index) =>
+                              HomePostListItem(post: data[index]),
+                        ),
+                      ),
+                error: (error, stackTrace) => SliverToBoxAdapter(
+                  child: Center(
+                    child: Text(
+                      error.toString(),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                loading: () => const SliverToBoxAdapter(
+                  child: Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                ),
+              ),
+        ],
+      ),
+    );
   }
 }

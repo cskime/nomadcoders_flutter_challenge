@@ -16,7 +16,7 @@ class ProfileOwnPostsListView extends StatelessWidget {
     return ListView(
       children: [
         OwnPostsListItem(
-          profileImageUrl: user.profileImageUrl!,
+          profileImageUrl: user.profileImageUrl,
           bodyText: const Text.rich(
             TextSpan(
               text: "Give ",
@@ -35,10 +35,10 @@ class ProfileOwnPostsListView extends StatelessWidget {
           ),
         ),
         OwnPostsListItem(
-          profileImageUrl: user.profileImageUrl!,
+          profileImageUrl: user.profileImageUrl,
           bodyText: const Text("Tea. Spillage."),
           body: PostListItemBodyPost(
-            userProfileImagePath: user.profileImageUrl!,
+            userProfileImagePath: user.profileImageUrl,
             username: "iwetmyyplants",
             verifiedUser: true,
             bodyText:
@@ -49,7 +49,7 @@ class ProfileOwnPostsListView extends StatelessWidget {
           ),
         ),
         OwnPostsListItem(
-          profileImageUrl: user.profileImageUrl!,
+          profileImageUrl: user.profileImageUrl,
           bodyText: const Text.rich(
             TextSpan(
               text: "Give ",
@@ -68,10 +68,10 @@ class ProfileOwnPostsListView extends StatelessWidget {
           ),
         ),
         OwnPostsListItem(
-          profileImageUrl: user.profileImageUrl!,
+          profileImageUrl: user.profileImageUrl,
           bodyText: const Text("Tea. Spillage."),
           body: PostListItemBodyPost(
-            userProfileImagePath: user.profileImageUrl!,
+            userProfileImagePath: user.profileImageUrl,
             username: "iwetmyyplants",
             verifiedUser: true,
             bodyText:

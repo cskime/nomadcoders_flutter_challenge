@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/util/form_validator.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/model/sign_up_field.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/view_models/sign_up_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_button.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/views/widgets/auth_form_field.dart';
@@ -26,8 +26,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     FocusScope.of(context).unfocus();
   }
 
-  void _onSaved({required String key, required String value}) {
-    formValues[key] = value;
+  void _onSaved({required SignUpField field, required String value}) {
+    formValues[field.name] = value;
   }
 
   void _onSignUpPressed() async {
@@ -41,8 +41,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     formState.save();
 
     await ref.read(signUpViewModelProvider.notifier).signUpWithEmailAndPassword(
-          email: formValues["email"]!,
-          password: formValues["password"]!,
+          email: formValues[SignUpField.email.name]!,
+          password: formValues[SignUpField.password.name]!,
+          name: formValues[SignUpField.name.name]!,
+          username: formValues[SignUpField.username.name]!,
+          bio: formValues[SignUpField.bio.name],
         );
 
     if (mounted) {
@@ -68,15 +71,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "English (US)",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey.shade700,
-                      ),
-                    ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 80),
+                      padding: EdgeInsets.symmetric(vertical: 32),
                       child: Icon(
                         FontAwesomeIcons.squareThreads,
                         size: 96,
@@ -84,27 +80,20 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     Form(
                       key: _formKey,
-                      child: Column(
+                      child: Wrap(
+                        runSpacing: 12,
                         children: [
-                          AuthFormField(
-                            hintText: "Mobile number or email",
-                            validator: FormValidator.emailValidator,
-                            onSaved: (value) => _onSaved(
-                              key: "email",
-                              value: value!,
+                          ...SignUpField.values.map<Widget>(
+                            (field) => AuthFormField(
+                              hintText: field.hintText,
+                              obscureText: field.obscureText,
+                              validator: field.validator,
+                              onSaved: (value) => _onSaved(
+                                field: field,
+                                value: value!,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 12),
-                          AuthFormField(
-                            hintText: "Password",
-                            obscureText: true,
-                            validator: FormValidator.passwordValidator,
-                            onSaved: (value) => _onSaved(
-                              key: "password",
-                              value: value!,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
                           AuthFormButton(
                             title: "Sign up",
                             onPressed: _onSignUpPressed,

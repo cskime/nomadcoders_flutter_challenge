@@ -14,7 +14,7 @@ class UserProfile {
   final String userId;
   final String username;
   final String name;
-  final String bio;
+  final String? bio;
   final bool verified;
   final int followerCount;
   final List<String> followers;
@@ -39,7 +39,7 @@ class UserProfile {
         "bio": bio,
         "verified": verified,
         "followerCount": followerCount,
-        "followers": followers.toString(),
+        "followers": followers,
       };
 }
 

@@ -22,6 +22,9 @@ class SignUpViewModel extends AutoDisposeAsyncNotifier<void> {
   Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
+    required String username,
+    required String name,
+    String? bio,
   }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
@@ -36,9 +39,10 @@ class SignUpViewModel extends AutoDisposeAsyncNotifier<void> {
         }
 
         final newProfile = UserProfile(
-          username: "username",
+          username: username,
           userId: credential.user!.uid,
-          name: "name",
+          name: name,
+          bio: bio,
         );
         _usersRepository.createProfile(newProfile);
       },

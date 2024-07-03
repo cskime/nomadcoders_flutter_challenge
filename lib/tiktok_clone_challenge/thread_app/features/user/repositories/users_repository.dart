@@ -6,7 +6,8 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/models/user_profile.dart';
 
 final usersRepositoryProvider = Provider<UsersRepositoryType>(
-  (ref) => UsersRepositoryMock(),
+  // (ref) => UsersRepositoryMock(),
+  (ref) => UsersRepository(),
 );
 
 final myUserProvider = FutureProvider<UserProfile>(
@@ -27,14 +28,8 @@ abstract class UsersRepositoryType {
 }
 
 class UsersRepositoryMock extends UsersRepositoryType {
-  final FirebaseFirestore _database = FirebaseFirestore.instance;
-
-  late final _usersCollection = _database.collection("users");
-
   @override
-  Future<void> createProfile(UserProfile profile) async {
-    await _usersCollection.doc(profile.userId).set(profile.toJson());
-  }
+  Future<void> createProfile(UserProfile profile) async {}
 
   @override
   Future<List<UserProfile>> fetchProfiles() async {

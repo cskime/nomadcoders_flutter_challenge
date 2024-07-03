@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/utils/image_placeholder.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/view_models/write_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_app_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_bottom_bar.dart';
@@ -34,7 +35,11 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
   }
 
   void _onPostPressed() async {
-    await ref.read(writeViewModelProvider.notifier).uploadPost();
+    final user = await ref.read(myUserProvider.future);
+    await ref.read(writeViewModelProvider.notifier).uploadPost(
+          user: user,
+          body: _textEditingController.text,
+        );
     _onClose();
   }
 
@@ -75,9 +80,12 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                       height: inputHeight,
                       child: ref.watch(myUserProvider).when(
                             data: (data) => WritePostEditArea(
-                              userProfileImage: AssetImage(
-                                data.profileImageUrl!,
-                              ),
+                              userProfileImage: (data.profileImageUrl == null
+                                      ? AssetImage(
+                                          ImagePlaceholder.userProfileImageUrl,
+                                        )
+                                      : NetworkImage(data.profileImageUrl!))
+                                  as ImageProvider,
                               username: data.username,
                               textEditingController: _textEditingController,
                             ),

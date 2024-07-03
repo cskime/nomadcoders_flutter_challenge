@@ -21,7 +21,6 @@ class RepliesPostsListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return PostListItem(
       avatar: const PostListItemUserAvatar(
-        profileImageUrl: "",
         showsFollowButton: false,
       ),
       action: const Icon(FontAwesomeIcons.ellipsis),

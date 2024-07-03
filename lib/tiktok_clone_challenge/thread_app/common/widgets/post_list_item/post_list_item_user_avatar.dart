@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/utils/image_placeholder.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/avatar/avatar.dart';
 
 class PostListItemUserAvatar extends StatelessWidget {
   const PostListItemUserAvatar({
     super.key,
-    required this.profileImageUrl,
+    this.profileImageUrl,
     required this.showsFollowButton,
   });
 
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final bool showsFollowButton;
 
   @override
@@ -21,7 +22,9 @@ class PostListItemUserAvatar extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Avatar.asset(imageUrl: profileImageUrl),
+            child: profileImageUrl == null
+                ? Avatar.asset(imageUrl: ImagePlaceholder.userProfileImageUrl)
+                : Image.network(profileImageUrl!),
           ),
           if (showsFollowButton)
             Align(

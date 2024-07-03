@@ -26,4 +26,16 @@ abstract final class FormValidator {
 
     return null;
   }
+
+  static String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Enter a username.";
+    }
+
+    if (value.length < 2) {
+      return "A username should be more than 4 characters.";
+    }
+
+    return null;
+  }
 }

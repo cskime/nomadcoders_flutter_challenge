@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/utils/image_placeholder.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/widgets/username_label.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/models/user_profile.dart';
 
@@ -20,7 +21,9 @@ class UserSearchListTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage(user.profileImageUrl!),
+            backgroundImage: (user.profileImageUrl == null
+                ? AssetImage(ImagePlaceholder.userProfileImageUrl)
+                : NetworkImage(user.profileImageUrl!)) as ImageProvider,
           ),
           const SizedBox(width: 16),
           Expanded(

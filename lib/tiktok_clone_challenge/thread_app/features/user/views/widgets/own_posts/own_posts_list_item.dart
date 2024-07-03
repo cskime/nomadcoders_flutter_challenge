@@ -7,12 +7,12 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 class OwnPostsListItem extends ConsumerWidget {
   const OwnPostsListItem({
     super.key,
-    required this.profileImageUrl,
+    this.profileImageUrl,
     required this.bodyText,
     this.body,
   });
 
-  final String profileImageUrl;
+  final String? profileImageUrl;
   final Widget bodyText;
   final Widget? body;
 

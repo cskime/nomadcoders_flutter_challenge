@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/utils/image_placeholder.dart';
 
 class PostListItemBodyPost extends StatelessWidget {
   const PostListItemBodyPost({
     super.key,
-    required this.userProfileImagePath,
+    this.userProfileImagePath,
     required this.username,
     required this.verifiedUser,
     required this.bodyText,
     this.imageUrls = const [],
   });
 
-  final String userProfileImagePath;
+  final String? userProfileImagePath;
   final String username;
   final bool verifiedUser;
   final String bodyText;
@@ -32,7 +33,9 @@ class PostListItemBodyPost extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(userProfileImagePath),
+                backgroundImage: (userProfileImagePath == null
+                    ? AssetImage(ImagePlaceholder.userProfileImageUrl)
+                    : NetworkImage(userProfileImagePath!)) as ImageProvider,
                 radius: 10,
               ),
               const SizedBox(width: 8),

@@ -80,13 +80,14 @@ class ProfileScreen extends ConsumerWidget {
                                 ],
                               ),
                               const SizedBox(height: 8),
-                              Text(user.value!.bio),
+                              if (user.value?.bio != null)
+                                Text(user.value!.bio!),
                             ],
                           ),
                         ),
                         Avatar.asset(
                           size: 72,
-                          imageUrl: user.value!.profileImageUrl!,
+                          imageUrl: user.value!.profileImageUrl,
                         ),
                       ],
                     ),
