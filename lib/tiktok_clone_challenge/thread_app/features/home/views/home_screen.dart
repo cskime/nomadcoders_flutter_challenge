@@ -30,7 +30,11 @@ class HomeScreen extends ConsumerWidget {
           ),
           ref.watch(homeViewModelProvider).when(
                 data: (data) => data.isEmpty
-                    ? const Center(child: Text("There's no posts."))
+                    ? const SliverToBoxAdapter(
+                        child: Center(
+                          child: Text("There's no posts."),
+                        ),
+                      )
                     : SliverList(
                         delegate: SliverChildBuilderDelegate(
                           childCount: data.length,

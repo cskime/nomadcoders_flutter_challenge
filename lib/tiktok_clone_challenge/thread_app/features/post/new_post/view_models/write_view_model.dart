@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ class WriteViewModel extends AutoDisposeAsyncNotifier {
   Future<void> uploadPost({
     required UserProfile user,
     required String body,
+    List<File>? imageFiles,
   }) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
@@ -33,8 +35,30 @@ class WriteViewModel extends AutoDisposeAsyncNotifier {
           body: body,
           timestamp: Timestamp.now(),
         );
-        await _postsRepository.uploadPost(newPost);
+
+        final postId = await _postsRepository.uploadPost(newPost);
+
+        if (imageFiles != null) {
+          final filenames =
+              imageFiles.map((file) => "${file.hashCode}").toList();
+          final fileInfos = _zip(imageFiles, filenames);
+          final imageUrls = await _postsRepository.uploadPostImages(
+            fileInfos,
+            postId: postId,
+          );
+          await _postsRepository.updatePostImages(imageUrls, postId: postId);
+        }
       },
     );
   }
+}
+
+List<(E1, E2)> _zip<E1, E2>(List<E1> list1, List<E2> list2) {
+  assert(list1.length == list2.length);
+
+  var result = <(E1, E2)>[];
+  for (int index = 0; index < list1.length; index++) {
+    result.add((list1[index], list2[index]));
+  }
+  return result;
 }

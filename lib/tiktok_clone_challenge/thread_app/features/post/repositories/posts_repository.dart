@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/models/post.dart';
 
@@ -11,7 +13,15 @@ final postsRepositoryProvider = Provider(
 
 abstract class PostsRepositoryType {
   Future<List<Post>> fetchPosts();
-  Future<void> uploadPost(Post post);
+  Future<String> uploadPost(Post post);
+  Future<List<String>> uploadPostImages(
+    List<(File, String)> fileInfos, {
+    required String postId,
+  });
+  Future<void> updatePostImages(
+    List<String> imageUrls, {
+    required String postId,
+  });
 }
 
 class PostsRepositoryMock extends PostsRepositoryType {
@@ -22,11 +32,29 @@ class PostsRepositoryMock extends PostsRepositoryType {
   }
 
   @override
-  Future<void> uploadPost(Post post) async {}
+  Future<String> uploadPost(Post post) async {
+    return "";
+  }
+
+  @override
+  Future<List<String>> uploadPostImages(
+    List<(File, String)> fileInfos, {
+    required String postId,
+  }) async {
+    return [];
+  }
+
+  @override
+  Future<void> updatePostImages(
+    List<String> imageUrls, {
+    required String postId,
+  }) async {}
 }
 
 class PostsRepository extends PostsRepositoryType {
   final FirebaseFirestore _database = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+
   late final _collection = _database.collection("posts");
 
   @override
@@ -37,7 +65,31 @@ class PostsRepository extends PostsRepositoryType {
   }
 
   @override
-  Future<void> uploadPost(Post post) async {
-    await _collection.add(post.toJson());
+  Future<String> uploadPost(Post post) async {
+    final newDocument = await _collection.add(post.toJson());
+    return newDocument.id;
+  }
+
+  @override
+  Future<List<String>> uploadPostImages(
+    List<(File, String)> fileInfos, {
+    required String postId,
+  }) async {
+    var imageUrls = <String>[];
+    final reference = _storage.ref("posts/$postId");
+    for (var fileInfo in fileInfos) {
+      final task = await reference.child(fileInfo.$2).putFile(fileInfo.$1);
+      final url = await task.ref.getDownloadURL();
+      imageUrls.add(url);
+    }
+    return imageUrls;
+  }
+
+  @override
+  Future<void> updatePostImages(
+    List<String> imageUrls, {
+    required String postId,
+  }) async {
+    await _collection.doc(postId).update({"imageUrls": imageUrls});
   }
 }

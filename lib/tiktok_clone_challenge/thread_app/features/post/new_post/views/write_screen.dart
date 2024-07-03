@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/common/utils/image_placeholder.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/camera/camera_screen.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/view_models/write_view_model.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_app_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_bottom_bar.dart';
@@ -16,6 +20,7 @@ class WriteScreen extends ConsumerStatefulWidget {
 
 class _WriteScreenState extends ConsumerState<WriteScreen> {
   final _textEditingController = TextEditingController();
+  final List<File> _attachedFiles = [];
 
   @override
   void initState() {
@@ -34,11 +39,37 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
     Navigator.of(context).pop();
   }
 
+  void _onAttachPressed() async {
+    final files = await Navigator.of(context).push<List<XFile>>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => const CameraScreen(),
+      ),
+    );
+
+    if (files == null) {
+      return;
+    }
+
+    setState(() {
+      _attachedFiles.addAll(
+        files.map((file) => File(file.path)).toList(),
+      );
+    });
+  }
+
+  void _onRemovePressed(int index) {
+    setState(() {
+      _attachedFiles.removeAt(index);
+    });
+  }
+
   void _onPostPressed() async {
     final user = await ref.read(myUserProvider.future);
     await ref.read(writeViewModelProvider.notifier).uploadPost(
           user: user,
           body: _textEditingController.text,
+          imageFiles: _attachedFiles,
         );
     _onClose();
   }
@@ -88,6 +119,9 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                                   as ImageProvider,
                               username: data.username,
                               textEditingController: _textEditingController,
+                              attachedFiles: _attachedFiles,
+                              onAttachPressed: _onAttachPressed,
+                              onRemovePressed: _onRemovePressed,
                             ),
                             error: (error, stackTrace) => const Center(
                               child: Text("Fail to fetch user profile."),

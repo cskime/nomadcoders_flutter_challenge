@@ -33,7 +33,9 @@ class _CameraScreenState extends State<CameraScreen>
 
   @override
   void dispose() {
-    _cameraController.dispose();
+    if (_cameraController.value.isInitialized) {
+      _cameraController.dispose();
+    }
     super.dispose();
   }
 

@@ -30,7 +30,7 @@ class PostListItemImage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               clipBehavior: Clip.hardEdge,
-              child: Image.asset(
+              child: Image.network(
                 imageUrls[index],
                 fit: BoxFit.cover,
               ),
