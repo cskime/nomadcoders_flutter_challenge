@@ -24,7 +24,7 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(profileViewModelProvider);
+    final user = ref.watch(profileViewModelProvider);
 
     if (user.isLoading) {
       return const Center(

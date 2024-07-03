@@ -15,8 +15,13 @@ abstract class PostsRepositoryType {
 class PostsRepositoryMock extends PostsRepositoryType {
   @override
   Future<List<Post>> fetchPosts() async {
-    final json = jsonDecode(postsDummyJson) as List<Map<String, dynamic>>;
-    return json.map((postJson) => Post.fromJson(postJson)).toList();
+    final json = jsonDecode(postsDummyJson) as List;
+    return json.map((postJson) {
+      print(postJson["imageUrls"]);
+      print(postJson["repliers"]);
+      print(postJson["replierProfileImageUrls"]);
+      return Post.fromJson(postJson);
+    }).toList();
   }
 
   @override

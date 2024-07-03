@@ -2,10 +2,22 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/authentication/repositories/auth_repository.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/models/user_profile.dart';
 
 final usersRepositoryProvider = Provider<UsersRepositoryType>(
   (ref) => UsersRepositoryMock(),
+);
+
+final myUserProvider = FutureProvider<UserProfile>(
+  (ref) async {
+    final authRepository = ref.read(authRepositoryProvider);
+    final usersRepository = ref.read(usersRepositoryProvider);
+
+    final myUserId = authRepository.user!.uid;
+    final userProfile = await usersRepository.fetchProfile(userId: myUserId);
+    return userProfile!;
+  },
 );
 
 abstract class UsersRepositoryType {

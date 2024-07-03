@@ -4,6 +4,7 @@ import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_app_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_bottom_bar.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/new_post/views/widgets/write_post_edit_area.dart';
+import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/user/repositories/users_repository.dart';
 
 class WriteScreen extends ConsumerStatefulWidget {
   const WriteScreen({super.key});
@@ -72,7 +73,7 @@ class _WriteScreenState extends ConsumerState<WriteScreen> {
                     right: 0,
                     child: SizedBox(
                       height: inputHeight,
-                      child: ref.read(writeViewModelMyUserProvider).when(
+                      child: ref.watch(myUserProvider).when(
                             data: (data) => WritePostEditArea(
                               userProfileImage: AssetImage(
                                 data.profileImageUrl!,

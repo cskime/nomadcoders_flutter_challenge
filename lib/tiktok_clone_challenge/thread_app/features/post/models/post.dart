@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Post {
   Post({
     required this.authorId,
@@ -31,11 +33,12 @@ class Post {
         authorProfileImageUrl = json["authorProfileImageUrl"],
         authorVerified = json["authorVerified"],
         body = json["body"],
-        imageUrls = json["imageUrls"],
+        imageUrls = List<String>.from(json["imageUrls"]),
         likeCount = json["likeCount"],
         replyCount = json["replyCount"],
-        repliers = json["repliers"],
-        replierProfileImageUrls = json["replierProfileImageUrls"],
+        repliers = List<String>.from(json["repliers"]),
+        replierProfileImageUrls =
+            List<String>.from(json["replierProfileImageUrls"]),
         timestamp = json["timestamp"];
 
   Map<String, dynamic> toJson() => {
@@ -87,167 +90,165 @@ String generateTimestamp({
         .millisecondsSinceEpoch
         .toString();
 
-final postsDummyJson = """
-[
+final postsDummyJson = jsonEncode([
   {
-    "authorId" : "1a",
-    "authorName" : "publity",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-1.jpg",
-    "authorVerified" : true,
-    "body" : "Vine after seeing the Treads logo unveiled",
-    "imageUrls" : [],
-    "likeCount" : 391,
-    "replyCount" : 36,
-    "repliers" : ["2b"],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeSeconds: 10)}"
+    "authorId": "1a",
+    "authorName": "publity",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-1.jpg",
+    "authorVerified": true,
+    "body": "Vine after seeing the Treads logo unveiled",
+    "imageUrls": [],
+    "likeCount": 391,
+    "replyCount": 36,
+    "repliers": ["2b"],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeSeconds: 10)
   },
   {
-    "authorId" : "2b",
-    "authorName" : "thetinderblog",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-2.jpg",
-    "authorVerified" : true,
-    "body" : "Elon alone on Twitter right now...",
-    "imageUrls" : [],
-    "likeCount" : 391,
-    "replyCount" : 36,
-    "repliers" : ["3c", "4d"],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeMinutes: 5)}"
+    "authorId": "2b",
+    "authorName": "thetinderblog",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-2.jpg",
+    "authorVerified": true,
+    "body": "Elon alone on Twitter right now...",
+    "imageUrls": [],
+    "likeCount": 391,
+    "replyCount": 36,
+    "repliers": ["3c", "4d"],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeMinutes: 5)
   },
   {
-    "authorId" : "3c",
-    "authorName" : "tropicalseductions",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "Drop a comment here to test things out.",
-    "imageUrls" : [],
-    "likeCount" : 4,
-    "replyCount" : 3,
-    "repliers" : ["1a", "2b", "4d"],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeHours: 2)}"
+    "authorId": "3c",
+    "authorName": "tropicalseductions",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body": "Drop a comment here to test things out.",
+    "imageUrls": [],
+    "likeCount": 4,
+    "replyCount": 3,
+    "repliers": ["1a", "2b", "4d"],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeHours: 2)
   },
   {
-    "authorId" : "4d",
-    "authorName" : "shityoushouldcareabout",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "my phone feels like a vibrator with all these notifications rn",
-    "imageUrls" : [
+    "authorId": "4d",
+    "authorName": "shityoushouldcareabout",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body": "my phone feels like a vibrator with all these notifications rn",
+    "imageUrls": [
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg"
     ],
-    "likeCount" : 631,
-    "replyCount" : 64,
-    "repliers" : ["1a", "2b", "3c", "5e"],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeDays: 3)}"
+    "likeCount": 631,
+    "replyCount": 64,
+    "repliers": ["1a", "2b", "3c", "5e"],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeDays: 3)
   },
   {
-    "authorId" : "5e",
-    "authorName" : "plantswithkrystal",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "If you're reading this, go water that thirsty plant. You're welcome ☺️",
-    "imageUrls" : [
+    "authorId": "5e",
+    "authorName": "plantswithkrystal",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body":
+        "If you're reading this, go water that thirsty plant. You're welcome ☺️",
+    "imageUrls": [
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg"
     ],
-    "likeCount" : 74,
-    "replyCount" : 0,
-    "repliers" : [],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeDays: 14)}"
+    "likeCount": 74,
+    "replyCount": 0,
+    "repliers": [],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeDays: 14)
   },
   {
-    "authorId" : "1a",
-    "authorName" : "publity",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-1.jpg",
-    "authorVerified" : true,
-    "body" : "Vine after seeing the Treads logo unveiled",
-    "imageUrls" : [],
-    "likeCount" : 391,
-    "replyCount" : 36,
-    "repliers" : ["2b"],
-    "replierProfileImageUrls" : [
-      "assets/images/thread-profile-image-2.jpg"
-    ],
-    "timestamp" : "${generateTimestamp(beforeSeconds: 10)}"
+    "authorId": "1a",
+    "authorName": "publity",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-1.jpg",
+    "authorVerified": true,
+    "body": "Vine after seeing the Treads logo unveiled",
+    "imageUrls": [],
+    "likeCount": 391,
+    "replyCount": 36,
+    "repliers": ["2b"],
+    "replierProfileImageUrls": ["assets/images/thread-profile-image-2.jpg"],
+    "timestamp": generateTimestamp(beforeSeconds: 10)
   },
   {
-    "authorId" : "2b",
-    "authorName" : "thetinderblog",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-2.jpg",
-    "authorVerified" : true,
-    "body" : "Elon alone on Twitter right now...",
-    "imageUrls" : [],
-    "likeCount" : 391,
-    "replyCount" : 36,
-    "repliers" : ["3c", "4d"],
-    "replierProfileImageUrls" : [
+    "authorId": "2b",
+    "authorName": "thetinderblog",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-2.jpg",
+    "authorVerified": true,
+    "body": "Elon alone on Twitter right now...",
+    "imageUrls": [],
+    "likeCount": 391,
+    "replyCount": 36,
+    "repliers": ["3c", "4d"],
+    "replierProfileImageUrls": [
       "assets/images/thread-profile-image-3.jpg",
       "assets/images/thread-profile-image-4.jpg",
     ],
-    "timestamp" : "${generateTimestamp(beforeMinutes: 5)}"
+    "timestamp": generateTimestamp(beforeMinutes: 5)
   },
   {
-    "authorId" : "3c",
-    "authorName" : "tropicalseductions",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "Drop a comment here to test things out.",
-    "imageUrls" : [],
-    "likeCount" : 4,
-    "replyCount" : 3,
-    "repliers" : ["1a", "2b", "4d"],
-    "replierProfileImageUrls" : [
+    "authorId": "3c",
+    "authorName": "tropicalseductions",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body": "Drop a comment here to test things out.",
+    "imageUrls": [],
+    "likeCount": 4,
+    "replyCount": 3,
+    "repliers": ["1a", "2b", "4d"],
+    "replierProfileImageUrls": [
       "assets/images/thread-profile-image-1.jpg",
       "assets/images/thread-profile-image-2.jpg",
       "assets/images/thread-profile-image-4.jpg",
     ],
-    "timestamp" : "${generateTimestamp(beforeHours: 2)}"
+    "timestamp": generateTimestamp(beforeHours: 2)
   },
   {
-    "authorId" : "4d",
-    "authorName" : "shityoushouldcareabout",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "my phone feels like a vibrator with all these notifications rn",
-    "imageUrls" : [
+    "authorId": "4d",
+    "authorName": "shityoushouldcareabout",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body": "my phone feels like a vibrator with all these notifications rn",
+    "imageUrls": [
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg"
     ],
-    "likeCount" : 631,
-    "replyCount" : 64,
-    "repliers" : ["1a", "2b", "3c", "5e"],
-    "replierProfileImageUrls" : [
+    "likeCount": 631,
+    "replyCount": 64,
+    "repliers": ["1a", "2b", "3c", "5e"],
+    "replierProfileImageUrls": [
       "assets/images/thread-profile-image-1.jpg",
       "assets/images/thread-profile-image-2.jpg",
       "assets/images/thread-profile-image-3.jpg",
       "assets/images/thread-profile-image-5.jpg",
     ],
-    "timestamp" : "${generateTimestamp(beforeDays: 3)}"
+    "timestamp": generateTimestamp(beforeDays: 3)
   },
   {
-    "authorId" : "5e",
-    "authorName" : "plantswithkrystal",
-    "authorProfileImageUrl" : "assets/images/thread-profile-image-3.jpg",
-    "authorVerified" : true,
-    "body" : "If you're reading this, go water that thirsty plant. You're welcome ☺️",
-    "imageUrls" : [
+    "authorId": "5e",
+    "authorName": "plantswithkrystal",
+    "authorProfileImageUrl": "assets/images/thread-profile-image-3.jpg",
+    "authorVerified": true,
+    "body":
+        "If you're reading this, go water that thirsty plant. You're welcome ☺️",
+    "imageUrls": [
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg",
       "assets/images/thread-image.jpg"
     ],
-    "likeCount" : 74,
-    "replyCount" : 0,
-    "repliers" : [],
-    "replierProfileImageUrls" : [],
-    "timestamp" : "${generateTimestamp(beforeDays: 14)}"
+    "likeCount": 74,
+    "replyCount": 0,
+    "repliers": [],
+    "replierProfileImageUrls": [],
+    "timestamp": generateTimestamp(beforeDays: 14)
   }
-]
-""";
+]);

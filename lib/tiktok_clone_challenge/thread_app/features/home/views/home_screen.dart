@@ -12,33 +12,32 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CustomScrollView(
-      slivers: [
-        const SliverAppBar(
-          title: Icon(
-            FontAwesomeIcons.threads,
-            size: 36,
-          ),
-        ),
-        ref.watch(homeViewModelProvider).when(
-              data: (data) => SliverList(
+    return ref.watch(homeViewModelProvider).when(
+          data: (data) => CustomScrollView(
+            slivers: [
+              const SliverAppBar(
+                title: Icon(
+                  FontAwesomeIcons.threads,
+                  size: 36,
+                ),
+              ),
+              SliverList(
                 delegate: SliverChildBuilderDelegate(
                   childCount: data.length,
                   (context, index) => HomePostListItem(post: data[index]),
                 ),
               ),
-              error: (error, stackTrace) => const SliverToBoxAdapter(
-                child: Center(
-                  child: Text("Something went wrong."),
-                ),
-              ),
-              loading: () => const SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              ),
+            ],
+          ),
+          error: (error, stackTrace) => Center(
+            child: Text(
+              error.toString(),
+              textAlign: TextAlign.center,
             ),
-      ],
-    );
+          ),
+          loading: () => const Center(
+            child: CircularProgressIndicator.adaptive(),
+          ),
+        );
   }
 }

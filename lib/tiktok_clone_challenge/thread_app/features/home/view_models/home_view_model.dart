@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/models/post.dart';
 import 'package:nomadcoders_flutter_challenge/tiktok_clone_challenge/thread_app/features/post/repositories/posts_repository.dart';
 
-final homeViewModelProvider = AsyncNotifierProvider(
+final homeViewModelProvider = AsyncNotifierProvider<HomeViewModel, List<Post>>(
   () => HomeViewModel(),
 );
 

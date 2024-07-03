@@ -29,7 +29,7 @@ class UserProfile {
         bio = json["bio"],
         verified = json["verified"],
         followerCount = json["followerCount"],
-        followers = json["followers"];
+        followers = List<String>.from(json["followers"]);
 
   Map<String, dynamic> toJson() => {
         "profileImageUrl": profileImageUrl,
