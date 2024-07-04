@@ -173,3 +173,10 @@
   - [go_router CHANGELOG.md](https://github.com/flutter/packages/blob/main/packages/go_router/CHANGELOG.md#800)
   - [Related GitHub issue](https://github.com/flutter/flutter/issues/129893#issuecomment-1617762284)
   - [optionURLReflectsImperativeAPIs](https://pub.dev/documentation/go_router/latest/go_router/GoRouter/optionURLReflectsImperativeAPIs.html)
+
+### NoSQL data modeling
+
+- Firebaes Firestore는 NoSQL database이므로 일반적인 RDBMS에서와 다르게 modeling을 해야 한다.
+- NoSQL database에서 data modeling은 "**화면에 출력할 data를 중심으로**" 한다.
+- 이 때, data를 읽어오는 횟수를 최소화하기 위해 의도적으로 data를 중복으로 저장한다.
+  <p><img src="./images/data-modeling.png" width="400" /></p>
