@@ -23,9 +23,15 @@ class SearchViewModel extends AsyncNotifier<List<UserProfile>> {
 
   Future<void> search({required String query}) async {
     state = const AsyncValue.loading();
-    final filteredUsers = _originalUsers
-        .where((user) => [user.username, user.name].contains(query))
-        .toList();
+
+    bool find(bool previousValue, String element) =>
+        previousValue || element.contains(query);
+
+    final filteredUsers = query.isEmpty
+        ? _originalUsers 
+        : _originalUsers
+            .where((user) => [user.username, user.name].fold(false, find))
+            .toList();
     state = AsyncValue.data(filteredUsers);
   }
 }
