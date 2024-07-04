@@ -21,6 +21,7 @@
   - [image_picker](https://pub.dev/packages/image_picker) : 사진첩에서 image를 가져오기 위한 package
   - [go_router](https://pub.dev/packages/go_router) : 선언적, 구조적 routing 코드 작성 및 web 환경 navigation 연습을 위한 package
   - [provider](https://pub.dev/packages/provider) : 설정 화면에서 appearance 변경 기능을 구현하기 위한 `ThemeMode` 상태 관리에 사용
+  - [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) : 상태 관리를 위한 package
 
 ## Results
 
