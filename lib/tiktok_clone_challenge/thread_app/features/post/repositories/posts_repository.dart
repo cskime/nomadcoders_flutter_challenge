@@ -75,14 +75,13 @@ class PostsRepository extends PostsRepositoryType {
     List<(File, String)> fileInfos, {
     required String postId,
   }) async {
-    var imageUrls = <String>[];
     final reference = _storage.ref("posts/$postId");
-    for (var fileInfo in fileInfos) {
-      final task = await reference.child(fileInfo.$2).putFile(fileInfo.$1);
-      final url = await task.ref.getDownloadURL();
-      imageUrls.add(url);
-    }
-    return imageUrls;
+    final results = await Future.wait(
+      fileInfos.map((info) async => reference.child(info.$2).putFile(info.$1)),
+    );
+    return await Future.wait(
+      results.map((task) => task.ref.getDownloadURL()),
+    );
   }
 
   @override
