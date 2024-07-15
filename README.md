@@ -50,3 +50,7 @@
 | <img src="./documents/images/flutter-challenge-thread-7.gif" width="200"/> |                <img src="./documents/images/" width="200"/>                |                <img src="./documents/images/" width="200"/>                |
 
 ### Flutter Animation 마스터클래스
+
+| [Implicit Animation](./lib/flutter_animations_masterclass_challenge/implicit_animations/main.dart) |
+| :------------------------------------------------------------------------------------------------: |
+|           <img src="./documents/images/flutter-challenge-animation-1.gif" width="200"/>            |
