@@ -54,3 +54,5 @@
 | [Implicit Animation](./lib/flutter_animations_masterclass_challenge/implicit_animations/main.dart) | [Explicit Animation](./lib/flutter_animations_masterclass_challenge/explicit_animations/main.dart) |
 | :------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
 |           <img src="./documents/images/flutter-challenge-animation-1.gif" width="200"/>            |           <img src="./documents/images/flutter-challenge-animation-2.gif" width="200"/>            |
+|   [CustomPaint](./lib/flutter_animations_masterclass_challenge/custom_paint_pomotimer/main.dart)   |                                                                                                    |
+|           <img src="./documents/images/flutter-challenge-animation-3.gif" width="200"/>            |                                                                                                    |
