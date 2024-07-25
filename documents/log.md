@@ -259,7 +259,7 @@
     },
   ),
   ```
-- 하지만, 이 방법은 `AnimationController`를 3개나 사용해야 하고 `AnimatedBuilder`가 다수 중첩되어 rebuild 횟수가 많아지면 성능에 문제가 생길 수 있다.
+- 하지만, 이 방법은 `AnimationController`를 3개나 사용해야 하고 `AnimatedBuilder`는 매 animation frame마다 rebuild 되므로 성능에 문제가 생길 수 있다.
 - 따라서, 아래와 같이 `AnimationController` 1개로 3가지 animation에 사용될 값을 계산하도록 개선한다.
   - 필요한 값이 `0 -> 1 -> 0`과 같은 형태를 가지므로 **삼각함수**를 활용하면 쉽게 계산할 수 있다.
   - Opacity
