@@ -17,48 +17,25 @@ class FlashcardApp extends StatefulWidget {
 class _FlashcardAppState extends State<FlashcardApp>
     with TickerProviderStateMixin {
   // Flip Animations
-  late final _flipRotationController = AnimationController(
+  late final _flipController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 500),
   );
-  double get _flipRotationAngle => Tween<double>(
-        begin: 0,
-        end: pi,
-      ).transform(_flipRotationController.value);
-
-  late final _flipColorController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 250),
-  );
-  Color? get _flipColor => ColorTween(
-        begin: Colors.white,
-        end: Colors.grey.shade800,
-      ).transform(_flipColorController.value);
-
-  late final _flipOpacityController = AnimationController(
-    vsync: this,
-    duration: const Duration(milliseconds: 250),
-  );
-  double get _flipOpacity => Tween<double>(
-        begin: 1,
-        end: 0,
-      ).transform(_flipOpacityController.value);
+  double get _flipRotationAngle => _flipController.value * pi;
+  double get _flipOpacity => cos(_flipController.value * pi).clamp(0, 1);
+  Color? get _flipColor => Color.lerp(
+        Colors.white,
+        Colors.grey.shade800,
+        sin(_flipController.value * pi),
+      );
 
   void _onFlashcardTap() {
     _flipping = true;
-
-    _flipRotationController.forward().whenComplete(() {
-      _flipRotationController.value = 0;
-      _flipOpacityController.value = 0;
+    _flipController.forward().whenComplete(() {
+      _flipController.value = 0;
       _flipped = !_flipped;
       _flipping = false;
     });
-
-    _flipColorController
-        .forward()
-        .whenComplete(() => _flipColorController.reverse());
-
-    _flipOpacityController.forward();
   }
 
   bool _flipped = false;
@@ -156,7 +133,7 @@ class _FlashcardAppState extends State<FlashcardApp>
 
   @override
   void dispose() {
-    _flipRotationController.dispose();
+    _flipController.dispose();
     super.dispose();
   }
 
@@ -175,88 +152,81 @@ class _FlashcardAppState extends State<FlashcardApp>
           backgroundColor: _draggingLeft ? _dragLeftColor : _dragRightColor,
           body: SafeArea(
             child: AnimatedBuilder(
-              animation: _flipRotationController,
+              animation: _flipController,
               builder: (context, child) => AnimatedBuilder(
-                animation: _flipColorController,
-                builder: (context, child) => AnimatedBuilder(
-                  animation: _flipOpacityController,
-                  builder: (context, child) => AnimatedBuilder(
-                    animation: _dragController,
-                    builder: (context, child) => Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Opacity(
-                              opacity: _dragOpacity,
-                              child: Text(
-                                _draggingText,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
+                animation: _dragController,
+                builder: (context, child) => Column(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Opacity(
+                          opacity: _dragOpacity,
+                          child: Text(
+                            _draggingText,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: cardSize.height,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          if (!_flipping)
+                            Positioned(
+                              child: Transform.scale(
+                                scale: _dragScale,
+                                child: Flashcard(
+                                  model: flashcardModels[_nextIndex],
+                                  size: cardSize,
+                                  backgroundColor: _flipColor,
+                                  opacity: _flipOpacity,
+                                  flipped: false,
+                                  onTap: _onFlashcardTap,
+                                ),
+                              ),
+                            ),
+                          Transform(
+                            transform: Matrix4.identity()
+                              ..setEntry(3, 2, 0.001)
+                              ..rotateY(_flipRotationAngle),
+                            origin: Offset(
+                              cardSize.width / 2,
+                              cardSize.height / 2,
+                            ),
+                            child: GestureDetector(
+                              onHorizontalDragUpdate: _onHorizontalDragUpdate,
+                              onHorizontalDragEnd: _onHorizontalDragEnd,
+                              child: Transform.translate(
+                                offset: _dragOffset,
+                                child: Transform.rotate(
+                                  angle: _dragRotationAngle,
+                                  child: Flashcard(
+                                    model: flashcardModels[_index],
+                                    size: cardSize,
+                                    backgroundColor: _flipColor,
+                                    opacity: _flipOpacity,
+                                    flipped: _flipped,
+                                    onTap: _onFlashcardTap,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: cardSize.height,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              if (!_flipping)
-                                Positioned(
-                                  child: Transform.scale(
-                                    scale: _dragScale,
-                                    child: Flashcard(
-                                      model: flashcardModels[_nextIndex],
-                                      size: cardSize,
-                                      backgroundColor: _flipColor,
-                                      opacity: _flipOpacity,
-                                      flipped: false,
-                                      onTap: _onFlashcardTap,
-                                    ),
-                                  ),
-                                ),
-                              Transform(
-                                transform: Matrix4.identity()
-                                  ..setEntry(3, 2, 0.001)
-                                  ..rotateY(_flipRotationAngle),
-                                origin: Offset(
-                                  cardSize.width / 2,
-                                  cardSize.height / 2,
-                                ),
-                                child: GestureDetector(
-                                  onHorizontalDragUpdate:
-                                      _onHorizontalDragUpdate,
-                                  onHorizontalDragEnd: _onHorizontalDragEnd,
-                                  child: Transform.translate(
-                                    offset: _dragOffset,
-                                    child: Transform.rotate(
-                                      angle: _dragRotationAngle,
-                                      child: Flashcard(
-                                        model: flashcardModels[_index],
-                                        size: cardSize,
-                                        backgroundColor: _flipColor,
-                                        opacity: _flipOpacity,
-                                        flipped: _flipped,
-                                        onTap: _onFlashcardTap,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
-                        CustomPaint(
-                          painter: ProgressBarPainter(progress: _progress),
-                          size: Size(screenSize.width, 48),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                    const Spacer(),
+                    CustomPaint(
+                      painter: ProgressBarPainter(progress: _progress),
+                      size: Size(screenSize.width, 48),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -180,3 +180,128 @@
 - NoSQL database에서 data modeling은 "**화면에 출력할 data를 중심으로**" 한다.
 - 이 때, data를 읽어오는 횟수를 최소화하기 위해 의도적으로 data를 중복으로 저장한다.
   <p><img src="./images/data-modeling.png" width="400" /></p>
+
+## Flashcard App
+
+### Card를 뒤집는 animation 구현 시, 서로 다른 3개의 부분 animation들의 sync 맞추기
+
+- Card를 뒤집을 때 3개의 animation 필요
+  1. Y 축 회전 -> Y axis rotation
+  2. Text fade out -> Opacity 1 to 0
+  3. Card 음영 처리 -> Background color white -> grey -> white
+- 1초간 rotation animation이 실행될 때 다른 두 animation은 0.5초 단위로 animatino이 실행되어야 함
+  - Card가 절반 회전했을 때 text opacity가 0이 되어야 뒷면이 나타날 때 text가 보이지 않음
+  - Card가 절반 회전했을 때 background color가 짙은 회색이고, 뒷면이 나타날수록 흰색이 되어야 card가 회전하는 동안 자연스러운 음영 처리 가능
+- 각 animation마다 실행되는 duration이 다르므로 `AnimationController`를 각각 만들고 `AnimatedBuilder`를 중첩해서 구현 가능
+  ```dart
+  // 0.5초동안 flip
+  late final _flipRotationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 500),
+  );
+
+  // 0.25초 동안 white -> grey (forward)
+  // 나머지 0.25초 동안 grey -> white (reverse)
+  late final _flipColorController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 250),
+  );
+
+  // 0.25초 동안 fade out
+  late final _flipOpacityController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 250),
+  );
+
+  ...
+
+  AnimatedBuilder(
+    animation: _flipRotationController, // 1. rotation
+    builder: (context, child) {
+      // 0 ~ 1 -> 0 ~ pi mapping
+      final rotationAngle = Tween<double>(
+        begin: 0,
+        end: pi,
+      ).transform(_flipRotationController.value);
+
+      return AnimatedBuilder(
+        animation: _flipColorController, // 2. background color
+        builder: (context, child) {
+          // 0 ~ 1 -> white -> grey -> white mapping
+          final color = ColorTween(
+            begin: Colors.white,
+            end: Colors.grey.shade800,
+          ).transform(_flipColorController.value);
+
+          return AnimatedBuilder(
+            animation: _flipOpacityController, // 3. opacity (fade-out)
+            builder: (context, child) {
+              // 0 ~ 1 ->
+              final opacity = Tween<double>(
+                begin: 1,
+                end: 0,
+              ).transform(_flipOpacityController.value)
+
+              ...
+
+              Transform.rotate(
+                angle: rotationAngle, // 1. rotation
+                child: Flashcard(
+                  backgroundColor: color, // 2. background color
+                  opacity: opacity, // 3. opacity (fade-out)
+                  ...
+                ),
+              ),
+            },
+          );
+        },
+      );
+    },
+  ),
+  ```
+- 하지만, 이 방법은 `AnimationController`를 3개나 사용해야 하고 `AnimatedBuilder`가 다수 중첩되어 rebuild 횟수가 많아지면 성능에 문제가 생길 수 있다.
+- 따라서, 아래와 같이 `AnimationController` 1개로 3가지 animation에 사용될 값을 계산하도록 개선한다.
+  - 필요한 값이 `0 -> 1 -> 0`과 같은 형태를 가지므로 **삼각함수**를 활용하면 쉽게 계산할 수 있다.
+  - Opacity
+    - 0.25초 동안 opacity가 1에서 0이 되면, 나머지 0.25초는 0을 유지시키면 된다.
+    - 즉, `AnimationController` value가 0에서 1로 변할 때 opacity는 `1 -> 0 -> 0`으로 변해야 한다.
+    - `cos()` 함수에 0부터 pi까지의 값을 넣으면 1부터 -1까지 값을 얻을 수 있는데, 이 때 최소값을 0으로 제한하면 `1 -> 0 -> 0`으로 변화하는 값을 얻는다.
+  - Color
+    - 0.25초 동안 `white -> grey`가 되었다가, 나머지 0.25초 동안 `grey -> white`가 되어야 한다.
+    - 즉, `0 -> 1 -> 0`의 값 패턴이 필요한데, 이 값은 `sin()` 함수에 0부터 pi까지의 값을 넣으면 얻을 수 있다.
+    - `Color.lerp(c1, c2, t)` method를 사용해서 `t`값의 변화에 따라 `Color` 값을 계산한다. 이 함수는 `t`가 0이면 `c1`을, 1이면 `c2`를 반환한다.
+- 이렇게 계산한 값을 사용하면 `AnimationController` 1개로 flip에 필요한 3가지 animation을 구현할 수 있다.
+  ```dart
+  // 0 ~ 1 사이 animation value
+  late final _flipController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 500),
+  );
+
+  ...
+
+  AnimatedBuilder(
+    animation: _flipController, // 1. rotation
+    builder: (context, child) {
+      // 0 ~ 1 -> 0 ~ pi mapping
+      final rotationAngle = _flipController.value * pi;
+      final color => Color.lerp(
+        Colors.white,
+        Colors.grey.shade800,
+        sin(_flipController.value * pi),
+      );
+      final opacity = cos(_flipController.value * pi).clamp(0, 1);
+
+      return Transform.rotate(
+        angle: rotationAngle, // 1. rotation
+        child: Flashcard(
+          backgroundColor: color, // 2. background color
+          opacity: opacity, // 3. opacity (fade-out)
+          ...
+        ),
+      );
+    },
+  ),
+  ```
+  - 최소값을 제한하기 위해 `min`, `max` 대신 `clamp` method를 사용해서 코드를 단순화한다.
+  - 불필요한 `Tween.transform` method는 제거하고 단순 계산식으로 변경한다.
