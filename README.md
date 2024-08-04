@@ -31,9 +31,9 @@
 
 ### 졸업 과제
 
-|           [CGV Clone App](./lib/webtoon_app_challenge/movie_cgv/)            |           [Moodtracker App](https://github.com/cskime/moodtracker)            | [Apple Music Search App](./lib/flutter_animations_masterclass_challenge/apple_music_search/) |
-| :--------------------------------------------------------------------------: | :---------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-| <img src="./documents/images/flutter-challenge-graduation.gif" width="200"/> | <img src="./documents/images/flutter-challenge-moodtracker.gif" width="200"/> |     <img src="./documents/images/flutter-challenge-apple-music-search.gif" width="200"/>     |
+|           [CGV Clone App](./lib/webtoon_app_challenge/movie_cgv/)            |           [Moodtracker App](https://github.com/cskime/moodtracker)            |
+| :--------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
+| <img src="./documents/images/flutter-challenge-graduation.gif" width="200"/> | <img src="./documents/images/flutter-challenge-moodtracker.gif" width="200"/> |
 
 ### Flutter로 웹툰 앱 만들기f
 
