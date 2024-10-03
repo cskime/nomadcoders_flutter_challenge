@@ -19,7 +19,14 @@ class PostListItemImage extends StatelessWidget {
           if (imageUrls.length > 1) {
             imageWidth -= 16;
           }
+
+          // final imageWidth = MediaQuery.sizeOf(context).width - 70 - 16;
+
           return ListView.separated(
+            // padding: const EdgeInsets.only(
+            //   left: 70,
+            //   right: 16,
+            // ),
             scrollDirection: Axis.horizontal,
             itemCount: imageUrls.length,
             itemBuilder: (context, index) => Container(
